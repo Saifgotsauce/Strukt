@@ -1,8 +1,8 @@
 ---
 import Base from '../layouts/Base.astro';
 
-const title = "STRUKT | The people behind Vancouver's club nights and festivals";
-const description = "STRUKT takes festivals and club nights apart, piece by piece, to credit the lighting designers, riggers, artists and crews behind the dance floor. Starting in Vancouver.";
+const title = "STRUKT | Who builds Vancouver's club nights and festivals";
+const description = "STRUKT takes festivals and club nights apart to credit the lighting designers, riggers, artists and crews behind the dance floor. Starting in Vancouver.";
 const site = Astro.site ?? new URL('https://strukt.example');
 const jsonLd = {
   "@context": "https://schema.org",
@@ -14,7 +14,7 @@ const jsonLd = {
   image: ["https://images.unsplash.com/photo-1555086156-e6c7353d283f?auto=format&fit=crop&w=1200&h=630&q=70"],
   author: { "@type": "Organization", name: "STRUKT", url: site.href },
   publisher: { "@type": "Organization", name: "STRUKT", logo: { "@type": "ImageObject", url: new URL('/strukt-logo.png', site).href } },
-  mainEntityOfPage: new URL('/about', site).href,
+  mainEntityOfPage: new URL('/about/', site).href,
 };
 ---
 <Base title={title} description={description} type="article" image="https://images.unsplash.com/photo-1555086156-e6c7353d283f?auto=format&fit=crop&w=1200&h=630&q=70" jsonLd={jsonLd}>
@@ -49,7 +49,7 @@ const jsonLd = {
         <p>Somebody built the booth, painted the backdrop, designed the flyer that made you buy the ticket, and pulled cables out of the rain at four, long after you went home. Their names were never on the poster.</p>
         <p class="kicker">STRUKT exists to put them there.</p>
       </div>
-      <aside class="clock" aria-labelledby="clock-t">
+      <section class="clock" aria-labelledby="clock-t">
         <p class="mono" id="clock-t">One night, by the clock</p>
         <ol>
           <li><b>02:00</b><span>The cue is programmed. Then programmed again.</span></li>
@@ -58,7 +58,7 @@ const jsonLd = {
           <li><b>23:00</b><span>Doors. The drop lands with the lights.</span></li>
           <li><b>04:00</b><span>Cables come out of the rain.</span></li>
         </ol>
-      </aside>
+      </section>
     </div>
   </section>
 
@@ -162,7 +162,7 @@ const jsonLd = {
         <button type="button" data-dir="1" aria-label="Next photo">Next</button>
       </div>
     </div>
-    <div class="reel" id="reel" tabindex="0" aria-label="Photo strip, scroll sideways">
+    <div class="reel" id="reel" tabindex="0" role="region" aria-label="Photo strip, scroll sideways">
       <figure><div class="photo duo"><img src="https://images.unsplash.com/photo-1530014671970-707f86eb10f5?auto=format&fit=crop&w=900&q=70" alt="Hands on a turntable at night" loading="lazy" decoding="async" onerror="this.closest('.photo').classList.add('noimg')"></div><figcaption><b>Before doors</b><span class="mono">Photo: Jernej Graj, Unsplash</span></figcaption></figure>
       <figure><div class="photo dk"><img src="https://images.unsplash.com/photo-1545128485-c400e7702796?auto=format&fit=crop&w=900&q=70" alt="A packed room mid-set" loading="lazy" decoding="async" onerror="this.closest('.photo').classList.add('noimg')"></div><figcaption><b>The room</b><span class="mono">Photo: Pim Myten, Unsplash</span></figcaption></figure>
       <figure><div class="photo duo"><img src="https://images.unsplash.com/photo-1594623930572-300a3011d9ae?auto=format&fit=crop&w=900&q=70" alt="A mixer lit blue in the dark" loading="lazy" decoding="async" onerror="this.closest('.photo').classList.add('noimg')"></div><figcaption><b>The booth</b><span class="mono">Photo: Aleksandr Popov, Unsplash</span></figcaption></figure>
@@ -184,7 +184,7 @@ const jsonLd = {
     <svg class="scatter dots" data-scatter='{"seed":61,"w":520,"h":360,"clusters":3,"min":40,"max":100,"density":0.6,"strays":16,"x0":0.3,"keyline":0.6,"pal":[["#8C52FF",4],["#000000",3],["#FFFFFF",1]]}' aria-hidden="true"></svg>
     <div class="wrap">
       <p>Built something?</p>
-      <a href="/call-for-creatives">Submit your work to STRUKT</a>
+      <a href="/call-for-creatives/">Submit your work to STRUKT</a>
     </div>
   </section>
 
@@ -196,7 +196,7 @@ const jsonLd = {
         <dt>Design</dt><dd>STRUKT</dd>
         <dt>Photos</dt><dd>Unsplash contributors, named in captions</dd>
         <dt>Published by</dt><dd>Obslik Studios</dd>
-        <dt>Next feature</dt><dd><a href="/call-for-creatives" aria-label="Next feature: you. Submit your work">You?</a></dd>
+        <dt>Next feature</dt><dd><a href="/call-for-creatives/" aria-label="Next feature: you. Submit your work">You?</a></dd>
       </dl>
     </div>
   </section>

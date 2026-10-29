@@ -7,9 +7,10 @@ interface Props {
   type?: 'website' | 'article';
   image?: string;
   jsonLd?: object | object[];
+  noindex?: boolean;
 }
 
-const { title, description, type = 'website', image, jsonLd } = Astro.props;
+const { title, description, type = 'website', image, jsonLd, noindex = false } = Astro.props;
 const site = Astro.site ?? new URL('https://strukt.example');
 const canonical = new URL(Astro.url.pathname, site).href;
 const ogImage = image ?? new URL('/og-default.png', site).href;
@@ -23,8 +24,8 @@ const current = (href: string) => (href === '/' ? path === '/' || path.startsWit
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <meta name="robots" content="index, follow, max-image-preview:large" />
-    <link rel="canonical" href={canonical} />
+    <meta name="robots" content={noindex ? "noindex, follow" : "index, follow, max-image-preview:large"} />
+    {!noindex && <link rel="canonical" href={canonical} />}
     <meta name="theme-color" content="#000000" />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="sitemap" href="/sitemap-index.xml" />
@@ -53,8 +54,8 @@ const current = (href: string) => (href === '/' ? path === '/' || path.startsWit
         <div class="bar" aria-hidden="true"><span id="bar"></span></div>
         <nav aria-label="Pages">
           <a href="/" aria-current={current('/')}>Journal</a>
-          <a href="/about" aria-current={current('/about')}>About</a>
-          <a href="/call-for-creatives" aria-current={current('/call-for-creatives')}><span class="long">Call for creatives</span><span class="short">Submit</span></a>
+          <a href="/about/" aria-current={current('/about')}>About</a>
+          <a href="/call-for-creatives/" aria-current={current('/call-for-creatives')}><span class="long">Call for creatives</span><span class="short">Submit</span></a>
         </nav>
       </div>
     </header>

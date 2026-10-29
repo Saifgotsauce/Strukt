@@ -46,7 +46,7 @@ Both sample posts are drafts until a real quote replaces the placeholder.
 ## Before launch
 
 1. In `astro.config.mjs` and `public/robots.txt`, replace `strukt.example` with your domain.
-2. Connect the form in `public/scripts/strukt.js` (search for TODO) to wherever submissions should go.
+2. Submissions from the call for creatives form go to Formspree (`https://formspree.io/f/maeebnbb`, set as the form's `action` in `src/pages/call-for-creatives.astro`). Check that a test submission reaches your Formspree inbox.
 3. Download the Unsplash photos and put them in `public/` if you'd rather host them yourself.
 
 ## Deploy on Vercel

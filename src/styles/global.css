@@ -140,12 +140,12 @@ a{color:inherit}
 .free .scatter{position:absolute;right:-3rem;top:-2rem;width:min(24vw,20rem)}
 
 .formsec{padding:clamp(3.5rem,8vw,7rem) 0}
-.formsec aside{grid-column:1/5}
-.formsec aside .sticky{position:sticky;top:5.5rem}
-.formsec aside h2{font:800 clamp(2.2rem,4vw,3.4rem)/.95 var(--sans);letter-spacing:-.05em;margin-bottom:1.2rem}
-.formsec aside p{color:var(--paper-ash);margin-bottom:1rem;max-width:22rem}
-.formsec aside .nom{border-top:1px solid var(--paper-ink);padding-top:1.2rem;margin-top:2rem}
-.formsec aside .nom b{display:block;color:var(--paper-ink);font-weight:700;margin-bottom:.3rem}
+.formsec .formside{grid-column:1/5}
+.formsec .formside .sticky{position:sticky;top:5.5rem}
+.formsec .formside h2{font:800 clamp(2.2rem,4vw,3.4rem)/.95 var(--sans);letter-spacing:-.05em;margin-bottom:1.2rem}
+.formsec .formside p{color:var(--paper-ash);margin-bottom:1rem;max-width:22rem}
+.formsec .formside .nom{border-top:1px solid var(--paper-ink);padding-top:1.2rem;margin-top:2rem}
+.formsec .formside .nom b{display:block;color:var(--paper-ink);font-weight:700;margin-bottom:.3rem}
 .formsec .formcol{grid-column:6/13}
 form{display:grid;gap:0}
 .q{display:grid;grid-template-columns:3.2rem 1fr;gap:.2rem 1rem;padding:1.6rem 0;border-top:1px solid var(--paper-rule)}
@@ -389,8 +389,8 @@ footer img{height:1.9rem;width:auto;mix-blend-mode:lighten}
   .free .scatter{width:38vw;right:-1.5rem;top:-1.5rem}
 
   .formsec{padding:3rem 0}
-  .formsec aside h2{font-size:2.4rem}
-  .formsec aside .nom{margin-top:1.4rem}
+  .formsec .formside h2{font-size:2.4rem}
+  .formsec .formside .nom{margin-top:1.4rem}
   .formsec .formcol{margin-top:1.8rem}
   .q{grid-template-columns:1fr;gap:.35rem;padding:1.4rem 0}
   .q .n{padding-top:0}
@@ -443,7 +443,7 @@ footer img{height:1.9rem;width:auto;mix-blend-mode:lighten}
   .mast .issue{grid-column:1;grid-row:1;justify-self:start}
   .mast nav{grid-column:3;grid-row:1;justify-self:end;margin-left:0}
   .prog8{top:4.4rem}
-  .margin .sticky,.formsec aside .sticky{top:6.2rem}
+  .margin .sticky,.formsec .formside .sticky{top:6.2rem}
 
   /* opener as a magazine cover: centred headline over the issue number */
   .open{min-height:calc(100svh - 4.4rem)}
