@@ -1,0 +1,95 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import PostCard from '../../components/PostCard.astro';
+import CtaBand from '../../components/CtaBand.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('journal', ({ data }) => (import.meta.env.PROD ? !data.draft : true));
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post, posts } }));
+}
+
+const { post, posts } = Astro.props;
+const { Content } = await render(post);
+const d = post.data;
+const site = Astro.site ?? new URL('https://strukt.example');
+const url = new URL(`/journal/${post.id}/`, site).href;
+const words = (post.body ?? '').split(/\s+/).filter(Boolean).length;
+const minutes = Math.max(1, Math.round(words / 220));
+const dateLabel = d.pubDate.toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
+const related = posts
+  .filter((p) => p.id !== post.id)
+  .sort((a, b) => Number(b.data.category === d.category) - Number(a.data.category === d.category) || b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: d.title,
+    description: d.description,
+    datePublished: d.pubDate.toISOString(),
+    dateModified: (d.updatedDate ?? d.pubDate).toISOString(),
+    inLanguage: "en-CA",
+    articleSection: d.category,
+    keywords: d.tags.join(', '),
+    image: d.heroImage ? [d.heroImage] : undefined,
+    author: { "@type": "Organization", name: "STRUKT", url: site.href },
+    publisher: { "@type": "Organization", name: "STRUKT", logo: { "@type": "ImageObject", url: new URL('/strukt-logo.png', site).href } },
+    mainEntityOfPage: url
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Journal", item: site.href },
+      { "@type": "ListItem", position: 2, name: d.title, item: url }
+    ]
+  }
+];
+---
+<Base title={`${d.title} | STRUKT`} description={d.description} type="article" image={d.heroImage} jsonLd={jsonLd}>
+  <main data-progress>
+    <article>
+      <header class="phead">
+        <svg class="scatter dots" data-align="xMaxYMid" data-scatter='{"seed":17,"w":520,"h":620,"clusters":4,"min":40,"max":110,"density":0.55,"strays":24,"x0":0.35,"s0":0.3,"keyline":0.5,"pal":[["#8C52FF",6],["#C9B3FF",2],["#1E1530",4]]}' aria-hidden="true"></svg>
+        <div class="wrap">
+          <nav class="crumbs mono" aria-label="Breadcrumb"><a href="/">Journal</a><span aria-hidden="true">/</span><span>{d.category}</span></nav>
+          <h1>{d.title}</h1>
+          <p class="pstand">{d.description}</p>
+          <p class="pmeta mono">
+            <span>Words by STRUKT</span>
+            <span><time datetime={d.pubDate.toISOString()}>{dateLabel}</time></span>
+            <span>{minutes} minute read</span>
+          </p>
+        </div>
+      </header>
+
+      {d.heroImage && (
+        <figure class="phero">
+          <div class="photo duo reveal">
+            <img src={d.heroImage} alt={d.heroAlt ?? ''} loading="eager" decoding="async" onerror="this.closest('.photo').classList.add('noimg')" />
+          </div>
+          {d.heroCredit && <figcaption class="mono credit">{d.heroCredit}</figcaption>}
+        </figure>
+      )}
+
+      <div class="prose">
+        <Content />
+      </div>
+    </article>
+
+    {related.length > 0 && (
+      <section class="related" aria-labelledby="h-related">
+        <div class="wrap">
+          <h2 class="label" id="h-related">Keep reading</h2>
+          <div class="cards">
+            {related.map((p) => <PostCard post={p} level="h3" />)}
+          </div>
+        </div>
+      </section>
+    )}
+
+    <CtaBand />
+  </main>
+</Base>
