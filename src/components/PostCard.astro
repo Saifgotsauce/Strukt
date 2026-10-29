@@ -1,0 +1,21 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  post: CollectionEntry<'journal'>;
+  featured?: boolean;
+  level?: 'h2' | 'h3';
+}
+const { post, featured = false, level = 'h2' } = Astro.props;
+const { title, description, category, pubDate } = post.data;
+const seed = [...post.id].reduce((a, c) => a + c.charCodeAt(0), 0);
+const Heading = level;
+const dateLabel = pubDate.toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
+---
+<a class:list={['card', { featured }]} href={`/journal/${post.id}/`}>
+  <svg data-glyph={seed} aria-hidden="true"></svg>
+  <span class="mono kat">{category}</span>
+  <Heading>{title}</Heading>
+  <p>{description}</p>
+  <span class="mono date"><time datetime={pubDate.toISOString()}>{dateLabel}</time></span>
+</a>
