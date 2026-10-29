@@ -57,7 +57,7 @@ const description = "Lighting, rigging, sound, visuals, sets, fashion or art for
 
       <div class="formcol">
         <div class="prog8" aria-live="polite"><div class="pdots" id="pdots" aria-hidden="true"></div><p class="mono" id="ptext">2 of 8 answered</p></div>
-        <form id="cf" novalidate>
+        <form id="cf" action="https://formspree.io/f/maeebnbb" method="POST" novalidate>
           <div class="q"><span class="n">01</span><div class="body"><fieldset>
             <legend>Who are you submitting?</legend>
             <div class="chips">
@@ -125,10 +125,12 @@ const description = "Lighting, rigging, sound, visuals, sets, fashion or art for
             <label class="check"><input type="checkbox" id="ok" name="ok" required aria-describedby="ok-e"><span id="ok-t">I made this work or have permission to share it, and STRUKT can contact me about a feature.</span></label>
             <p class="err" id="ok-e"></p></div></div>
 
+          <div class="sr" aria-hidden="true"><label>Leave this empty<input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label></div>
           <div class="submit">
             <button type="submit">Send submission</button>
             <p>We read every one ourselves.</p>
           </div>
+          <p class="err" id="send-e" role="alert"></p>
         </form>
 
         <div class="done" id="done" hidden tabindex="-1">

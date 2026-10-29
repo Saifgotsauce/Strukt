@@ -193,8 +193,41 @@ document.querySelectorAll('.strip-btns button').forEach(b=>b.addEventListener('c
     document.getElementById('ok-t').textContent=o?"I'm sharing public work or have their permission, and STRUKT can contact me about them.":'I made this work or have permission to share it, and STRUKT can contact me about a feature.';
   }));
   function err(id,msg){document.getElementById(id+'-e').textContent=msg;const el=document.getElementById(id);msg?el.setAttribute('aria-invalid','true'):el.removeAttribute('aria-invalid');return !msg}
+  /* every answer, labelled the way it reads in the Formspree inbox. `email` keeps its name so replies go to the sender */
+  function answers(){
+    const o=f.for.value==='other';
+    return{
+      _subject:'STRUKT submission: '+f.name.value.trim(),
+      'Submitting':o?'Someone else':'Myself',
+      'Name':f.name.value.trim(),
+      email:f.email.value.trim(),
+      'Instagram':f.ig.value.trim(),
+      'City':f.city.value.trim(),
+      'What they do':[...f.querySelectorAll('input[name=what]:checked')].map(c=>c.value).join(', '),
+      'Link':f.link.value.trim(),
+      'Night they built':f.story.value.trim(),
+      'Interview format':f.fmt.value,
+      'Feature under an alias':f.alias.checked?'Yes':'No',
+      'Permission':f.ok.checked?'Yes: '+document.getElementById('ok-t').textContent:'No',
+      _gotcha:f._gotcha.value
+    };
+  }
+  const btn=f.querySelector('button[type=submit]'),sendErr=document.getElementById('send-e');
+  let sending=false;
+  async function send(){
+    sending=true;sendErr.textContent='';btn.disabled=true;btn.textContent='Sending…';
+    const stop=new AbortController(),t=setTimeout(()=>stop.abort(),20000);
+    try{
+      const r=await fetch(f.action,{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(answers()),signal:stop.signal});
+      if(!r.ok)throw new Error('HTTP '+r.status);
+      f.hidden=true;document.querySelector('.prog8').hidden=true;const d=document.getElementById('done');d.hidden=false;d.focus();
+    }catch(x){
+      sendErr.textContent="Your submission didn't send. Your answers are still here, so check your connection and try again. If it keeps failing, message us on Instagram at @struktmag.";
+      btn.disabled=false;btn.textContent='Send submission';btn.focus();
+    }finally{clearTimeout(t);sending=false}
+  }
   f.addEventListener('submit',e=>{
-    e.preventDefault();
+    e.preventDefault();if(sending)return;
     const ok=[
       err('name',f.name.value.trim()?'':'Add a name or artist name so we know who to credit.'),
       err('email',/^\S+@\S+\.\S+$/.test(f.email.value)?'':'Add an email address we can reach you at.'),
@@ -204,7 +237,6 @@ document.querySelectorAll('.strip-btns button').forEach(b=>b.addEventListener('c
       err('ok',f.ok.checked?'':'Tick this box so we can contact you.')
     ];
     if(ok.includes(false)){const bad=f.querySelector('[aria-invalid=true]')||document.getElementById('ok');(bad.matches('input,textarea')?bad:bad.querySelector('input')).focus();return}
-    // TODO: send the form somewhere before launch, e.g. fetch('/api/submit',{method:'POST',body:new FormData(f)})
-    f.hidden=true;document.querySelector('.prog8').hidden=true;const d=document.getElementById('done');d.hidden=false;d.focus();
+    send();
   });
 })();
