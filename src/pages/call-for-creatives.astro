@@ -1,0 +1,144 @@
+---
+import Base from '../layouts/Base.astro';
+
+const title = "Call for creatives: get featured in STRUKT | Vancouver and BC";
+const description = "Lighting, rigging, sound, visuals, set design, fashion or art for nights out? Submit your work to STRUKT. Free, and open to creatives in Vancouver, the Fraser Valley and beyond.";
+---
+<Base title={title} description={description}>
+<main id="page-call">
+
+  <section class="copen" aria-labelledby="h-call">
+    <div class="wrap">
+      <div class="folio mono"><span>Call for creatives</span><span>Open now</span><span>p. 02</span></div>
+      <div class="grid cgrid">
+        <div class="ctext">
+          <svg class="t dots" data-text="OPEN CALL" data-o='{"drop":0.08,"stray":22,"seed":8,"color":"#000000","keyline":true}' role="img" aria-label="Open call"></svg>
+          <h1 id="h-call">Show us what you built.</h1>
+          <p>We're looking for the first people to feature in STRUKT. You don't need a big name, a festival résumé or a following. You need work you're proud of.</p>
+          <a href="#form">Start your submission</a>
+        </div>
+        <figure class="cphoto">
+          <div class="photo dk reveal"><img src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?auto=format&fit=crop&w=1200&q=70" alt="A single stage light cutting over a concert crowd" loading="lazy" decoding="async" onerror="this.closest('.photo').classList.add('noimg')"></div>
+          <svg class="scatter dots" data-scatter='{"seed":31,"w":420,"h":420,"clusters":3,"min":40,"max":110,"density":0.6,"strays":20,"keyline":0.6,"pal":[["#8C52FF",5],["#000000",3],["#FFFFFF",2]]}' aria-hidden="true"></svg>
+          <figcaption class="mono">Photo: Yvette de Wit, Unsplash</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="steps" aria-labelledby="h-steps">
+    <div class="wrap">
+      <h2 id="h-steps">What happens after you send it</h2>
+      <ol>
+        <li><svg class="dots" data-text="1" data-o='{"drop":0,"stray":3,"seed":1,"color":"#8C52FF","keyline":true,"sub":3}' aria-hidden="true"></svg><p>You send the form. It takes about five minutes.</p></li>
+        <li><svg class="dots" data-text="2" data-o='{"drop":0,"stray":3,"seed":2,"color":"#8C52FF","keyline":true,"sub":3}' aria-hidden="true"></svg><p>We look at every submission ourselves.</p></li>
+        <li><svg class="dots" data-text="3" data-o='{"drop":0,"stray":3,"seed":3,"color":"#8C52FF","keyline":true,"sub":3}' aria-hidden="true"></svg><p>If it's a fit, we set up an interview by video call, voice notes or in writing.</p></li>
+        <li><svg class="dots" data-text="4" data-o='{"drop":0,"stray":3,"seed":4,"color":"#8C52FF","keyline":true,"sub":3}' aria-hidden="true"></svg><p>You see your feature before it goes live.</p></li>
+        <li><svg class="dots" data-text="5" data-o='{"drop":0,"stray":3,"seed":5,"color":"#8C52FF","keyline":true,"sub":3}' aria-hidden="true"></svg><p>It's published, and you're credited and tagged.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="free">
+    <svg class="dots scatter" data-scatter='{"seed":41,"w":520,"h":420,"clusters":3,"min":40,"max":110,"density":0.6,"strays":16,"x0":0.3,"keyline":0.6,"pal":[["#000000",4],["#C9B3FF",3],["#FFFFFF",1]]}' aria-hidden="true"></svg>
+    <div class="wrap grid">
+      <p>Being featured is free. It always will be.<span>Nobody pays to be in STRUKT. The only thing we ask for is your work and your story.</span></p>
+    </div>
+  </section>
+
+  <section class="formsec" id="form" aria-labelledby="h-form">
+    <div class="wrap grid">
+      <aside><div class="sticky">
+        <h2 id="h-form">The form</h2>
+        <p>Eight questions. Answer the way you'd talk to someone at the bar after load-out. We care about the work, not the polish.</p>
+        <p>We only use your details to contact you about STRUKT.</p>
+        <div class="nom"><b>Know someone who should be here?</b><p>Nominate them. Pick "someone else" in the first question and tell us about their work.</p></div>
+      </div></aside>
+
+      <div class="formcol">
+        <div class="prog8" aria-live="polite"><div class="pdots" id="pdots" aria-hidden="true"></div><p class="mono" id="ptext">2 of 8 answered</p></div>
+        <form id="cf" novalidate>
+          <div class="q"><span class="n">01</span><div class="body"><fieldset>
+            <legend>Who are you submitting?</legend>
+            <div class="chips">
+              <label class="chip"><input type="radio" name="for" value="me" checked><span>Myself</span></label>
+              <label class="chip"><input type="radio" name="for" value="other"><span>Someone else</span></label>
+            </div></fieldset></div></div>
+
+          <div class="q"><span class="n">02</span><div class="body">
+            <span class="l" style="font:600 clamp(1.25rem,2vw,1.6rem)/1.2 var(--sans);letter-spacing:-.025em;display:block;margin-bottom:.8rem" id="who-l">Who should we credit?</span>
+            <div class="pair">
+              <div><label for="name" id="name-l">Name or artist name</label><input type="text" id="name" name="name" autocomplete="name" required><p class="err" id="name-e"></p></div>
+              <div><label for="email">Email</label><input type="email" id="email" name="email" autocomplete="email" required><p class="err" id="email-e"></p></div>
+            </div></div></div>
+
+          <div class="q"><span class="n">03</span><div class="body">
+            <span style="font:600 clamp(1.25rem,2vw,1.6rem)/1.2 var(--sans);letter-spacing:-.025em;display:block;margin-bottom:.8rem">Where can we find you?</span>
+            <div class="pair">
+              <div><label for="ig">Instagram</label><input type="text" id="ig" name="ig" placeholder="@handle"></div>
+              <div><label for="city">City</label><input type="text" id="city" name="city" placeholder="Vancouver, Abbotsford, anywhere"></div>
+            </div></div></div>
+
+          <div class="q"><span class="n">04</span><div class="body"><fieldset>
+            <legend id="what-l">What do you do?</legend>
+            <p class="hint">Pick everything that fits.</p>
+            <div class="chips" id="what">
+              <label class="chip"><input type="checkbox" name="what" value="Lighting"><span>Lighting</span></label>
+              <label class="chip"><input type="checkbox" name="what" value="Rigging"><span>Rigging</span></label>
+              <label class="chip"><input type="checkbox" name="what" value="Sound"><span>Sound</span></label>
+              <label class="chip"><input type="checkbox" name="what" value="Visuals and VJ"><span>Visuals and VJ</span></label>
+              <label class="chip"><input type="checkbox" name="what" value="Set and stage design"><span>Set and stage design</span></label>
+              <label class="chip"><input type="checkbox" name="what" value="Art and installations"><span>Art and installations</span></label>
+              <label class="chip"><input type="checkbox" name="what" value="Fashion"><span>Fashion</span></label>
+              <label class="chip"><input type="checkbox" name="what" value="Photo and video"><span>Photo and video</span></label>
+              <label class="chip"><input type="checkbox" name="what" value="Graphic design"><span>Graphic design</span></label>
+              <label class="chip"><input type="checkbox" name="what" value="Production"><span>Production</span></label>
+              <label class="chip"><input type="checkbox" name="what" value="DJ or producer"><span>DJ or producer</span></label>
+              <label class="chip"><input type="checkbox" name="what" value="Something else"><span>Something else</span></label>
+            </div>
+            <p class="err" id="what-e"></p></fieldset></div></div>
+
+          <div class="q"><span class="n">05</span><div class="body">
+            <label class="l" for="link">Show us the work</label>
+            <p class="hint">A portfolio, Instagram, Drive folder or video. The work itself, not just the poster.</p>
+            <input type="url" id="link" name="link" placeholder="https://" required>
+            <p class="err" id="link-e"></p></div></div>
+
+          <div class="q"><span class="n">06</span><div class="body">
+            <label class="l" for="story" id="story-l">Tell us about a night you built</label>
+            <p class="hint" id="story-h">What was it, what did you do, and what went wrong that nobody noticed?</p>
+            <textarea id="story" name="story" maxlength="800" required aria-describedby="story-h story-c"></textarea>
+            <p class="count" id="story-c">0 / 800</p>
+            <p class="err" id="story-e"></p></div></div>
+
+          <div class="q"><span class="n">07</span><div class="body"><fieldset>
+            <legend>How would you like to be interviewed?</legend>
+            <div class="chips">
+              <label class="chip"><input type="radio" name="fmt" value="Video call" checked><span>Video call</span></label>
+              <label class="chip"><input type="radio" name="fmt" value="Voice notes"><span>Voice notes</span></label>
+              <label class="chip"><input type="radio" name="fmt" value="In writing"><span>In writing</span></label>
+            </div></fieldset></div></div>
+
+          <div class="q"><span class="n">08</span><div class="body">
+            <span style="font:600 clamp(1.25rem,2vw,1.6rem)/1.2 var(--sans);letter-spacing:-.025em;display:block;margin-bottom:.6rem">Last thing</span>
+            <label class="check"><input type="checkbox" name="alias"><span>Feature me under an alias. Some of the best people in this scene don't use their real name, and that's fine.</span></label>
+            <label class="check"><input type="checkbox" id="ok" name="ok" required><span id="ok-t">I made this work or have permission to share it, and STRUKT can contact me about a feature.</span></label>
+            <p class="err" id="ok-e"></p></div></div>
+
+          <div class="submit">
+            <button type="submit">Send submission</button>
+            <p>We read every one ourselves.</p>
+          </div>
+        </form>
+
+        <div class="done" id="done" hidden tabindex="-1">
+          <svg class="dots scatter" data-scatter='{"seed":51,"w":320,"h":300,"clusters":2,"min":40,"max":90,"density":0.6,"strays":14,"keyline":0.6,"pal":[["#8C52FF",4],["#C9B3FF",2]]}' aria-hidden="true"></svg>
+          <svg class="dots t" data-text="RECEIVED" data-o='{"drop":0.04,"stray":12,"seed":6,"color":"#8C52FF","keyline":true}' role="img" aria-label="Received"></svg>
+          <h2>Submission sent.</h2>
+          <p>We look at every one ourselves. If it's a fit, we'll message you to set up an interview. Until then, follow @struktmag and tag us in your work.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+</Base>

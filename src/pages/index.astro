@@ -1,0 +1,60 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import PostCard from '../components/PostCard.astro';
+import CtaBand from '../components/CtaBand.astro';
+
+const posts = (await getCollection('journal', ({ data }) => (import.meta.env.PROD ? !data.draft : true)))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const site = Astro.site ?? new URL('https://strukt.example');
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "NewsMediaOrganization",
+      "@id": new URL('/#org', site).href,
+      name: "STRUKT",
+      alternateName: "STRUKT mag",
+      url: site.href,
+      logo: new URL('/strukt-logo.png', site).href,
+      description: "A magazine for the people who build the night: lighting designers, riggers, sound engineers, artists and every crew behind festivals and club nights.",
+      foundingLocation: { "@type": "Place", name: "Vancouver, British Columbia, Canada" },
+      areaServed: ["Vancouver", "Fraser Valley", "British Columbia"],
+      parentOrganization: { "@type": "Organization", name: "Obslik Studios" },
+      sameAs: ["https://www.instagram.com/struktmag"]
+    },
+    { "@type": "WebSite", "@id": new URL('/#site', site).href, url: site.href, name: "STRUKT", inLanguage: "en-CA", publisher: { "@id": new URL('/#org', site).href } }
+  ]
+};
+---
+<Base
+  title="STRUKT | Guides and stories from the people who build the night"
+  description="Guides, interviews and credits for the lighting designers, riggers, sound engineers, artists and crews behind club nights and festivals. From Vancouver, for everyone."
+  jsonLd={jsonLd}
+>
+  <main>
+    <section class="jhero" aria-labelledby="h-journal">
+      <svg class="scatter dots" data-align="xMaxYMid" data-scatter='{"seed":91,"w":1600,"h":800,"clusters":5,"min":40,"max":130,"density":0.55,"strays":40,"x0":0.6,"s0":0.5,"y0":0.3,"keyline":0.5,"pal":[["#8C52FF",6],["#C9B3FF",2],["#1E1530",4]]}' aria-hidden="true"></svg>
+      <div class="wrap">
+        <div class="folio mono"><span>The journal</span><span>Vancouver, BC</span><span>{posts.length} {posts.length === 1 ? 'story' : 'stories'}</span></div>
+        <h1 id="h-journal">The people who build the night.</h1>
+        <p class="jstand">Guides, interviews and credits for the lighting designers, riggers, sound engineers, artists and crews behind club nights and festivals.</p>
+      </div>
+    </section>
+
+    <section class="jlist" aria-label="Latest stories">
+      <div class="wrap">
+        {posts.length > 0 ? (
+          <div class="cards">
+            {posts.map((post, i) => <PostCard post={post} featured={i === 0} />)}
+          </div>
+        ) : (
+          <p class="empty">The first stories are on their way.</p>
+        )}
+      </div>
+    </section>
+
+    <CtaBand />
+  </main>
+</Base>
