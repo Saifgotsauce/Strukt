@@ -4,7 +4,7 @@ description: "Everyone knows the DJs. Far fewer know the lighting, sound and int
 pubDate: 2026-10-29
 category: "The scene"
 tags: ["club history", "Studio 54", "Paradise Garage", "Haçienda", "lighting design", "sound design", "club design"]
-heroImage: "https://images.unsplash.com/photo-1630395822310-15b171c9a85f?auto=format&fit=crop&w=2000&q=70"
+heroImage: "/images/journal/the-designers-behind-legendary-clubs/crowd-hands-raised.webp"
 heroAlt: "Silhouettes of a crowd with hands raised under stage lights"
 heroCredit: "Photo: Kajetan Sumila, Unsplash"
 draft: false
@@ -29,9 +29,19 @@ The club also had a sound and lighting team that almost nobody remembers. The in
 
 Even the club's spelling was a piece of design. Spanish doesn't use the cedilla, but Factory gave the Haçienda one anyway because "çi" looks like 51, the club's number in the Factory catalogue, FAC 51.
 
+<figure class="post-figure">
+  <img src="/images/journal/the-designers-behind-legendary-clubs/hacienda-apartments-sign.webp" alt="The words The Haçienda Apartments in metal letters on a brick wall" width="1400" height="1050" loading="lazy">
+  <figcaption>The sign on the Haçienda Apartments, the flats built where the club stood in Manchester, kept the cedilla. <span class="credit">Photo: Gene Hunt, CC BY 2.0, via Wikimedia Commons</span></figcaption>
+</figure>
+
 ## The light: Joshua White and the Fillmore East
 
 Long before club lighting meant moving heads and lasers, it meant oil, water and coloured dye on a projector. From the night Bill Graham's Fillmore East opened in New York in March 1968, the [Joshua Light Show](https://en.wikipedia.org/wiki/Joshua_White_(artist)) played behind every act on the bill.
+
+<figure class="post-figure">
+  <img src="/images/journal/the-designers-behind-legendary-clubs/fillmore-east-building.webp" alt="A Second Avenue street corner in New York, with the narrow red-brick former Fillmore East building at the centre, its ground floor an Emigrant Savings Bank" width="1400" height="931" loading="lazy">
+  <figcaption>105 Second Avenue in 2010. The former Fillmore East is the narrow red-brick front at the centre, by then an Emigrant Savings Bank. <span class="credit">Photo: Fletcher6, CC BY-SA 3.0, via Wikimedia Commons</span></figcaption>
+</figure>
 
 Joshua White had studied lighting at film and theatre school and worked in discothèques before the Fillmore. According to the [University of Iowa's Downtown Pop Underground archive](https://dsps.lib.uiowa.edu/downtownpopunderground/person/joshua-white/), he travelled to San Francisco in 1967 to see the light shows there and came away unimpressed by how static they were. Back in New York, his team built something more alive, mixing liquid projections, colour wheels, slides and film into visuals that moved with each band in real time. Because acts usually played two shows a night, often for several nights running, the team could experiment and refine their work in front of a crowd almost constantly.
 
@@ -42,9 +52,19 @@ Joshua White had studied lighting at film and theatre school and worked in disco
 
 Their work reached further than most people realise. Images from the light show appear on the back cover of Jimi Hendrix's *Band of Gypsys* and the front cover of Iron Butterfly's *In-A-Gadda-Da-Vida*, as [Untapped New York](https://untappedcities.com/2021/10/08/secrets-of-fillmore-east/6/) has documented. Millions of people own a piece of Joshua White's work without ever having heard his name.
 
+<figure class="post-figure embed">
+  <iframe src="https://www.youtube-nocookie.com/embed/hZe_KS4Hp0U" title="Joshua Light Show and Moon Duo at the Exploratorium" loading="lazy" allow="encrypted-media; picture-in-picture" allowfullscreen></iframe>
+  <figcaption>The Joshua Light Show projecting live behind Moon Duo at the Exploratorium in San Francisco. <span class="credit">Video: Exploratorium, YouTube</span></figcaption>
+</figure>
+
 ## The rig: Jules Fisher, Paul Marantz and Studio 54
 
 [Studio 54](https://opencollection.brooklynmuseum.org/exhibitions/3392) ran for thirty-three months, from April 1977 to February 1980, in a former theatre and television studio on West 54th Street. Its owners, Steve Rubell and Ian Schrager, wanted the club to feel like stagecraft, so they hired theatre people. Jules Fisher and Paul Marantz had lit Tony Award-winning Broadway productions and earlier clubs such as Electric Circus and Arthur, and they designed a kinetic lighting system for the dance floor.
+
+<figure class="post-figure">
+  <img src="/images/journal/the-designers-behind-legendary-clubs/studio-54-marquee.webp" alt="The Studio 54 marquee on West 54th Street, lit up with the title Kiss Me, Kate!" width="1400" height="788" loading="lazy">
+  <figcaption>Studio 54 at 254 West 54th Street, now a Broadway theatre run by Roundabout Theatre Company, with Kiss Me, Kate! on the marquee. <span class="credit">Photo: Ajay Suresh, CC BY 2.0, via Wikimedia Commons</span></figcaption>
+</figure>
 
 Schrager has said the split was deliberate. The interiors got soft architectural light, and the dance floor got as much theatrical lighting as the room could hold. In an [interview with the Design Museum Frankfurt](https://www.design-museum.de/en/ueber-design/interviews/detailseiten/interview-ian-schrager.html), he called the combination "the linchpin of the club's success." When the club was renovated in 1978, Fisher and Marantz brought in the fanned neon backdrop from the original Broadway production of *Chicago* after the show closed.
 

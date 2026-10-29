@@ -33,7 +33,7 @@ const jsonLd = [
     inLanguage: "en-CA",
     articleSection: d.category,
     keywords: d.tags.join(', '),
-    image: d.heroImage ? [d.heroImage] : undefined,
+    image: d.heroImage ? [new URL(d.heroImage, site).href] : undefined,
     author: { "@type": "Organization", name: "STRUKT", url: site.href },
     publisher: { "@type": "Organization", name: "STRUKT", logo: { "@type": "ImageObject", url: new URL('/strukt-logo.png', site).href } },
     mainEntityOfPage: url

@@ -4,7 +4,7 @@ description: "No degree required. The free software to learn on, the jobs that t
 pubDate: 2026-10-29
 category: "Careers"
 tags: ["lighting", "careers", "lighting technician", "event production", "festivals", "club nights"]
-heroImage: "https://images.unsplash.com/photo-1635373308995-52a45b7ff7c6?auto=format&fit=crop&w=2000&q=70"
+heroImage: "/images/journal/how-to-become-a-lighting-technician/stage-fixtures-on-pole.webp"
 heroAlt: "Stage lighting fixtures clamped to a pole before being rigged for a show"
 heroCredit: "Photo: Xavi Cabrera, Unsplash"
 draft: false
@@ -26,11 +26,21 @@ You don't need to buy a console to learn one. The two systems you'll meet most o
 
 **grandMA3 onPC.** MA Lighting offers the [grandMA3 onPC software](https://www.malighting.com/special/grandma3-onpc/) as a free download for Windows and Mac, and it's the same software that runs on their full-size consoles. They also run a [free e-learning course](https://www.malighting.com/ma-university/first-steps/) with a starter show built in, so you have something to program from day one.
 
+<figure class="post-figure embed">
+  <iframe src="https://www.youtube-nocookie.com/embed/NwRE1dGwWkc" title="MA e-learning: the easiest way to get started with grandMA3" loading="lazy" allow="encrypted-media; picture-in-picture" allowfullscreen></iframe>
+  <figcaption>MA Lighting's own introduction to its free grandMA3 e-learning course. <span class="credit">Video: MA Lighting, YouTube</span></figcaption>
+</figure>
+
 **ChamSys MagicQ.** [MagicQ PC](https://bookstack.hku.nl/books/controlling-lights/page/magicq-lighting-software-mimicking-a-light-console/revisions/951) is free on Windows, Mac and Linux, with 64 universes of output enabled over network protocols like Art-Net and sACN, and it includes a 3D visualiser, so you can watch your programming on virtual fixtures. ChamSys hosts [video tutorials](https://chamsyslighting.com/pages/be-home-page) for it too.
 
 Pick one and stay with it for a month before trying the other. Concepts carry over between consoles; muscle memory doesn't.
 
 **A practice routine that actually helps.** Choose a track you know well, ideally something with a long build and a clean drop. In the visualiser, patch a simple rig: eight moving heads on a truss, four wash lights on the floor and a strobe. Then build three cues: a moody look for the build, a held breath right before the drop (everything dark except one beam), and a full-room hit for the drop. Run them live against the track until you can land the drop without looking at your hands. Then do it again with a track you've never heard. That second part is what nights are actually like.
+
+<figure class="post-figure">
+  <video src="/video/journal/how-to-become-a-lighting-technician/festival-stage-lights-haze.mp4" poster="/video/journal/how-to-become-a-lighting-technician/festival-stage-lights-haze.webp" autoplay muted loop playsinline preload="none"></video>
+  <figcaption>Red light and smoke over the crowd at an electronic music festival stage. <span class="credit">Video: Dan Dubassy, Mixkit</span></figcaption>
+</figure>
 
 <!-- REDDIT DATA: add what working techs on Reddit say they wish they'd practised first, with a link to the thread. -->
 
