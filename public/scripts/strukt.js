@@ -146,14 +146,14 @@ document.querySelectorAll('.strip-btns button').forEach(b=>b.addEventListener('c
         return{c,from:{transform:RISE,opacity:'0'},to:{transform:'none',opacity:'1'},order:k};
       });
       if(list.length)play(list,450,50);
-    },{rootMargin:'0px 0px -8% 0px'});
+    },{rootMargin:'0px 0px 40px 0px'}); // start as soon as a card's slot reaches the screen (the 40px covers the 28px it starts lowered by)
     cards.forEach(c=>io.observe(c));
   }
-  /* desktop: start in a pile, deal out once the section is well into view */
+  /* desktop: start in a pile, deal out as soon as any of the grid is on screen, so the pile is never left sitting there */
   function deal(){
     move(true,true);waiting='pile';
     io=new IntersectionObserver(es=>{if(!es[0].isIntersecting)return;io.disconnect();
-      setTimeout(()=>{if(waiting==='pile'){waiting=null;move(false)}},650)},{rootMargin:'0px 0px -45% 0px'});
+      setTimeout(()=>{if(waiting==='pile'){waiting=null;move(false)}},400)});
     io.observe(grid);
   }
   const ready=Promise.all([document.fonts?document.fonts.ready:0,...[...grid.querySelectorAll('img')].map(i=>i.decode?i.decode().catch(()=>{}):0)]);
