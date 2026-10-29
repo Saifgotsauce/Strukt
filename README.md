@@ -4,7 +4,7 @@ The STRUKT magazine site, built with Astro.
 
 ## Run it on your computer
 
-You need Node.js (version 20 or newer).
+You need Node.js (version 22.23.4 or newer).
 
 ```bash
 npm install
