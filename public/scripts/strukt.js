@@ -203,7 +203,7 @@ document.querySelectorAll('.strip-btns button').forEach(b=>b.addEventListener('c
       err('story',f.story.value.trim().length>=40?'':'Tell us a little more. A few sentences is enough.'),
       err('ok',f.ok.checked?'':'Tick this box so we can contact you.')
     ];
-    if(ok.includes(false)){(f.querySelector('[aria-invalid=true]')||document.getElementById('ok')).focus();return}
+    if(ok.includes(false)){const bad=f.querySelector('[aria-invalid=true]')||document.getElementById('ok');(bad.matches('input,textarea')?bad:bad.querySelector('input')).focus();return}
     // TODO: send the form somewhere before launch, e.g. fetch('/api/submit',{method:'POST',body:new FormData(f)})
     f.hidden=true;document.querySelector('.prog8').hidden=true;const d=document.getElementById('done');d.hidden=false;d.focus();
   });

@@ -1,8 +1,8 @@
 ---
 import Base from '../layouts/Base.astro';
 
-const title = "Call for creatives: get featured in STRUKT | Vancouver and BC";
-const description = "Lighting, rigging, sound, visuals, set design, fashion or art for nights out? Submit your work to STRUKT. Free, and open to creatives in Vancouver, the Fraser Valley and beyond.";
+const title = "Call for creatives: get featured in STRUKT | Vancouver & BC";
+const description = "Lighting, rigging, sound, visuals, sets, fashion or art for nights out? Get featured in STRUKT. Free, and open to Vancouver, the Fraser Valley and beyond.";
 ---
 <Base title={title} description={description}>
 <main id="page-call">
@@ -48,12 +48,12 @@ const description = "Lighting, rigging, sound, visuals, set design, fashion or a
 
   <section class="formsec" id="form" aria-labelledby="h-form">
     <div class="wrap grid">
-      <aside><div class="sticky">
+      <div class="formside"><div class="sticky">
         <h2 id="h-form">The form</h2>
         <p>Eight questions. Answer the way you'd talk to someone at the bar after load-out. We care about the work, not the polish.</p>
         <p>We only use your details to contact you about STRUKT.</p>
         <div class="nom"><b>Know someone who should be here?</b><p>Nominate them. Pick "someone else" in the first question and tell us about their work.</p></div>
-      </div></aside>
+      </div></div>
 
       <div class="formcol">
         <div class="prog8" aria-live="polite"><div class="pdots" id="pdots" aria-hidden="true"></div><p class="mono" id="ptext">2 of 8 answered</p></div>
@@ -68,8 +68,8 @@ const description = "Lighting, rigging, sound, visuals, set design, fashion or a
           <div class="q"><span class="n">02</span><div class="body">
             <span class="l" style="font:600 clamp(1.25rem,2vw,1.6rem)/1.2 var(--sans);letter-spacing:-.025em;display:block;margin-bottom:.8rem" id="who-l">Who should we credit?</span>
             <div class="pair">
-              <div><label for="name" id="name-l">Name or artist name</label><input type="text" id="name" name="name" autocomplete="name" required><p class="err" id="name-e"></p></div>
-              <div><label for="email">Email</label><input type="email" id="email" name="email" autocomplete="email" required><p class="err" id="email-e"></p></div>
+              <div><label for="name" id="name-l">Name or artist name</label><input type="text" id="name" name="name" autocomplete="name" required aria-describedby="name-e"><p class="err" id="name-e"></p></div>
+              <div><label for="email">Email</label><input type="email" id="email" name="email" autocomplete="email" required aria-describedby="email-e"><p class="err" id="email-e"></p></div>
             </div></div></div>
 
           <div class="q"><span class="n">03</span><div class="body">
@@ -79,7 +79,7 @@ const description = "Lighting, rigging, sound, visuals, set design, fashion or a
               <div><label for="city">City</label><input type="text" id="city" name="city" placeholder="Vancouver, Abbotsford, anywhere"></div>
             </div></div></div>
 
-          <div class="q"><span class="n">04</span><div class="body"><fieldset>
+          <div class="q"><span class="n">04</span><div class="body"><fieldset aria-describedby="what-e">
             <legend id="what-l">What do you do?</legend>
             <p class="hint">Pick everything that fits.</p>
             <div class="chips" id="what">
@@ -101,13 +101,13 @@ const description = "Lighting, rigging, sound, visuals, set design, fashion or a
           <div class="q"><span class="n">05</span><div class="body">
             <label class="l" for="link">Show us the work</label>
             <p class="hint">A portfolio, Instagram, Drive folder or video. The work itself, not just the poster.</p>
-            <input type="url" id="link" name="link" placeholder="https://" required>
+            <input type="url" id="link" name="link" placeholder="https://" required aria-describedby="link-e">
             <p class="err" id="link-e"></p></div></div>
 
           <div class="q"><span class="n">06</span><div class="body">
             <label class="l" for="story" id="story-l">Tell us about a night you built</label>
             <p class="hint" id="story-h">What was it, what did you do, and what went wrong that nobody noticed?</p>
-            <textarea id="story" name="story" maxlength="800" required aria-describedby="story-h story-c"></textarea>
+            <textarea id="story" name="story" maxlength="800" required aria-describedby="story-h story-c story-e"></textarea>
             <p class="count" id="story-c">0 / 800</p>
             <p class="err" id="story-e"></p></div></div>
 
@@ -122,7 +122,7 @@ const description = "Lighting, rigging, sound, visuals, set design, fashion or a
           <div class="q"><span class="n">08</span><div class="body">
             <span style="font:600 clamp(1.25rem,2vw,1.6rem)/1.2 var(--sans);letter-spacing:-.025em;display:block;margin-bottom:.6rem">Last thing</span>
             <label class="check"><input type="checkbox" name="alias"><span>Feature me under an alias. Some of the best people in this scene don't use their real name, and that's fine.</span></label>
-            <label class="check"><input type="checkbox" id="ok" name="ok" required><span id="ok-t">I made this work or have permission to share it, and STRUKT can contact me about a feature.</span></label>
+            <label class="check"><input type="checkbox" id="ok" name="ok" required aria-describedby="ok-e"><span id="ok-t">I made this work or have permission to share it, and STRUKT can contact me about a feature.</span></label>
             <p class="err" id="ok-e"></p></div></div>
 
           <div class="submit">
