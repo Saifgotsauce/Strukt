@@ -12,7 +12,7 @@ interface Props {
 const { title, description, type = 'website', image, jsonLd } = Astro.props;
 const site = Astro.site ?? new URL('https://strukt.example');
 const canonical = new URL(Astro.url.pathname, site).href;
-const ogImage = image ?? "https://images.unsplash.com/photo-1555086156-e6c7353d283f?auto=format&fit=crop&w=1200&h=630&q=70";
+const ogImage = image ?? new URL('/og-default.png', site).href;
 const path = Astro.url.pathname;
 const current = (href: string) => (href === '/' ? path === '/' || path.startsWith('/journal') : path.startsWith(href)) ? 'page' : undefined;
 ---
