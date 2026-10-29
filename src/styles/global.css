@@ -566,6 +566,13 @@ footer img{height:1.9rem;width:auto;mix-blend-mode:lighten}
 .prose blockquote p{font:300 clamp(1.4rem,2.6vw,1.95rem)/1.22 var(--sans);letter-spacing:-.03em}
 .prose blockquote p+p{margin-top:.9rem;font:400 .85rem var(--mono);color:var(--lilac);letter-spacing:0}
 .prose img{width:100%;height:auto;margin:2rem 0}
+/* figures in posts (photos, illustrations, video loops, embeds): full column width, no duotone, mono credit line */
+.prose .post-figure{margin:2.6rem 0;width:100%}
+.prose .post-figure img,.prose .post-figure video{display:block;width:100%;height:auto;margin:0}
+.prose .post-figure video{aspect-ratio:16/9;object-fit:cover;background:var(--deep)}
+.prose .post-figure.embed iframe{display:block;width:100%;height:auto;aspect-ratio:16/9;border:0;background:var(--deep)}
+.prose .post-figure figcaption{margin-top:.7rem;font:400 .8rem/1.55 var(--mono);color:var(--paper-ash)}
+.prose .post-figure .credit{color:inherit}
 .prose hr{border:0;height:14px;background:radial-gradient(circle,var(--violet) 3px,transparent 3.6px) center/16px 14px repeat-x;margin:3.2rem auto;max-width:12rem}
 .prose code{font-family:var(--mono);font-size:.88em;background:var(--paper-rule);padding:.1em .35em}
 .prose table{width:100%;border-collapse:collapse;font-size:1rem}

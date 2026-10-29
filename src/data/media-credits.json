@@ -1,0 +1,49 @@
+[
+  {
+    "path": "/images/journal/the-designers-behind-legendary-clubs/hacienda-column.svg",
+    "post": "the-designers-behind-legendary-clubs",
+    "description": "Illustration of a Haçienda column painted in yellow and black hazard stripes, with traffic bollards marking the edge of the dance floor",
+    "creator": "STRUKT",
+    "source": null,
+    "licence": "Original STRUKT illustration (all rights reserved)",
+    "credit": "Illustration: STRUKT"
+  },
+  {
+    "path": "/images/journal/the-designers-behind-legendary-clubs/liquid-light-show.svg",
+    "post": "the-designers-behind-legendary-clubs",
+    "description": "Illustration of a liquid light show: an overhead projector shines oil and dye through a lens onto a screen behind the band",
+    "creator": "STRUKT",
+    "source": null,
+    "licence": "Original STRUKT illustration (all rights reserved)",
+    "credit": "Illustration: STRUKT"
+  },
+  {
+    "path": "/images/journal/the-designers-behind-legendary-clubs/folded-bass-horn.svg",
+    "post": "the-designers-behind-legendary-clubs",
+    "description": "Illustrative cutaway of a large folded bass horn: the driver at the top fires down a widening path that turns at the bottom and opens through a wide mouth",
+    "creator": "STRUKT",
+    "source": null,
+    "licence": "Original STRUKT illustration (all rights reserved)",
+    "credit": "Illustration: STRUKT"
+  },
+  {
+    "path": "https://images.unsplash.com/photo-1635373308995-52a45b7ff7c6?auto=format&fit=crop&w=2000&q=70",
+    "post": "how-to-become-a-lighting-technician",
+    "description": "Hero: stage lighting fixtures clamped to a pole before being rigged for a show",
+    "creator": "Xavi Cabrera",
+    "source": "https://images.unsplash.com/photo-1635373308995-52a45b7ff7c6",
+    "licence": "Unsplash License (not yet confirmed on the photo's page)",
+    "credit": "Photo: Xavi Cabrera, Unsplash",
+    "note": "Still hotlinked from Unsplash. Not self-hosted yet: Unsplash was unreachable from the environment that prepared this post, so the photo page and licence could not be checked."
+  },
+  {
+    "path": "https://images.unsplash.com/photo-1630395822310-15b171c9a85f?auto=format&fit=crop&w=2000&q=70",
+    "post": "the-designers-behind-legendary-clubs",
+    "description": "Hero: silhouettes of a crowd with hands raised under stage lights",
+    "creator": "Kajetan Sumila",
+    "source": "https://images.unsplash.com/photo-1630395822310-15b171c9a85f",
+    "licence": "Unsplash License (not yet confirmed on the photo's page)",
+    "credit": "Photo: Kajetan Sumila, Unsplash",
+    "note": "Still hotlinked from Unsplash. Not self-hosted yet: Unsplash was unreachable from the environment that prepared this post, so the photo page and licence could not be checked."
+  }
+]
