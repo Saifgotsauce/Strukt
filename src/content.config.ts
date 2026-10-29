@@ -13,7 +13,8 @@ const journal = defineCollection({
     updatedDate: z.coerce.date().optional(),
     category: z.enum(['Craft', 'Careers', 'The scene', 'STRUKT']),
     tags: z.array(z.string()).default([]),
-    heroImage: z.string().url().optional(),
+    // a full URL, or a path to a self-hosted image in public/, e.g. /images/journal/<slug>/hero.webp
+    heroImage: z.string().refine((v) => v.startsWith('/') || /^https?:\/\//.test(v), 'heroImage must be a full URL or a path starting with /').optional(),
     heroAlt: z.string().optional(),
     heroCredit: z.string().optional(),
     draft: z.boolean().default(false),

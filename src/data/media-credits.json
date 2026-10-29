@@ -1,0 +1,112 @@
+[
+  {
+    "path": "/images/journal/the-designers-behind-legendary-clubs/hacienda-column.svg",
+    "post": "the-designers-behind-legendary-clubs",
+    "description": "Illustration of a Haçienda column painted in yellow and black hazard stripes, with traffic bollards marking the edge of the dance floor",
+    "creator": "STRUKT",
+    "source": null,
+    "licence": "Original STRUKT illustration (all rights reserved)",
+    "credit": "Illustration: STRUKT"
+  },
+  {
+    "path": "/images/journal/the-designers-behind-legendary-clubs/liquid-light-show.svg",
+    "post": "the-designers-behind-legendary-clubs",
+    "description": "Illustration of a liquid light show: an overhead projector shines oil and dye through a lens onto a screen behind the band",
+    "creator": "STRUKT",
+    "source": null,
+    "licence": "Original STRUKT illustration (all rights reserved)",
+    "credit": "Illustration: STRUKT"
+  },
+  {
+    "path": "/images/journal/the-designers-behind-legendary-clubs/folded-bass-horn.svg",
+    "post": "the-designers-behind-legendary-clubs",
+    "description": "Illustrative cutaway of a large folded bass horn: the driver at the top fires down a widening path that turns at the bottom and opens through a wide mouth",
+    "creator": "STRUKT",
+    "source": null,
+    "licence": "Original STRUKT illustration (all rights reserved)",
+    "credit": "Illustration: STRUKT"
+  },
+  {
+    "path": "/images/journal/how-to-become-a-lighting-technician/stage-fixtures-on-pole.webp",
+    "post": "how-to-become-a-lighting-technician",
+    "description": "Hero: stage lighting fixtures clamped to a pole before being rigged for a show",
+    "creator": "Xavi Cabrera",
+    "source": "https://unsplash.com/photos/aKh11C3YXdg",
+    "licence": "Unsplash License",
+    "credit": "Photo: Xavi Cabrera, Unsplash",
+    "note": "Self-hosted from images.unsplash.com/photo-1635373308995-52a45b7ff7c6, the image this site already used. Unsplash's photo pages were behind a bot check and could not be opened from the build environment; the licence is taken from the page as indexed by web search ('free to use under the Unsplash License', published 27 October 2021, which matches the image ID's timestamp) and from the file being on images.unsplash.com rather than the Unsplash+ server (plus.unsplash.com). Please confirm on the page."
+  },
+  {
+    "path": "/images/journal/the-designers-behind-legendary-clubs/crowd-hands-raised.webp",
+    "post": "the-designers-behind-legendary-clubs",
+    "description": "Hero: silhouettes of a crowd with hands raised under stage lights",
+    "creator": "Kajetan Sumila",
+    "source": "https://unsplash.com/@kajtek",
+    "licence": "Unsplash License",
+    "credit": "Photo: Kajetan Sumila, Unsplash",
+    "note": "Self-hosted from images.unsplash.com/photo-1630395822310-15b171c9a85f, the image this site already used (not Unsplash+). The exact photo page could not be opened from the build environment. The image ID's timestamp is 31 August 2021, matching two of Kajetan Sumila's KIFF Aarau concert photos published that day: https://unsplash.com/photos/KuwgYp4k0kY and https://unsplash.com/photos/UV3GmG_HEqI. Please confirm which one it is and its licence."
+  },
+  {
+    "path": "/images/journal/the-designers-behind-legendary-clubs/hacienda-apartments-sign.webp",
+    "post": "the-designers-behind-legendary-clubs",
+    "description": "The Haçienda Apartments sign on the building that replaced the club, Manchester",
+    "creator": "Gene Hunt",
+    "source": "https://commons.wikimedia.org/wiki/File:Haciendaapartments.jpg",
+    "licence": "CC BY 2.0 (https://creativecommons.org/licenses/by/2.0)",
+    "credit": "Photo: Gene Hunt, CC BY 2.0, via Wikimedia Commons",
+    "changes": "Resized to 1400px wide and converted to WebP"
+  },
+  {
+    "path": "/images/journal/the-designers-behind-legendary-clubs/fillmore-east-building.webp",
+    "post": "the-designers-behind-legendary-clubs",
+    "description": "105 Second Avenue, New York, in 2010: the former Fillmore East, then an Emigrant Savings Bank",
+    "creator": "Fletcher6",
+    "source": "https://commons.wikimedia.org/wiki/File:Fillmore_East_Exterior.jpg",
+    "licence": "CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0)",
+    "credit": "Photo: Fletcher6, CC BY-SA 3.0, via Wikimedia Commons",
+    "changes": "Resized to 1400px wide and converted to WebP. This adapted file is shared under the same CC BY-SA 3.0 licence."
+  },
+  {
+    "path": "/images/journal/the-designers-behind-legendary-clubs/studio-54-marquee.webp",
+    "post": "the-designers-behind-legendary-clubs",
+    "description": "Studio 54 at 254 West 54th Street with Kiss Me, Kate! on the Roundabout Theatre Company marquee",
+    "creator": "Ajay Suresh",
+    "source": "https://commons.wikimedia.org/wiki/File:Studio_54_(48269674087).jpg",
+    "licence": "CC BY 2.0 (https://creativecommons.org/licenses/by/2.0)",
+    "credit": "Photo: Ajay Suresh, CC BY 2.0, via Wikimedia Commons",
+    "changes": "Resized to 1400px wide and converted to WebP"
+  },
+  {
+    "path": "/video/journal/how-to-become-a-lighting-technician/festival-stage-lights-haze.mp4",
+    "poster": "/video/journal/how-to-become-a-lighting-technician/festival-stage-lights-haze.webp",
+    "post": "how-to-become-a-lighting-technician",
+    "description": "Red light and smoke over the crowd at an electronic music festival stage",
+    "creator": "Dan Dubassy",
+    "source": "https://mixkit.co/free-stock-video/stage-of-an-electronic-music-festival-4188/",
+    "licence": "Mixkit Stock Video Free License (https://mixkit.co/license/#videoFree)",
+    "credit": "Video: Dan Dubassy, Mixkit",
+    "changes": "First 10 seconds, audio removed, re-encoded as H.264 at 1280px wide; poster frame taken at 1 second"
+  },
+  {
+    "path": "https://www.youtube-nocookie.com/embed/NwRE1dGwWkc",
+    "post": "how-to-become-a-lighting-technician",
+    "embedded": true,
+    "description": "MA e-learning | The easiest way to get started with grandMA3",
+    "creator": "MA Lighting (YouTube channel @MALightingInt)",
+    "source": "https://www.youtube.com/watch?v=NwRE1dGwWkc",
+    "licence": "Embedded only, not downloaded (YouTube embed)",
+    "credit": "Video: MA Lighting, YouTube",
+    "note": "Official upload: linked from MA Lighting's own page https://www.malighting.com/ma-university/first-steps/ and uploaded by @MALightingInt."
+  },
+  {
+    "path": "https://www.youtube-nocookie.com/embed/hZe_KS4Hp0U",
+    "post": "the-designers-behind-legendary-clubs",
+    "embedded": true,
+    "description": "Joshua Light Show and Moon Duo | Off the Screen | Exploratorium",
+    "creator": "Exploratorium (YouTube channel @exploratorium)",
+    "source": "https://www.youtube.com/watch?v=hZe_KS4Hp0U",
+    "licence": "Embedded only, not downloaded (YouTube embed)",
+    "credit": "Video: Exploratorium, YouTube",
+    "note": "Uploaded by the Exploratorium museum's own channel and embedded on the Joshua Light Show's site at https://www.joshualightshow.com/videos-exploratorium-2014/exploratorium-2014"
+  }
+]
