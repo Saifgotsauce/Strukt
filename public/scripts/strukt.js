@@ -94,24 +94,83 @@ document.querySelectorAll('[data-glyph]').forEach(s=>glyph(s,+s.dataset.glyph));
 document.querySelectorAll('.strip-btns button').forEach(b=>b.addEventListener('click',()=>{
   const reel=document.getElementById('reel'),f=reel&&reel.querySelector('figure');if(f)reel.scrollBy({left:(+b.dataset.dir)*(f.offsetWidth+18),behavior:'smooth'})}));
 
-/* take the night apart: parts start stacked, then spread when the section is reached */
+/* take the night apart: parts start in a pile, then are dealt out into the grid when the section is reached.
+   FLIP: each card's grid slot is measured once, after icons and fonts are ready (and again only when the width changes),
+   then only transform and opacity are animated, with the Web Animations API, so nothing triggers layout mid-animation. */
 (function(){
   const grid=document.getElementById('parts'),btn=document.querySelector('.apart');if(!grid||!btn)return;
-  const cards=[...grid.children],still=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  function stack(on){
-    cards.forEach((c,i)=>{c.style.zIndex=on?String(i):'';
-      if(!on){c.style.transform='';return}
-      const dx=grid.clientWidth/2-(c.offsetLeft+c.offsetWidth/2),dy=Math.min(grid.clientHeight/2,190)-(c.offsetTop+c.offsetHeight/2);
-      c.style.transform=`translate(${dx}px,${dy}px) rotate(${(i-(cards.length-1)/2)*2.6}deg)`});
-    btn.setAttribute('aria-pressed',String(on));
-    btn.textContent=on?'Take the night apart':'Put the night back together';
+  const cards=[...grid.children],n=cards.length,still=matchMedia('(prefers-reduced-motion: reduce)'),phone=matchMedia('(max-width:700px)');
+  const canAnimate='animate' in Element.prototype,EASE='cubic-bezier(.2,.8,.2,1)',RISE='translateY(28px)',anims=new Map();
+  let pile=[],width=0,piled=false,waiting=null,io=null;
+  /* the transform that takes each card from its grid slot onto the pile. offset* ignores transforms, so this is right even mid-animation */
+  function measure(){
+    width=grid.clientWidth;const cx=width/2,cy=Math.min(grid.clientHeight/2,190);
+    pile=cards.map((c,i)=>`translate(${(cx-c.offsetLeft-c.offsetWidth/2).toFixed(1)}px,${(cy-c.offsetTop-c.offsetHeight/2).toFixed(1)}px) rotate(${((i-(n-1)/2)*2.6).toFixed(1)}deg)`);
   }
-  btn.addEventListener('click',()=>stack(btn.getAttribute('aria-pressed')!=='true'));
-  if(still||!('IntersectionObserver' in window))return;
-  stack(true);
-  const io=new IntersectionObserver(es=>{if(es[0].isIntersecting){setTimeout(()=>stack(false),650);io.disconnect()}},{threshold:0,rootMargin:'0px 0px -45% 0px'});
-  io.observe(grid);
-  addEventListener('resize',()=>{if(btn.getAttribute('aria-pressed')==='true')stack(true)});
+  /* where a card is on screen right now; stops any animation it's in so the next one starts from there */
+  function current(c){
+    const a=anims.get(c);if(!a)return{transform:c.style.transform||'none',opacity:c.style.opacity||'1'};
+    const cs=getComputedStyle(c),now={transform:cs.transform,opacity:cs.opacity};a.cancel();anims.delete(c);return now;
+  }
+  /* animate a batch of cards from→to, each starting `step` ms after the last. The stagger is built into the keyframes
+     (hold, then ease, then hold) rather than given as per-card delays, so every card starts together with one shared
+     duration and the whole batch runs on the compositor. will-change is on for the batch and off when the last card lands */
+  function play(list,dur,step){
+    const total=dur+step*Math.max(...list.map(x=>x.order));
+    list.forEach(x=>{
+      const s=x.order*step/total,e=(x.order*step+dur)/total;
+      x.c.style.willChange=x.from.opacity===x.to.opacity?'transform':'transform, opacity';
+      x.a=x.c.animate([{...x.from,offset:0},{...x.from,offset:s,easing:EASE},{...x.to,offset:e},{...x.to,offset:1}],{duration:total});
+      anims.set(x.c,x.a);
+    });
+    Promise.all(list.map(x=>x.a.finished)).then(()=>list.forEach(x=>{if(anims.get(x.c)===x.a)anims.delete(x.c);x.c.style.willChange=''}),()=>{});
+  }
+  function label(){btn.setAttribute('aria-pressed',String(piled));btn.textContent=piled?'Take the night apart':'Put the night back together'}
+  /* pile up or deal out. Cards leave the top of the pile first, and the bottom card lands first when gathering */
+  function move(toPile,instant){
+    piled=toPile;label();
+    if(waiting){waiting=null;if(io)io.disconnect()}
+    const list=cards.map((c,i)=>{
+      const from=current(c);c.style.transform=toPile?pile[i]:'';c.style.opacity='';c.style.willChange='';
+      return{c,from,to:{transform:toPile?pile[i]:'none',opacity:'1'},order:toPile?i:n-1-i};
+    });
+    if(!instant&&!still.matches&&canAnimate)phone.matches?play(list,520,40):play(list,700,50);
+  }
+  /* phones: no pile on the way in. Cards rise and fade into place as they scroll into view, a few at a time */
+  function rise(){
+    waiting='rise';
+    cards.forEach(c=>{c.style.opacity='0';c.style.transform=RISE});
+    io=new IntersectionObserver(es=>{
+      const list=es.filter(e=>e.isIntersecting).map(e=>e.target).sort((a,b)=>cards.indexOf(a)-cards.indexOf(b)).map((c,k)=>{
+        io.unobserve(c);c.style.opacity='';c.style.transform='';
+        return{c,from:{transform:RISE,opacity:'0'},to:{transform:'none',opacity:'1'},order:k};
+      });
+      if(list.length)play(list,450,50);
+    },{rootMargin:'0px 0px -8% 0px'});
+    cards.forEach(c=>io.observe(c));
+  }
+  /* desktop: start in a pile, deal out once the section is well into view */
+  function deal(){
+    move(true,true);waiting='pile';
+    io=new IntersectionObserver(es=>{if(!es[0].isIntersecting)return;io.disconnect();
+      setTimeout(()=>{if(waiting==='pile'){waiting=null;move(false)}},650)},{rootMargin:'0px 0px -45% 0px'});
+    io.observe(grid);
+  }
+  const ready=Promise.all([document.fonts?document.fonts.ready:0,...[...grid.querySelectorAll('img')].map(i=>i.decode?i.decode().catch(()=>{}):0)]);
+  btn.addEventListener('click',()=>ready.then(()=>{if(!width)measure();move(!piled)}));
+  ready.then(()=>{
+    measure();
+    // nothing to animate in: reduced motion, old browsers, or the section is already on screen (moving it now would be a jump)
+    if(still.matches||!canAnimate||!('IntersectionObserver' in window)||grid.getBoundingClientRect().top<innerHeight)return;
+    phone.matches?rise():deal();
+  });
+  /* only re-measure when the grid's width actually changes (not on scroll, and not when a phone's address bar hides) */
+  let t;addEventListener('resize',()=>{clearTimeout(t);t=setTimeout(()=>{
+    if(!width||grid.clientWidth===width)return;
+    anims.forEach(a=>a.finish());measure();
+    if(waiting==='rise'&&!phone.matches){io.disconnect();waiting=null;cards.forEach(c=>{c.style.opacity='';c.style.transform=''})}
+    else if(piled)cards.forEach((c,i)=>c.style.transform=pile[i]);
+  },150)});
 })();
 
 /* call for creatives form */

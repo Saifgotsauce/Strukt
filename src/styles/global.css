@@ -294,7 +294,7 @@ footer img{height:1.9rem;width:auto;mix-blend-mode:lighten}
 .apart{margin-top:.8rem;background:var(--black);color:var(--white);border:0;border-radius:999px;padding:.95rem 1.5rem;font:600 1rem var(--sans);cursor:pointer}
 .apart:hover{background:var(--deep)}
 .parts{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;position:relative}
-.part{background:var(--black);color:var(--white);padding:1.3rem 1.3rem 1.5rem;min-height:15rem;display:flex;flex-direction:column;position:relative;transition:transform .85s cubic-bezier(.2,.8,.2,1)}
+.part{background:var(--black);color:var(--white);padding:1.3rem 1.3rem 1.5rem;min-height:15rem;display:flex;flex-direction:column;position:relative}
 .part:nth-child(3n+2){background:var(--deep)}
 .part .who{width:7rem;height:7rem;margin:-.4rem 0 auto -.4rem}
 .part.floor{grid-column:span 2;background:var(--violet);color:var(--black)}
