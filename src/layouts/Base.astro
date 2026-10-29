@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import PostHog from '../components/PostHog.astro';
 
 interface Props {
   title: string;
@@ -45,6 +46,7 @@ const current = (href: string) => (href === '/' ? path === '/' || path.startsWit
     <link rel="preconnect" href="https://images.unsplash.com" />
     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
     {jsonLd && <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+    <PostHog />
   </head>
   <body>
     <header class="mast">
