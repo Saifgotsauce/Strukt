@@ -1,0 +1,70 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  type?: 'website' | 'article';
+  image?: string;
+  jsonLd?: object | object[];
+}
+
+const { title, description, type = 'website', image, jsonLd } = Astro.props;
+const site = Astro.site ?? new URL('https://strukt.example');
+const canonical = new URL(Astro.url.pathname, site).href;
+const ogImage = image ?? "https://images.unsplash.com/photo-1555086156-e6c7353d283f?auto=format&fit=crop&w=1200&h=630&q=70";
+const path = Astro.url.pathname;
+const current = (href: string) => (href === '/' ? path === '/' || path.startsWith('/journal') : path.startsWith(href)) ? 'page' : undefined;
+---
+<!doctype html>
+<html lang="en-CA">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#000000" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta property="og:type" content={type} />
+    <meta property="og:site_name" content="STRUKT" />
+    <meta property="og:locale" content="en_CA" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://images.unsplash.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    {jsonLd && <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+  </head>
+  <body>
+    <header class="mast">
+      <div class="wrap">
+        <a href="/" aria-label="STRUKT home"><img src="/strukt-logo.png" alt="strukt mag" width="900" height="422" /></a>
+        <span class="mono issue">Issue 00, <time datetime="2026-10">October 2026</time></span>
+        <div class="bar" aria-hidden="true"><span id="bar"></span></div>
+        <nav aria-label="Pages">
+          <a href="/" aria-current={current('/')}>Journal</a>
+          <a href="/about" aria-current={current('/about')}>About</a>
+          <a href="/call-for-creatives" aria-current={current('/call-for-creatives')}><span class="long">Call for creatives</span><span class="short">Submit</span></a>
+        </nav>
+      </div>
+    </header>
+    <slot />
+    <footer>
+  <div class="wrap">
+    <img src="/strukt-logo.png" alt="strukt mag">
+    <span class="mono">Published by Obslik Studios. The people who build the night.</span>
+  </div>
+</footer>
+    <script is:inline src="/scripts/strukt.js" defer></script>
+  </body>
+</html>
