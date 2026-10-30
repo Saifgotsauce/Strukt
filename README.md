@@ -55,4 +55,13 @@ Both sample posts are drafts until a real quote replaces the placeholder.
 2. In Vercel, choose Add New Project and import the repository. Vercel detects Astro automatically.
 3. Every time you push a new post, the site rebuilds and publishes it.
 
+## Analytics (PostHog)
+
+PostHog loads on every page from `src/components/PostHog.astro`. It reads two environment variables at build time:
+
+- `PUBLIC_POSTHOG_KEY`: the project API key (starts with `phc_`)
+- `PUBLIC_POSTHOG_HOST`: `https://us.i.posthog.com`
+
+For local builds, copy `.env.example` to `.env` and fill in the key. `.env` is ignored by git. For the live site, add both variables in Vercel under Settings > Environment Variables, then redeploy. If the key isn't set, the site builds as normal and PostHog stays off.
+
 Then add your domain in Google Search Console and submit `https://yourdomain.com/sitemap-index.xml`.

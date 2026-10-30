@@ -21,4 +21,35 @@ const journal = defineCollection({
   }),
 });
 
-export const collections = { journal };
+// Track of the week: one Markdown file per week in src/content/tracks. The newest week is the featured track.
+// Platform tracks play through their embed (embedUrl). Self-hosted tracks (platform: file) need an audioFile
+// under /audio/ and rightsConfirmed: true, so nothing goes on the site without permission to host it.
+const tracks = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/tracks' }),
+  schema: z
+    .object({
+      week: z.coerce.date(),
+      title: z.string(),
+      artist: z.string(),
+      release: z.string().optional(),
+      label: z.string().optional(),
+      platform: z.enum(['soundcloud', 'bandcamp', 'spotify', 'youtube', 'file']),
+      embedUrl: z.string().url().optional(),
+      link: z.string().url(),
+      audioFile: z.string().startsWith('/audio/', 'audioFile must be a path under public/audio/, e.g. /audio/2026-11-09-track.mp3').optional(),
+      rightsConfirmed: z.boolean().default(false),
+      artwork: z.string().optional(),
+      credits: z.array(z.object({ role: z.string(), name: z.string() })).default([]),
+      note: z.string(),
+    })
+    .superRefine((t, ctx) => {
+      if (t.platform === 'file') {
+        if (!t.audioFile) ctx.addIssue({ code: 'custom', path: ['audioFile'], message: 'audioFile is required when platform is "file"' });
+        if (!t.rightsConfirmed) ctx.addIssue({ code: 'custom', path: ['rightsConfirmed'], message: 'rightsConfirmed must be true before a track is self-hosted (platform "file")' });
+      } else if (!t.embedUrl) {
+        ctx.addIssue({ code: 'custom', path: ['embedUrl'], message: `embedUrl is required when platform is "${t.platform}"` });
+      }
+    }),
+});
+
+export const collections = { journal, tracks };

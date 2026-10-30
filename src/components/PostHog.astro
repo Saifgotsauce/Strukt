@@ -1,0 +1,19 @@
+---
+// PostHog product analytics, loaded on every page through Base.astro.
+// The project key and host come from PUBLIC_POSTHOG_KEY and PUBLIC_POSTHOG_HOST (see .env.example).
+// With no key set (local builds without a .env, preview deploys), nothing is sent.
+---
+<script>
+  import posthog from 'posthog-js';
+
+  const key = import.meta.env.PUBLIC_POSTHOG_KEY;
+  if (key) {
+    posthog.init(key, {
+      api_host: import.meta.env.PUBLIC_POSTHOG_HOST || 'https://us.i.posthog.com',
+      defaults: '2026-08-30',
+      person_profiles: 'identified_only',
+    });
+    // so other scripts (the track of the week player) can send events only when analytics is on
+    (window as any).posthog = posthog;
+  }
+</script>

@@ -1,5 +1,8 @@
 ---
 import '../styles/global.css';
+import { ClientRouter } from 'astro:transitions';
+import PostHog from '../components/PostHog.astro';
+import TrackPlayer from '../components/TrackPlayer.astro';
 
 interface Props {
   title: string;
@@ -18,7 +21,7 @@ const path = Astro.url.pathname;
 const current = (href: string) => (href === '/' ? path === '/' || path.startsWith('/journal') : path.startsWith(href)) ? 'page' : undefined;
 ---
 <!doctype html>
-<html lang="en-CA">
+<html lang="en-CA" transition:animate="none">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -45,6 +48,9 @@ const current = (href: string) => (href === '/' ? path === '/' || path.startsWit
     <link rel="preconnect" href="https://images.unsplash.com" />
     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
     {jsonLd && <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+    <PostHog />
+    <!-- pages change without a full reload, so the track of the week keeps playing between pages -->
+    <ClientRouter />
   </head>
   <body>
     <header class="mast">
@@ -64,8 +70,10 @@ const current = (href: string) => (href === '/' ? path === '/' || path.startsWit
   <div class="wrap">
     <img src="/strukt-logo.png" alt="strukt mag">
     <span class="mono">Published by Obslik Studios. The people who build the night.</span>
+    <a class="mono" href="/tracks/">Track of the week</a>
   </div>
 </footer>
+    <TrackPlayer />
     <script is:inline src="/scripts/strukt.js" defer></script>
   </body>
 </html>
