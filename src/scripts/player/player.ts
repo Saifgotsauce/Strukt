@@ -96,6 +96,7 @@ function setup(): boolean {
     scrub: null,
     view: saved?.view === 'collapsed' ? 'collapsed' : 'open',
     sheet: false,
+    full: false,
     panel: false,
     embed: false,
     blocked: false,
@@ -296,7 +297,7 @@ function setup(): boolean {
       ? `Your browser wants the first tap on ${platform}'s own player. Press play on it here and our controls take over from there.`
       : why === 'listen' ? `${platform} doesn't let other sites start its player, so here's theirs. Press play on it.` : '';
     if (text) embedNote = text;
-    set({ sheet: true, panel: false, ...(text ? { embed: true } : {}) });
+    set({ sheet: true, full: false, panel: false, ...(text ? { embed: true } : {}) });
     if (why === 'tap') capture('track_credits_open', { source: 'sheet' });
     if (why === 'listen') adapter.load();
     if (text) say(text);
@@ -304,7 +305,7 @@ function setup(): boolean {
   }
   function closeSheet(focus = true) {
     if (!get().sheet) return;
-    set({ sheet: false, embed: false });
+    set({ sheet: false, full: false, embed: false });
     if (focus && opener && document.contains(opener) && !opener.closest('[inert]')) opener.focus({ preventScroll: true });
     else if (focus) (get().view === 'collapsed' ? fab : plays[0]).focus({ preventScroll: true });
   }
@@ -422,7 +423,8 @@ function setup(): boolean {
     }
     if (ch('embed')) root.toggleAttribute('data-embed', s.embed);
     if (ch('embed') || ch('status')) note.textContent = s.embed ? embedNote : s.status === 'error' ? errorNote : '';
-    if (ch('sheet') || ch('embed')) placeEngine();
+    if (ch('full')) root.toggleAttribute('data-sheet-full', s.full);
+    if (ch('sheet') || ch('embed') || ch('full')) placeEngine();
     if (ch('artwork') && s.artwork) {
       artImgs.forEach((img) => {
         img.onload = () => arts.forEach((a) => a.classList.add('has-art'));
@@ -529,7 +531,7 @@ function setup(): boolean {
   {
     let y0 = 0, dy = 0, id = -1, active = false;
     dock.addEventListener('pointerdown', (e) => {
-      if (!phone.matches || e.button > 0 || (e.target as Element).closest('[data-play], [data-slider], .tow-panel')) return;
+      if (!phone.matches || e.button > 0 || (e.target as Element).closest('[data-play], [data-collapse], [data-slider], .tow-panel')) return;
       y0 = e.clientY; dy = 0; id = e.pointerId; active = false; swiped = false;
     });
     dock.addEventListener('pointermove', (e) => {
@@ -554,38 +556,49 @@ function setup(): boolean {
     dock.addEventListener('pointercancel', end);
   }
 
-  /* ---------- the sheet: swipe down to close (touch anywhere when scrolled to the top; mouse on the handle) ---------- */
+  /* ---------- the sheet: it opens at 75% and can be pulled up to full screen or swiped down to close.
+     Half open, any drag moves the sheet. Full screen, the content scrolls, and a drag down from the top moves the sheet.
+     Touch anywhere on the sheet; mouse on the handle. ---------- */
   let handleDragged = false;
   {
     let y0 = 0, dy = 0, t0 = 0, can = false, active = false;
+    const snaps = () => { const h = sheet.offsetHeight; return { full: 0, half: Math.max(0, h - innerHeight * 0.75), closed: h }; };
+    const base = () => (get().full ? 0 : snaps().half);
     const begin = (y: number, ok: boolean) => { y0 = y; dy = 0; t0 = performance.now(); can = ok; active = false; };
+    /** true when the gesture belongs to the sheet, so the browser mustn't scroll */
     const move = (y: number) => {
       if (!can) return false;
       dy = y - y0;
       if (!active) {
-        if (dy < -4) { can = false; return false; } // scrolling up through the sheet
-        if (dy < 6) return false;
+        if (dy < 0 && get().full) { can = false; return false; } // full screen: pushing up scrolls the content
+        if (Math.abs(dy) < 6) return dy > 0 || !get().full;
         active = true;
         sheet.classList.add('drag');
         engine.classList.remove('show');
       }
-      sheet.style.translate = `0 ${Math.max(0, dy)}px`;
-      backdrop.style.opacity = String(clamp(1 - dy / sheet.offsetHeight, 0, 1));
+      const s = snaps();
+      const p = clamp(base() + dy, 0, s.closed);
+      sheet.style.translate = `0 ${p}px`;
+      backdrop.style.opacity = String(clamp(1 - (p - s.half) / Math.max(1, s.closed - s.half), 0, 1));
       return true;
     };
     const finish = () => {
       if (!active) return;
       active = false; can = false;
+      const s = snaps();
+      // where the sheet would end up at this speed, then the nearest resting place
+      const p = clamp(base() + dy + (dy / Math.max(1, performance.now() - t0)) * 180, 0, s.closed);
+      const target = [s.full, s.half, s.closed].reduce((a, c) => (Math.abs(c - p) < Math.abs(a - p) ? c : a));
       sheet.classList.remove('drag');
       sheet.style.translate = ''; backdrop.style.opacity = '';
-      const fast = dy / (performance.now() - t0) > 0.5;
-      if (dy > sheet.offsetHeight * 0.22 || (fast && dy > 30)) closeSheet(); else placeEngine();
+      if (target === s.closed) closeSheet();
+      else { set({ full: target === s.full }); placeEngine(); }
     };
     sheet.addEventListener('touchstart', (e) => {
       const t = e.target as Element;
-      begin(e.touches[0].clientY, e.touches.length === 1 && !t.closest('[data-slider]') && (sheetBody.scrollTop <= 0 || !sheetBody.contains(t)));
+      begin(e.touches[0].clientY, e.touches.length === 1 && !t.closest('[data-slider]') && (!get().full || sheetBody.scrollTop <= 0 || !sheetBody.contains(t)));
     }, { passive: true });
-    sheet.addEventListener('touchmove', (e) => { if (move(e.touches[0].clientY)) e.preventDefault(); }, { passive: false });
+    sheet.addEventListener('touchmove', (e) => { if (move(e.touches[0].clientY) && e.cancelable) e.preventDefault(); }, { passive: false });
     sheet.addEventListener('touchend', finish);
     sheet.addEventListener('touchcancel', finish);
     handle.addEventListener('pointerdown', (e) => {
@@ -594,7 +607,7 @@ function setup(): boolean {
       begin(e.clientY, true);
       handle.setPointerCapture(e.pointerId);
     });
-    handle.addEventListener('pointermove', (e) => { if (e.pointerType === 'mouse' && e.buttons && move(e.clientY)) handleDragged = true; });
+    handle.addEventListener('pointermove', (e) => { if (e.pointerType === 'mouse' && e.buttons && move(e.clientY) && active) handleDragged = true; });
     handle.addEventListener('pointerup', (e) => { if (e.pointerType === 'mouse') { finish(); setTimeout(() => (handleDragged = false)); } });
   }
 

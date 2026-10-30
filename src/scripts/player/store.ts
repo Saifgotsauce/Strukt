@@ -13,6 +13,8 @@ export interface State {
   scrub: number | null;
   view: 'open' | 'collapsed';
   sheet: boolean;
+  /** the sheet is pulled up to full screen (it opens at 75%) */
+  full: boolean;
   panel: boolean;
   /** the platform's own player is on show in the sheet, because the browser blocked ours (or it's Bandcamp) */
   embed: boolean;
