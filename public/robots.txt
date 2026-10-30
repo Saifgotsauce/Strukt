@@ -1,5 +1,0 @@
-User-agent: *
-Allow: /
-
-# Change the domain below to your real one before launch
-Sitemap: https://strukt.example/sitemap-index.xml

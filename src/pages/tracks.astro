@@ -4,7 +4,7 @@ import Base from '../layouts/Base.astro';
 import { platformName } from '../lib/tracks';
 
 const tracks = (await getCollection('tracks')).sort((a, b) => b.data.week.valueOf() - a.data.week.valueOf());
-const site = Astro.site ?? new URL('https://strukt.example');
+const site = Astro.site ?? new URL('https://www.struktmagazine.com');
 const weekLabel = (d: Date) => d.toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
 
 const jsonLd = {

@@ -12,7 +12,7 @@ export async function getStaticPaths() {
 const { post, posts } = Astro.props;
 const { Content } = await render(post);
 const d = post.data;
-const site = Astro.site ?? new URL('https://strukt.example');
+const site = Astro.site ?? new URL('https://www.struktmagazine.com');
 const url = new URL(`/journal/${post.id}/`, site).href;
 const words = (post.body ?? '').split(/\s+/).filter(Boolean).length;
 const minutes = Math.max(1, Math.round(words / 220));
@@ -49,6 +49,7 @@ const jsonLd = [
 ];
 ---
 <Base title={`${d.title} | STRUKT`} description={d.description} type="article" image={d.heroImage} jsonLd={jsonLd}>
+  <link slot="head" rel="alternate" type="text/markdown" href={`/journal/${post.id}.md`} title="This post as Markdown" />
   <main data-progress>
     <article>
       <header class="phead">
