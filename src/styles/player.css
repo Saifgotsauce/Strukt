@@ -1,0 +1,214 @@
+/* ---------- track of the week player (src/components/TrackPlayer.astro, src/scripts/player/) ----------
+   Only transform (translate, scale) and opacity are animated, except the credits panel, which opens with
+   grid-template-rows 0fr to 1fr. Each state is a data attribute on #tow: data-status, data-view, data-sheet-open,
+   data-panel-open, data-embed, data-hide, data-enter. */
+.tow{--ease:cubic-bezier(.2,.8,.2,1);--line:#2A2240;color:#fff;font-family:var(--sans)}
+.tow button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.tow a{-webkit-tap-highlight-color:transparent}
+.tow :focus-visible{outline:2px solid var(--violet);outline-offset:2px}
+
+/* the page makes room for the bar, measured in player.ts */
+body:has(> #tow) footer{padding-bottom:calc(2.4rem + var(--tow-space,100px) + env(safe-area-inset-bottom,0px))}
+footer a{color:var(--lilac);text-underline-offset:3px}
+footer a:hover{color:var(--white)}
+
+/* ---------- the bar ---------- */
+.tow-dock{position:fixed;z-index:50;left:16px;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));margin:0 auto;max-width:760px;height:68px;
+  display:flex;align-items:center;gap:12px;padding:0 10px 0 12px;background:var(--black);border:1px solid var(--line);border-radius:14px;
+  box-shadow:0 18px 48px -14px rgba(0,0,0,.6),0 3px 12px rgba(0,0,0,.25);transform-origin:100% 100%;
+  transition:translate .22s var(--ease),scale .22s var(--ease),opacity .22s var(--ease),visibility 0s}
+
+/* progress line along the top edge; the 20px strip around it is the hit area */
+.tow-line{position:relative;display:block;cursor:pointer;touch-action:none;border-radius:4px}
+.tow-dock>.tow-line{position:absolute;left:14px;right:14px;top:-10px;height:20px}
+.tow-line[aria-disabled=true]{cursor:default}
+.tow .tow-line:focus-visible{outline:0}
+.tow-line:focus-visible .tow-knob i{box-shadow:0 0 0 3px var(--violet),0 0 0 6px rgba(201,179,255,.45)}
+.tow-line-track{position:absolute;left:0;right:0;top:7px;height:6px;border-radius:3px;overflow:hidden;background:var(--line);scale:1 .34;transition:scale .16s var(--ease)}
+.tow-buf,.tow-played{position:absolute;inset:0;transform-origin:0 50%;transform:scaleX(0)}
+.tow-buf{background:rgba(201,179,255,.32)}
+.tow-played{background:var(--violet)}
+.tow-knob{position:absolute;left:0;right:0;top:10px;height:0;pointer-events:none}
+.tow-knob i{position:absolute;left:-6px;top:-6px;width:12px;height:12px;border-radius:50%;background:#fff;box-shadow:0 0 0 3px var(--violet);opacity:0;scale:.4;transition:opacity .16s var(--ease),scale .16s var(--ease)}
+.tow-tip{position:absolute;left:0;bottom:calc(100% + 4px);translate:-50% 0;padding:4px 7px;border-radius:6px;background:var(--deep);color:#fff;font:500 11px/1 var(--mono);white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .16s var(--ease)}
+@media (hover:hover){
+  .tow-line:not([aria-disabled=true]):hover .tow-line-track{scale:1}
+  .tow-line:not([aria-disabled=true]):hover .tow-knob i{opacity:1;scale:1}
+  .tow-line:not([aria-disabled=true]):hover .tow-tip{opacity:1}
+}
+.tow-line.drag .tow-line-track,.tow-line:focus-visible .tow-line-track{scale:1}
+.tow-line.drag .tow-knob i,.tow-line:focus-visible .tow-knob i{opacity:1;scale:1}
+.tow-line.drag .tow-tip{opacity:1}
+
+/* play / pause: the icons are stacked and swap with a 160ms fade and scale */
+.tow-play{position:relative;z-index:1;flex:none;display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--violet)!important;color:#fff!important}
+.tow-play .ic{grid-area:1/1;width:22px;height:22px;fill:currentColor;opacity:0;scale:.55;transition:opacity .16s var(--ease),scale .16s var(--ease)}
+.tow[data-status=idle] .ic-play,.tow[data-status=paused] .ic-play,.tow[data-status=playing] .ic-pause,
+.tow[data-status=loading] .ic-load,.tow[data-status=ended] .ic-replay,.tow[data-status=error] .ic-out{opacity:1;scale:1}
+.tow[data-platform=bandcamp] .tow-play .ic{opacity:0}
+.tow[data-platform=bandcamp] .tow-play .ic-out{opacity:1;scale:1}
+.ic-load{display:flex;align-items:center;justify-content:center;gap:4px}
+.ic-load i{width:5px;height:5px;border-radius:50%;background:currentColor;opacity:.3}
+.tow[data-status=loading] .ic-load i{animation:tow-pulse .9s var(--ease) infinite}
+.ic-load i:nth-child(2){animation-delay:.15s!important}
+.ic-load i:nth-child(3){animation-delay:.3s!important}
+@keyframes tow-pulse{0%,100%{opacity:.3;transform:scale(.85)}40%{opacity:1;transform:scale(1)}}
+
+.tow-open{display:none}
+
+/* artwork with a fine dot screen over it; dots on deep violet until the platform sends the cover */
+.tow-art{position:relative;flex:none;display:block;width:44px;height:44px;border-radius:6px;overflow:hidden;background:var(--deep) radial-gradient(circle,rgba(140,82,255,.9) 1px,transparent 1.5px) 1px 1px/6px 6px}
+.tow-art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .3s var(--ease)}
+.tow-art.has-art img{opacity:1}
+.tow-art::after{content:"";position:absolute;inset:0;background:radial-gradient(circle,rgba(0,0,0,.4) .7px,transparent 1.1px) 0 0/3px 3px;pointer-events:none}
+
+.tow-text{flex:1;min-width:0;display:grid;grid-template-columns:auto minmax(0,1fr);align-items:baseline;column-gap:8px;row-gap:5px}
+.tow-label{grid-column:1/-1;font:500 11px/1 var(--mono);color:var(--lilac);letter-spacing:.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tow-title{display:block;max-width:24ch;font:600 15px/1.2 var(--sans);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tow-title>span{display:inline-block}
+.tow-artist{display:block;font:400 13px/1.2 var(--sans);color:var(--ash);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* dot equaliser: 5 columns of 4 dots, lit from the bottom; data-l is set by player.ts */
+.tow-eq{flex:none;display:flex;align-items:flex-end;gap:2px}
+.tow-eq .col{display:grid;gap:2px}
+.tow-eq i{display:block;width:3px;height:3px;border-radius:50%;background:var(--violet);opacity:.22}
+.tow-eq i:first-child{background:var(--lilac)}
+.tow-eq .col[data-l="1"] i:nth-child(n+4),.tow-eq .col[data-l="2"] i:nth-child(n+3),
+.tow-eq .col[data-l="3"] i:nth-child(n+2),.tow-eq .col[data-l="4"] i{opacity:1}
+
+.tow-time{flex:none;font:400 12px/1 var(--mono);color:var(--ash);white-space:nowrap;font-variant-numeric:tabular-nums}
+.tow-time [data-elapsed]{color:#fff}
+.tow-err-link{display:none;flex:none;align-items:center;min-height:44px;font:500 13px var(--sans);color:var(--lilac);text-underline-offset:3px}
+.tow-credits-btn{flex:none;min-height:44px;padding:0 12px!important;border-radius:999px;font:500 13px var(--sans)!important;color:var(--ash)!important}
+.tow-credits-btn[aria-expanded=true]{color:var(--lilac)!important;background:var(--deep)!important}
+.tow-collapse{flex:none;display:grid;place-items:center;width:44px;height:44px;border-radius:50%;color:var(--ash)!important}
+.tow-collapse svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2}
+
+/* states that change what the bar shows */
+.tow[data-status=error] .tow-eq,.tow[data-status=error] .tow-time,.tow[data-status=error]>.tow-dock>.tow-line{display:none}
+.tow[data-status=error] .tow-err-link{display:inline-flex}
+.tow[data-platform=bandcamp] .tow-eq,.tow[data-platform=bandcamp] .tow-time,.tow[data-platform=bandcamp] .tow-line,
+.tow[data-platform=bandcamp] [data-ctl],.tow[data-platform=bandcamp] .tow-sheet-ctl{display:none}
+
+/* ---------- credits panel (desktop), anchored above the bar ---------- */
+.tow-panel{position:absolute;right:0;bottom:calc(100% + 10px);width:380px;max-width:calc(100vw - 32px);display:grid;grid-template-rows:0fr;
+  background:var(--black);border:1px solid var(--line);border-radius:14px;box-shadow:0 24px 60px -16px rgba(0,0,0,.6);
+  opacity:0;visibility:hidden;transition:grid-template-rows .26s var(--ease),opacity .2s var(--ease),visibility 0s .26s}
+.tow[data-panel-open] .tow-panel{grid-template-rows:1fr;opacity:1;visibility:visible;transition:grid-template-rows .26s var(--ease),opacity .2s var(--ease),visibility 0s}
+.tow-panel-in{min-height:0;overflow:hidden}
+.tow-panel-body{max-height:min(560px,calc(100dvh - 150px));overflow:auto;overscroll-behavior:contain;padding:18px 18px 16px;outline:none}
+.tow-panel-head{display:flex;gap:14px;align-items:center;margin-bottom:14px}
+.tow-panel-head .tow-art{width:64px;height:64px;border-radius:8px}
+.tow-panel-head .tow-label{margin-bottom:7px}
+.tow-panel-title{font:700 19px/1.15 var(--sans);letter-spacing:-.02em}
+.tow-panel-title span{display:block;margin-top:3px;font:400 14px/1.2 var(--sans);color:var(--ash);letter-spacing:0}
+
+.tow-note{font:400 14px/1.55 var(--sans);color:#E9E5F3}
+.tow-credits{margin:14px 0 0}
+.tow-credits div{display:grid;gap:3px;padding:10px 0;border-top:1px solid var(--line)}
+.tow-credits dt{font:400 11px/1.3 var(--mono);color:var(--ash);letter-spacing:.02em}
+.tow-credits dd{margin:0;font:500 14px/1.4 var(--sans)}
+.tow-actions{display:flex;flex-wrap:wrap;align-items:center;gap:6px 16px;margin-top:14px}
+.tow-buy{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border-radius:999px;background:var(--violet);color:var(--black);font:600 14px var(--sans);text-decoration:none}
+.tow-via{display:inline-flex;align-items:center;min-height:44px;font:400 12px var(--mono);color:var(--ash);text-underline-offset:3px}
+
+/* ---------- bottom sheet (phones; and anywhere a platform's own player has to be shown) ---------- */
+.tow-sheet-wrap{position:fixed;inset:0;z-index:60;visibility:hidden;transition:visibility 0s .32s}
+.tow[data-sheet-open] .tow-sheet-wrap{visibility:visible;transition:none}
+.tow-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.62);opacity:0;touch-action:none;transition:opacity .32s var(--ease)}
+.tow[data-sheet-open] .tow-backdrop{opacity:1}
+.tow-sheet{position:absolute;left:0;right:0;bottom:0;margin:0 auto;max-width:560px;height:75vh;height:75dvh;display:flex;flex-direction:column;
+  background:var(--black);border:1px solid var(--line);border-bottom:0;border-radius:20px 20px 0 0;padding-bottom:env(safe-area-inset-bottom,0px);
+  translate:0 100%;transition:translate .32s cubic-bezier(.2,.8,.2,1)}
+.tow[data-sheet-open] .tow-sheet{translate:0 0}
+.tow-sheet.drag,.tow-sheet-wrap:has(.drag) .tow-backdrop{transition:none}
+.tow-handle{flex:none;display:grid;place-items:center;width:100%;height:44px;cursor:grab;border-radius:20px 20px 0 0}
+.tow-handle i{display:block;width:40px;height:4px;border-radius:2px;background:#3D3456}
+.tow-slot{display:none;flex:none;padding:0 20px 14px}
+.tow[data-embed] .tow-slot,.tow[data-status=error] .tow-slot{display:block}
+.tow-slot-note{font:400 13px/1.5 var(--sans);color:var(--lilac);margin-bottom:10px}
+.tow-slot-note:empty{display:none}
+.tow-slot-frame{height:var(--slot-h,166px);border-radius:10px;background:var(--deep)}
+.tow:not([data-embed]) .tow-slot-frame{display:none}
+.tow-sheet-body{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;padding:2px 24px 28px;text-align:center}
+.tow-art-lg{width:min(62vw,250px,24vh);width:min(62vw,250px,24dvh);height:auto;aspect-ratio:1;margin:2px auto 20px;border-radius:12px;background-size:8px 8px}
+.tow-art-lg::after{background-size:4px 4px;background-image:radial-gradient(circle,rgba(0,0,0,.38) .9px,transparent 1.4px)}
+.tow-sheet-title{margin-top:10px;font:800 34px/1 var(--sans);letter-spacing:-.045em}
+.tow-sheet-artist{margin-top:6px;font:400 17px/1.3 var(--sans);color:var(--ash)}
+.tow-scrub{margin-top:16px}
+.tow-line-lg{height:44px}
+.tow-line-lg .tow-line-track{top:19px;scale:1 .67}
+.tow-line-lg .tow-knob{top:22px}
+.tow-line-lg .tow-knob i{left:-7px;top:-7px;width:14px;height:14px;opacity:1;scale:1}
+.tow-line-lg[aria-disabled=true] .tow-knob i{opacity:0}
+.tow-times{display:flex;justify-content:space-between;margin-top:-6px;font:400 12px/1 var(--mono);color:var(--ash);font-variant-numeric:tabular-nums}
+.tow-sheet-ctl{display:flex;justify-content:center;margin:16px 0 26px}
+.tow-play-lg{width:72px;height:72px}
+.tow-play-lg .ic{width:30px;height:30px}
+.tow-play-lg .ic-load i{width:7px;height:7px}
+.tow-sheet-h{margin:0 0 4px;font:500 11px/1 var(--mono);color:var(--lilac);text-align:left}
+.tow-sheet-body .tow-credits{margin-top:6px;text-align:left}
+.tow-sheet-body .tow-note{margin-top:18px;text-align:left}
+.tow-sheet-body .tow-actions{margin-top:18px}
+.tow-sheet-foot{display:flex;flex-wrap:wrap;gap:0 20px;margin-top:18px;padding-top:6px;border-top:1px solid var(--line)}
+.tow-sheet-foot>*{display:inline-flex;align-items:center;min-height:44px;font:400 12px var(--mono)!important;color:var(--ash)!important;text-decoration:underline;text-underline-offset:3px}
+
+/* the platform's own iframe or <audio>, outside <body> (see player.ts). Out of sight unless it's on show in the sheet */
+.tow-engine{position:fixed;left:0;bottom:0;width:320px;height:var(--slot-h,166px);border-radius:10px;overflow:hidden;opacity:0;pointer-events:none;z-index:-1;transition:opacity .16s var(--ease)}
+.tow-engine.show{bottom:auto;opacity:1;pointer-events:auto;z-index:70}
+.tow-engine iframe,.tow-engine audio{display:block;width:100%;height:100%;border:0;background:var(--deep)}
+
+/* hover colours only where there's a real pointer, so they don't stick after a tap */
+@media (hover:hover){
+  .tow-play:hover{background:var(--lilac)!important;color:var(--black)!important}
+  .tow-err-link:hover{color:#fff}
+  .tow-credits-btn:hover{color:#fff!important;background:var(--deep)!important}
+  .tow-collapse:hover{color:#fff!important;background:var(--deep)!important}
+  .tow-buy:hover{background:var(--lilac)}
+  .tow-via:hover{color:#fff}
+  .tow-sheet-foot>*:hover{color:#fff!important}
+  .tow-fab:hover{box-shadow:inset 0 0 0 2px var(--lilac),0 10px 30px -8px rgba(0,0,0,.55)}
+}
+
+/* ---------- collapsed: a round button, bottom right ---------- */
+.tow-fab{position:fixed;z-index:50;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));display:grid;place-items:center;width:56px;height:56px;border-radius:50%;
+  background:var(--black)!important;box-shadow:inset 0 0 0 2px var(--violet),0 10px 30px -8px rgba(0,0,0,.55);transform-origin:100% 100%;
+  scale:.6;opacity:0;visibility:hidden;pointer-events:none;transition:translate .22s var(--ease),scale .22s var(--ease),opacity .22s var(--ease),visibility 0s .22s}
+.tow-fab .tow-eq{gap:3px}
+.tow-fab .tow-eq .col{gap:3px}
+.tow-fab .tow-eq i{width:4px;height:4px}
+.tow[data-view=collapsed] .tow-dock{scale:.6;opacity:0;visibility:hidden;pointer-events:none;transition:translate .22s var(--ease),scale .22s var(--ease),opacity .22s var(--ease),visibility 0s .22s}
+.tow[data-view=collapsed] .tow-fab{scale:1;opacity:1;visibility:visible;pointer-events:auto;transition:translate .22s var(--ease),scale .22s var(--ease),opacity .22s var(--ease),visibility 0s}
+
+/* out of the way: keyboard open, or over a send button or call to action */
+.tow[data-hide] .tow-dock,.tow[data-hide] .tow-fab{translate:0 calc(100% + 40px);opacity:0;visibility:hidden;pointer-events:none;transition:translate .22s var(--ease),scale .22s var(--ease),opacity .22s var(--ease),visibility 0s .22s}
+
+/* entrance, first visit only: up 24px and in over 280ms */
+.tow[data-enter=wait] .tow-dock,.tow[data-enter=wait] .tow-fab{translate:0 24px;opacity:0;transition:none}
+.tow[data-enter=go] .tow-dock,.tow[data-enter=go] .tow-fab{transition:translate .28s var(--ease),opacity .28s var(--ease)}
+.tow[data-enter=go][data-view=collapsed] .tow-dock,.tow[data-enter][data-view=open] .tow-fab{opacity:0}
+
+/* ---------- phones: a docked card; tap it for the sheet, swipe it down to collapse ---------- */
+@media (max-width:700px){
+  .tow-dock{left:8px;right:8px;bottom:calc(8px + env(safe-area-inset-bottom,0px));height:64px;gap:12px;padding:0 10px 0 12px;touch-action:none}
+  .tow-dock.drag{transition:none}
+  .tow-dock>.tow-line{pointer-events:none}
+  .tow-dock>.tow-line .tow-knob,.tow-dock>.tow-line .tow-tip{display:none}
+  .tow-dock>.tow-line .tow-line-track{scale:1 .34!important}
+  .tow-open{display:block;position:absolute;inset:0;z-index:0;border-radius:14px;cursor:pointer}
+  .tow-dock .tow-art{width:40px;height:40px;pointer-events:none}
+  .tow-dock .tow-text{display:flex;flex-direction:column;align-items:stretch;gap:4px;pointer-events:none}
+  .tow-dock .tow-label,.tow-dock .tow-eq,.tow-time,.tow-credits-btn,.tow-collapse,.tow-panel,.tow[data-status=error] .tow-err-link{display:none}
+  .tow-dock .tow-title{max-width:none;text-overflow:clip}
+  .tow-title.scroll{mask-image:linear-gradient(90deg,#000 82%,transparent);-webkit-mask-image:linear-gradient(90deg,#000 82%,transparent)}
+  .tow-title.scroll>span{animation:tow-marquee 12s ease-in-out infinite}
+  .tow-dock .tow-play{order:3}
+  .tow-fab{right:max(12px,env(safe-area-inset-right,0px));bottom:calc(12px + env(safe-area-inset-bottom,0px))}
+}
+@keyframes tow-marquee{0%,18%{transform:translateX(0)}50%,68%{transform:translateX(var(--shift,0))}100%{transform:translateX(0)}}
+
+/* reduced motion: every change is instant */
+@media (prefers-reduced-motion:reduce){
+  .tow,.tow *,.tow-engine{transition-duration:0s!important;transition-delay:0s!important;animation:none!important}
+  .tow[data-status=loading] .ic-load i{opacity:1}
+}

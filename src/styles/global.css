@@ -593,84 +593,6 @@ footer img{height:1.9rem;width:auto;mix-blend-mode:lighten}
   .prose p,.prose li{font-size:1.06rem}
 }
 
-/* ---------- track of the week: player bar (src/components/TrackPlayer.astro) ---------- */
-:root{--tow-h:64px}
-@media (max-width:700px){:root{--tow-h:60px}}
-/* the bar sits over the bottom of the page, so the footer (always last, always black) makes room for it */
-body:has(> #tow) footer{padding-bottom:calc(2.4rem + var(--tow-h) + env(safe-area-inset-bottom,0px))}
-footer a{color:var(--lilac);text-underline-offset:3px}
-footer a:hover{color:var(--white)}
-.tow{position:fixed;left:0;right:0;bottom:0;z-index:40;color:var(--white);font:400 .95rem/1.3 var(--sans);pointer-events:none}
-.tow>*{pointer-events:auto}
-.tow button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
-.tow-bar{position:relative;display:flex;align-items:center;gap:.9rem;height:calc(var(--tow-h) + env(safe-area-inset-bottom,0px));padding:0 max(var(--gut),env(safe-area-inset-right,0px)) env(safe-area-inset-bottom,0px) max(var(--gut),env(safe-area-inset-left,0px));background:var(--black);border-top:1px solid #3A2C5C}
-.tow-bar[hidden]{display:none}
-.tow-play{flex:none;display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--violet)!important;color:var(--white)}
-.tow-play:hover{background:var(--lilac)!important;color:var(--black)}
-.tow-play svg{width:20px;height:20px;fill:currentColor}
-.tow-play .i-pause,.tow.playing .tow-play .i-play{display:none}
-.tow.playing .tow-play .i-pause{display:block}
-.tow-main{flex:1;min-width:0;display:flex;align-items:center;gap:1rem}
-.tow-meta{min-width:0;display:flex;flex-direction:column;gap:.15rem}
-.tow-label{font-size:.7rem;color:var(--lilac);letter-spacing:.02em}
-.tow-title{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.tow-title b{font-weight:700}
-.tow-title span{color:var(--ash)}
-.tow-embed{flex:1;min-width:0}
-.tow-embed iframe{display:block;width:100%;border:0;background:var(--black)}
-.tow.embedded:not(.tall) .tow-meta{display:none}
-/* taller embeds (SoundCloud, Spotify, YouTube) open in a panel above the bar */
-.tow.tall .tow-embed{position:absolute;left:var(--gut);bottom:calc(100% + 8px);width:min(26rem,calc(100vw - 2 * var(--gut)));background:var(--black);border:1px solid #3A2C5C;padding:.5rem}
-.tow.tall .tow-embed iframe{aspect-ratio:16/9;height:auto}
-.tow-progress{flex:1;min-width:6rem;display:flex;align-items:center;gap:.7rem}
-.tow-seek{--p:0;flex:1;height:4px;appearance:none;-webkit-appearance:none;border-radius:2px;background:linear-gradient(90deg,var(--violet) calc(var(--p) / 10 * 1%),#3A2C5C 0);cursor:pointer}
-.tow-seek::-webkit-slider-thumb{-webkit-appearance:none;width:12px;height:12px;border-radius:50%;background:var(--white)}
-.tow-seek::-moz-range-thumb{width:12px;height:12px;border:0;border-radius:50%;background:var(--white)}
-.tow-time{font-size:.75rem;color:var(--ash);min-width:2.6rem}
-.tow-credits-btn{flex:none;padding:.45rem .9rem!important;border:1px solid #3A2C5C!important;border-radius:999px;font-size:.8rem!important}
-.tow-credits-btn:hover,.tow-credits-btn[aria-expanded=true]{border-color:var(--violet)!important;color:var(--lilac)}
-.tow-hide{flex:none;display:grid;place-items:center;width:32px;height:32px;border-radius:50%;color:var(--ash)}
-.tow-hide:hover{color:var(--white);background:#1E1530!important}
-.tow-hide svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2}
-.tow-credits{position:absolute;right:var(--gut);bottom:calc(100% + 8px);width:min(26rem,calc(100vw - 2 * var(--gut)));max-height:min(70vh,32rem);overflow:auto;background:var(--black);border:1px solid #3A2C5C;padding:1.1rem 1.2rem 1.2rem}
-.tow-credits[hidden]{display:none}
-.tow-credits-head{font-size:.75rem;color:var(--lilac);margin-bottom:.8rem}
-.tow-credits dl{display:grid;grid-template-columns:auto 1fr;gap:.45rem 1rem;font-size:.9rem}
-.tow-credits dt{color:var(--ash)}
-.tow-credits dd{margin:0}
-.tow-links{margin-top:1rem;display:flex;flex-wrap:wrap;gap:.4rem 1.2rem;font-size:.9rem}
-.tow-links a{color:var(--lilac);text-underline-offset:3px}
-.tow-links a:hover{color:var(--white)}
-.tow-dot{position:absolute;right:max(var(--gut),env(safe-area-inset-right,0px));bottom:calc(8px + env(safe-area-inset-bottom,0px));display:grid;place-items:center;width:48px;height:48px;border-radius:50%;background:var(--black)!important;border:1px solid var(--violet)!important}
-.tow-dot[hidden]{display:none}
-/* dot-matrix equaliser: dim dots, lit from the bottom up; animated only while playing and only if motion is allowed */
-.tow-eq{display:inline-flex;align-items:flex-end;gap:3px;flex:none}
-.tow-eq .col{display:grid;gap:2px}
-.tow-eq i{display:block;width:4px;height:4px;border-radius:50%;background:#3A2C5C}
-.tow-eq i:last-child{background:var(--violet)}
-.tow-eq .col:nth-child(2n) i:nth-last-child(2){background:var(--violet)}
-.tow.playing .tow-eq i:nth-last-child(2),.tow.playing .tow-eq i:nth-last-child(3){background:var(--violet)}
-.tow.playing .tow-eq i:nth-last-child(4){background:var(--lilac)}
-@media (prefers-reduced-motion:no-preference){
-  .tow.playing .tow-eq i:not(:last-child){animation:tow-eq calc(.55s + var(--c) * .13s) steps(2,jump-none) infinite alternate;animation-delay:calc(var(--c) * -.21s)}
-  .tow.playing .tow-eq i:nth-last-child(2){animation-duration:calc(.8s + var(--c) * .09s)}
-  .tow.playing .tow-eq i:nth-last-child(4){animation-duration:calc(.42s + var(--c) * .17s)}
-  @keyframes tow-eq{from{opacity:1}to{opacity:.12}}
-}
-@media (max-width:700px){
-  .tow-bar{gap:.6rem}
-  .tow.embedded:not(.tall) .tow-bar>.tow-eq{display:none}
-  .tow-label{font-size:.65rem}
-  .tow-title{font-size:.88rem}
-  /* on phones the progress bar runs along the top edge of the bar */
-  .tow-progress{position:absolute;left:0;right:0;top:-1px;min-width:0}
-  .tow-seek{height:3px;border-radius:0}
-  .tow-time{display:none}
-  .tow-credits-btn{padding:.4rem .7rem!important}
-  .tow-credits dl{grid-template-columns:1fr;gap:.1rem}
-  .tow-credits dd{margin-bottom:.55rem}
-}
-
 /* ---------- track of the week: archive (/tracks) ---------- */
 .tracks{padding:clamp(3rem,6vw,5rem) 0}
 .trk{max-width:44rem;margin:0 auto;padding-bottom:3rem}
@@ -692,7 +614,7 @@ footer a:hover{color:var(--white)}
 .trk-credits{display:grid;grid-template-columns:minmax(0,14rem) 1fr;gap:.55rem 1.4rem;font-size:1rem}
 .trk-credits dt{color:var(--paper-ash)}
 .trk-credits dd{margin:0}
-.trk-link{margin-top:1.4rem}
+.trk-link{margin-top:1.4rem;display:flex;flex-wrap:wrap;gap:.4rem 1.6rem}
 .trk-link a{color:var(--paper-ink);text-decoration-color:var(--violet);text-decoration-thickness:2px;text-underline-offset:3px}
 .trk-link a:hover{color:var(--violet)}
 @media (max-width:560px){.trk-credits{grid-template-columns:1fr;gap:.15rem}.trk-credits dd{margin-bottom:.6rem}}

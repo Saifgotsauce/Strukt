@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
-import { platformName } from '../lib/tracks';
+import { platformName, buyLabel } from '../lib/tracks';
 
 const tracks = (await getCollection('tracks')).sort((a, b) => b.data.week.valueOf() - a.data.week.valueOf());
 const site = Astro.site ?? new URL('https://www.struktmagazine.com');
@@ -46,8 +46,9 @@ const jsonLd = {
 
     <section class="tracks" aria-label="Every track of the week, newest first">
       <div class="wrap">
-        {tracks.map((t) => {
+        {tracks.map((t, i) => {
           const d = t.data;
+          const featured = i === 0; // this week's track plays in the player at the bottom of the page, not a second one here
           return (
             <article class="trk" aria-labelledby={`trk-${t.id}`}>
               <p class="trk-week mono"><time datetime={d.week.toISOString().slice(0, 10)}>Week of {weekLabel(d.week)}</time></p>
@@ -58,9 +59,9 @@ const jsonLd = {
                 {d.platform === 'file' ? (
                   <audio controls preload="none" src={d.audioFile} data-track-title={d.title} data-track-artist={d.artist} data-track-week={d.week.toISOString().slice(0, 10)}></audio>
                 ) : (
-                  <button type="button" class="trk-facade" data-embed={d.embedUrl} data-platform={d.platform} data-track-title={d.title} data-track-artist={d.artist} data-track-week={d.week.toISOString().slice(0, 10)}>
+                  <button type="button" class="trk-facade" data-embed={featured ? undefined : d.embedUrl} data-featured={featured ? '' : undefined} data-platform={d.platform} data-track-title={d.title} data-track-artist={d.artist} data-track-week={d.week.toISOString().slice(0, 10)}>
                     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
-                    <span>Play {d.title} <span class="mono">loads the {platformName[d.platform]} player</span></span>
+                    <span>Play {d.title} <span class="mono">{featured ? 'in the player below' : `loads the ${platformName[d.platform]} player`}</span></span>
                   </button>
                 )}
               </div>
@@ -68,7 +69,10 @@ const jsonLd = {
               <dl class="trk-credits">
                 {d.credits.map((c) => <><dt>{c.role}</dt><dd>{c.name}</dd></>)}
               </dl>
-              <p class="trk-link"><a href={d.link} target="_blank" rel="noopener">{d.platform === 'file' ? "The track's page" : `Hear it on ${platformName[d.platform]}`}</a></p>
+              <p class="trk-link">
+                {d.buyLink && <a href={d.buyLink} target="_blank" rel="noopener" data-buy data-track-title={d.title} data-track-artist={d.artist}>{buyLabel(d.buyLink)}</a>}
+                <a href={d.link} target="_blank" rel="noopener">{d.platform === 'file' ? "The track's page" : `Hear it on ${platformName[d.platform]}`}</a>
+              </p>
             </article>
           );
         })}
@@ -82,7 +86,10 @@ const jsonLd = {
   const track = (event: string, props: Record<string, unknown>) => { try { (window as any).posthog?.capture?.(event, props); } catch { /* analytics off */ } };
   const props = (el: HTMLElement) => ({ title: el.dataset.trackTitle, artist: el.dataset.trackArtist, week: el.dataset.trackWeek, source: 'archive' });
   document.addEventListener('click', (e) => {
+    const buy = (e.target as Element | null)?.closest?.<HTMLElement>('.trk-link [data-buy]');
+    if (buy) return track('track_buy_click', { title: buy.dataset.trackTitle, artist: buy.dataset.trackArtist, source: 'archive' });
     const b = (e.target as Element | null)?.closest?.<HTMLButtonElement>('.trk-facade');
+    if (b && 'featured' in b.dataset) return void document.dispatchEvent(new CustomEvent('tow:play'));
     if (!b || !b.dataset.embed) return;
     const f = document.createElement('iframe');
     f.src = b.dataset.embed; f.title = `${b.dataset.trackTitle} by ${b.dataset.trackArtist}`;
