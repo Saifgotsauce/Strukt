@@ -14,7 +14,7 @@ interface Props {
 }
 
 const { title, description, type = 'website', image, jsonLd, noindex = false } = Astro.props;
-const site = Astro.site ?? new URL('https://strukt.example');
+const site = Astro.site ?? new URL('https://www.struktmagazine.com');
 const canonical = new URL(Astro.url.pathname, site).href;
 const ogImage = new URL(image ?? '/og-default.png', site).href;
 const path = Astro.url.pathname;
@@ -48,6 +48,7 @@ const current = (href: string) => (href === '/' ? path === '/' || path.startsWit
     <link rel="preconnect" href="https://images.unsplash.com" />
     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
     {jsonLd && <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+    <slot name="head" />
     <PostHog />
     <!-- pages change without a full reload, so the track of the week keeps playing between pages -->
     <ClientRouter />

@@ -45,7 +45,7 @@ Both sample posts are drafts until a real quote replaces the placeholder.
 
 ## Before launch
 
-1. In `astro.config.mjs` and `public/robots.txt`, replace `strukt.example` with your domain.
+1. The live domain is set once, as `site` in `astro.config.mjs`. Canonical links, the sitemap, `robots.txt`, `llms.txt` and social previews are all built from it.
 2. Submissions from the call for creatives form go to Formspree (`https://formspree.io/f/maeebnbb`, set as the form's `action` in `src/pages/call-for-creatives.astro`). Check that a test submission reaches your Formspree inbox.
 3. Download the Unsplash photos and put them in `public/` if you'd rather host them yourself.
 
@@ -65,3 +65,8 @@ PostHog loads on every page from `src/components/PostHog.astro`. It reads two en
 For local builds, copy `.env.example` to `.env` and fill in the key. `.env` is ignored by git. For the live site, add both variables in Vercel under Settings > Environment Variables, then redeploy. If the key isn't set, the site builds as normal and PostHog stays off.
 
 Then add your domain in Google Search Console and submit `https://yourdomain.com/sitemap-index.xml`.
+
+## Search engines and AI assistants
+
+- `robots.txt`, `llms.txt`, `llms-full.txt` and a Markdown copy of each post (`/journal/<post-name>.md`) are generated on every build, so new posts show up in them automatically.
+- **IndexNow (Bing):** each production deploy on Vercel compares the new sitemap with the live one and reports new or changed pages to IndexNow, which shares them with Bing. The key is the public file `public/ed491aa9a8ccb24676f587de09d3646b.txt`. To see what would be sent without sending it, build with `INDEXNOW_DRY_RUN=1 npm run build`.
