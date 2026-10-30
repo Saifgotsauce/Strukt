@@ -108,5 +108,105 @@
     "licence": "Embedded only, not downloaded (YouTube embed)",
     "credit": "Video: Exploratorium, YouTube",
     "note": "Uploaded by the Exploratorium museum's own channel and embedded on the Joshua Light Show's site at https://www.joshualightshow.com/videos-exploratorium-2014/exploratorium-2014"
+  },
+  {
+    "path": "/images/journal/how-to-become-a-live-sound-engineer/engineer-at-mixing-console.webp",
+    "post": "how-to-become-a-live-sound-engineer",
+    "description": "Hero: an engineer at a mixing desk, facing the stage over the crowd",
+    "creator": "Bee Balogun",
+    "source": "https://unsplash.com/photos/man-in-front-of-mixing-console-KGyzk-EvTwQ",
+    "licence": "Unsplash License",
+    "credit": "Photo: Bee Balogun, Unsplash",
+    "note": "Checked through the Unsplash API on 30 October 2026: free photo served from images.unsplash.com (not Unsplash+), downloaded via the API with the download registered."
+  },
+  {
+    "path": "/images/journal/how-to-become-a-live-sound-engineer/stacked-pa-system.webp",
+    "post": "how-to-become-a-live-sound-engineer",
+    "description": "A stack of black PA speakers beside a performer on an outdoor stage (cropped square)",
+    "creator": "Dominik Kempf",
+    "source": "https://unsplash.com/photos/black-pa-system-JeMDicKJ8Gc",
+    "licence": "Unsplash License",
+    "credit": "Photo: Dominik Kempf, Unsplash",
+    "note": "Checked through the Unsplash API on 30 October 2026: free photo served from images.unsplash.com (not Unsplash+), downloaded via the API with the download registered."
+  },
+  {
+    "path": "/images/journal/how-to-become-a-live-sound-engineer/digital-mixing-console.webp",
+    "post": "how-to-become-a-live-sound-engineer",
+    "description": "A Yamaha DM7 digital mixing console with touchscreens and faders",
+    "creator": "Manuel Luikenga",
+    "source": "https://unsplash.com/photos/a-digital-audio-mixing-console-with-screens-and-faders-3o8U_xXRgN4",
+    "licence": "Unsplash License",
+    "credit": "Photo: Manuel Luikenga, Unsplash",
+    "note": "Checked through the Unsplash API on 30 October 2026: free photo served from images.unsplash.com (not Unsplash+), downloaded via the API with the download registered."
+  },
+  {
+    "path": "/images/journal/how-to-become-a-live-sound-engineer/hand-on-digital-desk.webp",
+    "post": "how-to-become-a-live-sound-engineer",
+    "description": "A hand on the controls of a digital mixing desk in a dark room",
+    "creator": "Yomex Owo",
+    "source": "https://unsplash.com/photos/person-using-audio-mixer-leScCAsHZcw",
+    "licence": "Unsplash License",
+    "credit": "Photo: Yomex Owo, Unsplash",
+    "note": "Checked through the Unsplash API on 30 October 2026: free photo served from images.unsplash.com (not Unsplash+), downloaded via the API with the download registered."
+  },
+  {
+    "path": "/images/journal/how-to-become-a-live-sound-engineer/crew-on-lift-stage.webp",
+    "post": "how-to-become-a-live-sound-engineer",
+    "description": "A line array hung from a truss tower at an outdoor stage",
+    "creator": "A Friend",
+    "source": "https://unsplash.com/photos/a-man-on-a-crane-working-on-a-stage-I6qiHLYZATo",
+    "licence": "Unsplash License",
+    "credit": "Photo: A Friend, Unsplash",
+    "note": "Checked through the Unsplash API on 30 October 2026: free photo served from images.unsplash.com (not Unsplash+), downloaded via the API with the download registered."
+  },
+  {
+    "path": "/images/journal/how-to-become-a-live-sound-engineer/speaker-blue-light.webp",
+    "post": "how-to-become-a-live-sound-engineer",
+    "description": "A speaker cone up close in a dark room (cropped square from the top)",
+    "creator": "Christian Lambert",
+    "source": "https://unsplash.com/photos/black-and-gray-speaker-with-blue-light-wtresIcJJPg",
+    "licence": "Unsplash License",
+    "credit": "Photo: Christian Lambert, Unsplash",
+    "note": "Checked through the Unsplash API on 30 October 2026: free photo served from images.unsplash.com (not Unsplash+), downloaded via the API with the download registered."
+  },
+  {
+    "path": "/images/journal/how-uk-garage-came-home-to-north-america/dancer-in-front-of-dj.webp",
+    "post": "how-uk-garage-came-home-to-north-america",
+    "description": "Hero: a DJ in silhouette behind the decks under a red light",
+    "creator": "Dima Kosh",
+    "source": "https://unsplash.com/photos/a-woman-standing-in-front-of-a-dj-set-vQwNLzGIKuU",
+    "licence": "Unsplash License",
+    "credit": "Photo: Dima Kosh, Unsplash",
+    "note": "Checked through the Unsplash API on 30 October 2026: free photo served from images.unsplash.com (not Unsplash+), downloaded via the API with the download registered."
+  },
+  {
+    "path": "/images/journal/how-uk-garage-came-home-to-north-america/dj-mixer-close-up.webp",
+    "post": "how-uk-garage-came-home-to-north-america",
+    "description": "Close-up of faders and knobs on a mixing desk",
+    "creator": "Alexey Ruban",
+    "source": "https://unsplash.com/photos/selective-focus-photo-of-dj-mixer-73o_FzZ5x-w",
+    "licence": "Unsplash License",
+    "credit": "Photo: Alexey Ruban, Unsplash",
+    "note": "Checked through the Unsplash API on 30 October 2026: free photo served from images.unsplash.com (not Unsplash+), downloaded via the API with the download registered."
+  },
+  {
+    "path": "/images/journal/how-uk-garage-came-home-to-north-america/microphone-on-dj-gear.webp",
+    "post": "how-uk-garage-came-home-to-north-america",
+    "description": "A microphone resting on a lit mixer",
+    "creator": "Michael Maasen",
+    "source": "https://unsplash.com/photos/microphone-on-dj-controller-ZY7fuakuXJ0",
+    "licence": "Unsplash License",
+    "credit": "Photo: Michael Maasen, Unsplash",
+    "note": "Checked through the Unsplash API on 30 October 2026: free photo served from images.unsplash.com (not Unsplash+), downloaded via the API with the download registered."
+  },
+  {
+    "path": "/images/journal/how-uk-garage-came-home-to-north-america/packed-room.webp",
+    "post": "how-uk-garage-came-home-to-north-america",
+    "description": "A packed room with the DJ at floor level in the corner",
+    "creator": "Maksim Zhashkevych",
+    "source": "https://unsplash.com/photos/a-large-group-of-people-in-a-room-WKPFLcrkcKA",
+    "licence": "Unsplash License",
+    "credit": "Photo: Maksim Zhashkevych, Unsplash",
+    "note": "Checked through the Unsplash API on 30 October 2026: free photo served from images.unsplash.com (not Unsplash+), downloaded via the API with the download registered."
   }
 ]

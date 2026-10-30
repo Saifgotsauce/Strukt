@@ -4,6 +4,9 @@ description: "The free desk software to learn on, the networking certificate wor
 pubDate: 2026-10-30
 category: "Careers"
 tags: ["live sound", "sound engineer", "careers", "front of house", "festivals", "club nights"]
+heroImage: "/images/journal/how-to-become-a-live-sound-engineer/engineer-at-mixing-console.webp"
+heroAlt: "An engineer at a mixing desk, facing the stage over the heads of the crowd"
+heroCredit: "Photo: Bee Balogun, Unsplash"
 draft: false
 ---
 
@@ -17,6 +20,11 @@ On a festival stage, live sound usually splits into three roles. The front of ho
 
 In a club, one person often does all three. They patch the DJ mixer into the system, check the booth monitors, set the subs, keep an MC's microphone clear of feedback, and watch the levels all night. It's less glamorous than a festival main stage and a far better place to learn, because every problem in the room is yours to solve.
 
+<figure class="post-figure">
+  <img src="/images/journal/how-to-become-a-live-sound-engineer/stacked-pa-system.webp" alt="A stack of black PA speakers beside a performer on an outdoor stage" width="1400" height="1400" loading="lazy">
+  <figcaption>PA cabinets stacked at the side of the stage, where the monitor engineer usually works. <span class="credit">Photo: Dominik Kempf, Unsplash</span></figcaption>
+</figure>
+
 ## Learn the desks before you touch one
 
 Nearly every major console manufacturer gives away offline editing software that looks like the real desk, so you can learn it on a laptop. As [ProSoundWeb's guide](https://www.prosoundweb.com/lockdown-lessons-a-guide-for-sound-engineers-techs/2/) puts it, all of the leading companies offer their software for free. The ones worth starting with:
@@ -26,6 +34,11 @@ Nearly every major console manufacturer gives away offline editing software that
 - **Yamaha.** According to [FOH magazine](https://fohonline.com/?p=172957), Yamaha has the most complete coverage, with offline editors for all of its digital mixers on both platforms. The catch, noted by [Live Sound International](https://digital.livesoundint.com/articles/digital-evolution), is that Yamaha's editors share a generic layout and don't look like the individual desks.
 
 None of these pass audio, so you won't be mixing real sound at home. What you will learn is where everything lives, which is most of the battle the first time you walk up to an unfamiliar desk with ten minutes before doors.
+
+<figure class="post-figure">
+  <img src="/images/journal/how-to-become-a-live-sound-engineer/digital-mixing-console.webp" alt="A Yamaha DM7 digital mixing console with three touchscreens and rows of faders" width="1400" height="933" loading="lazy">
+  <figcaption>A Yamaha DM7. Learn the offline editor first and the layout won't surprise you. <span class="credit">Photo: Manuel Luikenga, Unsplash</span></figcaption>
+</figure>
 
 **A practice routine that actually helps.** Build a show file for a typical club night: a DJ mixer coming in as a stereo pair, a wireless microphone for an MC, a feed for the booth monitors and separate outputs for the main speakers and the subs. Name every channel, colour-code it, set up a mute group for the MC mic, and save it. Then rebuild the same show on a second manufacturer's software. When you can do both from memory, you're ready to be useful on a real desk.
 
@@ -37,9 +50,19 @@ Modern festival and touring systems move audio over computer networks, and the m
 
 Level 1 is a short online course with an exam at the end. It costs nothing, it's a line on your résumé a production manager will actually recognise, and it means you won't be the person who panics when a stage box drops off the network.
 
+<figure class="post-figure">
+  <img src="/images/journal/how-to-become-a-live-sound-engineer/hand-on-digital-desk.webp" alt="A hand on the controls of a digital mixing desk in a dark room" width="1400" height="934" loading="lazy">
+  <figcaption>A digital desk mid-show, lit by its own buttons. <span class="credit">Photo: Yomex Owo, Unsplash</span></figcaption>
+</figure>
+
 ## The jobs that take beginners
 
 **Audio crew for load-ins.** Speakers, amplifiers, cable and stage boxes all need carrying, hanging and plugging in, and production companies hire local crew to do it. It's where you learn how a system is physically built and where you meet the engineers who decide who gets called next time.
+
+<figure class="post-figure">
+  <img src="/images/journal/how-to-become-a-live-sound-engineer/crew-on-lift-stage.webp" alt="A line array of speakers hung from a truss tower at an outdoor stage, against a blue sky" width="1400" height="933" loading="lazy">
+  <figcaption>A line array, the tall column of speakers flown above a stage, hung from a truss tower. Local crew carry every box of it. <span class="credit">Photo: A Friend, Unsplash</span></figcaption>
+</figure>
 
 **Warehouse prep at an audio rental company.** Rental houses need people to test microphones, build and label cables, and pack systems for upcoming shows. You'll handle every piece of equipment you'll later be trusted to run.
 
@@ -54,6 +77,11 @@ Whatever the job, the habits that get you rehired don't change: show up before c
 ## Protect your hearing like it's your career, because it is
 
 Hearing damage is permanent, and live sound engineers spend their working lives standing in loud rooms. In 2022, the World Health Organization published a [global standard for safe listening venues and events](https://worldhearingday.org/wp-content/uploads/2022/03/MLS_WHD_Infographic_WHO-LOGO_aw.pdf) that applies to nightclubs, bars, concerts and festivals. Its first feature is a maximum level of 100 dB measured as an average over 15 minutes, written as 100 dB LAeq,15min, alongside live monitoring with calibrated equipment and a properly tuned system.
+
+<figure class="post-figure">
+  <img src="/images/journal/how-to-become-a-live-sound-engineer/speaker-blue-light.webp" alt="A speaker cone up close in a dark room" width="1400" height="1400" loading="lazy">
+  <figcaption>A speaker cone up close. <span class="credit">Photo: Christian Lambert, Unsplash</span></figcaption>
+</figure>
 
 That limit is less restrictive than it sounds. Writing in [ProSoundWeb](https://www.prosoundweb.com/?p=171351), audio researcher Adam Hill reported on monitoring data from more than 300 events: shows with a limit in place ran only about 2 dBA quieter than shows without one, and only a handful of engineers mixed above 103 dBA for more than a few minutes, usually during the encore.
 
