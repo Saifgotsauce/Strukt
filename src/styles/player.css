@@ -117,10 +117,14 @@ footer a:hover{color:var(--white)}
 .tow[data-sheet-open] .tow-sheet-wrap{visibility:visible;transition:none}
 .tow-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.62);opacity:0;touch-action:none;transition:opacity .32s var(--ease)}
 .tow[data-sheet-open] .tow-backdrop{opacity:1}
-.tow-sheet{position:absolute;left:0;right:0;bottom:0;margin:0 auto;max-width:560px;height:75vh;height:75dvh;display:flex;flex-direction:column;
+.tow-sheet{position:absolute;left:0;right:0;bottom:0;margin:0 auto;max-width:560px;display:flex;flex-direction:column;
+  height:calc(100vh - 12px);height:calc(100dvh - max(12px, env(safe-area-inset-top,0px)));
   background:var(--black);border:1px solid var(--line);border-bottom:0;border-radius:20px 20px 0 0;padding-bottom:env(safe-area-inset-bottom,0px);
   translate:0 100%;transition:translate .32s cubic-bezier(.2,.8,.2,1)}
-.tow[data-sheet-open] .tow-sheet{translate:0 0}
+/* opens with 75% of the screen showing; pulled up, it fills the screen */
+.tow[data-sheet-open] .tow-sheet{translate:0 calc(100% - 75vh);translate:0 calc(100% - 75dvh)}
+.tow[data-sheet-open][data-sheet-full] .tow-sheet{translate:0 0}
+.tow:not([data-sheet-full]) .tow-sheet{touch-action:none}
 .tow-sheet.drag,.tow-sheet-wrap:has(.drag) .tow-backdrop{transition:none}
 .tow-handle{flex:none;display:grid;place-items:center;width:100%;height:44px;cursor:grab;border-radius:20px 20px 0 0}
 .tow-handle i{display:block;width:40px;height:4px;border-radius:2px;background:#3D3456}
@@ -130,7 +134,12 @@ footer a:hover{color:var(--white)}
 .tow-slot-note:empty{display:none}
 .tow-slot-frame{height:var(--slot-h,166px);border-radius:10px;background:var(--deep)}
 .tow:not([data-embed]) .tow-slot-frame{display:none}
-.tow-sheet-body{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;padding:2px 24px 28px;text-align:center}
+.tow-sheet-body{flex:1;min-height:0;overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain;touch-action:pan-y;padding:2px 24px 28px;text-align:center}
+/* half open, the bottom quarter of the sheet is below the screen; the padding keeps the end of the content reachable */
+.tow:not([data-sheet-full]) .tow-sheet-body{padding-bottom:calc(28px + 25vh)}
+/* the scrubber's knob rides on a full-width layer that moves with the track; clip it so it never widens the sheet */
+.tow-scrub,.tow-panel-body{overflow-x:clip}
+.tow-scrub{padding:0 8px;margin-left:-8px;margin-right:-8px}
 .tow-art-lg{width:min(62vw,250px,24vh);width:min(62vw,250px,24dvh);height:auto;aspect-ratio:1;margin:2px auto 20px;border-radius:12px;background-size:8px 8px}
 .tow-art-lg::after{background-size:4px 4px;background-image:radial-gradient(circle,rgba(0,0,0,.38) .9px,transparent 1.4px)}
 .tow-sheet-title{margin-top:10px;font:800 34px/1 var(--sans);letter-spacing:-.045em}
@@ -197,12 +206,17 @@ footer a:hover{color:var(--white)}
   .tow-dock>.tow-line .tow-line-track{scale:1 .34!important}
   .tow-open{display:block;position:absolute;inset:0;z-index:0;border-radius:14px;cursor:pointer}
   .tow-dock .tow-art{width:40px;height:40px;pointer-events:none}
-  .tow-dock .tow-text{display:flex;flex-direction:column;align-items:stretch;gap:4px;pointer-events:none}
-  .tow-dock .tow-label,.tow-dock .tow-eq,.tow-time,.tow-credits-btn,.tow-collapse,.tow-panel,.tow[data-status=error] .tow-err-link{display:none}
+  .tow-dock .tow-text{display:flex;flex-direction:column;align-items:stretch;gap:3px;pointer-events:none}
+  .tow-dock .tow-label{font-size:10.5px}
+  .tow-dock .tow-title{font-size:14.5px;line-height:1.15}
+  .tow-dock .tow-artist{font-size:12.5px;line-height:1.15}
+  .tow-dock .tow-eq,.tow-time,.tow-credits-btn,.tow-panel,.tow[data-status=error] .tow-err-link{display:none}
   .tow-dock .tow-title{max-width:none;text-overflow:clip}
   .tow-title.scroll{mask-image:linear-gradient(90deg,#000 82%,transparent);-webkit-mask-image:linear-gradient(90deg,#000 82%,transparent)}
   .tow-title.scroll>span{animation:tow-marquee 12s ease-in-out infinite}
   .tow-dock .tow-play{order:3}
+  .tow-dock .tow-collapse{order:4;position:relative;z-index:1;margin-left:-6px}
+  .tow-dock{gap:10px;padding-right:4px}
   .tow-fab{right:max(12px,env(safe-area-inset-right,0px));bottom:calc(12px + env(safe-area-inset-bottom,0px))}
 }
 @keyframes tow-marquee{0%,18%{transform:translateX(0)}50%,68%{transform:translateX(var(--shift,0))}100%{transform:translateX(0)}}
