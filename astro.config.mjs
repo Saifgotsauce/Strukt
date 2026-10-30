@@ -3,6 +3,7 @@ import sitemap from '@astrojs/sitemap';
 import vercel from '@astrojs/vercel';
 import fs from 'node:fs';
 import indexnow from './integrations/indexnow.mjs';
+import securityHeaders from './integrations/security-headers.mjs';
 
 // The live domain. Canonical links, the sitemap, robots.txt, llms.txt and social previews are all built from it.
 const site = 'https://www.struktmagazine.com';
@@ -26,6 +27,8 @@ export default defineConfig({
     }),
     // after sitemap: reads the sitemap it just wrote and reports new or changed URLs to IndexNow (Bing) on production builds
     indexnow({ site, key: 'ed491aa9a8ccb24676f587de09d3646b' }),
+    // last, after the Vercel adapter has written its routes: a Content Security Policy and hardening headers on every response
+    securityHeaders(),
   ],
   adapter: vercel({
     webAnalytics: { enabled: true }

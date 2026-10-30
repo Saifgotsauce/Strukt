@@ -16,5 +16,9 @@
     "@astrojs/vercel": "^11.0.17",
     "astro": "7.4.4",
     "posthog-js": "1.442.1"
+  },
+  "overrides": {
+    "path-to-regexp@<6.3.0": "6.3.0",
+    "zod@<4.6.6": "4.6.7"
   }
 }
