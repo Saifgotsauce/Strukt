@@ -13,5 +13,7 @@
       defaults: '2026-08-30',
       person_profiles: 'identified_only',
     });
+    // so other scripts (the track of the week player) can send events only when analytics is on
+    (window as any).posthog = posthog;
   }
 </script>

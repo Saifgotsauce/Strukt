@@ -13,8 +13,8 @@ const description = "Lighting, rigging, sound, visuals, sets, fashion or art for
       <div class="grid cgrid">
         <div class="ctext">
           <svg class="t dots" data-text="OPEN CALL" data-o='{"drop":0.08,"stray":22,"seed":8,"color":"#000000","keyline":true}' role="img" aria-label="Open call"></svg>
-          <h1 id="h-call">Show us what you built.</h1>
-          <p>We're looking for the first people to feature in STRUKT. You don't need a big name, a festival résumé or a following. You need work you're proud of.</p>
+          <h1 id="h-call">Show us what you made.</h1>
+          <p>We're looking for the first people to feature in STRUKT. You don't need a big name, a festival résumé or a following, just work you're proud of.</p>
           <a href="#form">Start your submission</a>
         </div>
         <figure class="cphoto">
@@ -32,7 +32,7 @@ const description = "Lighting, rigging, sound, visuals, sets, fashion or art for
       <ol>
         <li><svg class="dots" data-text="1" data-o='{"drop":0,"stray":3,"seed":1,"color":"#8C52FF","keyline":true,"sub":3}' aria-hidden="true"></svg><p>You send the form. It takes about five minutes.</p></li>
         <li><svg class="dots" data-text="2" data-o='{"drop":0,"stray":3,"seed":2,"color":"#8C52FF","keyline":true,"sub":3}' aria-hidden="true"></svg><p>We look at every submission ourselves.</p></li>
-        <li><svg class="dots" data-text="3" data-o='{"drop":0,"stray":3,"seed":3,"color":"#8C52FF","keyline":true,"sub":3}' aria-hidden="true"></svg><p>If it's a fit, we set up an interview by video call, voice notes or in writing.</p></li>
+        <li><svg class="dots" data-text="3" data-o='{"drop":0,"stray":3,"seed":3,"color":"#8C52FF","keyline":true,"sub":3}' aria-hidden="true"></svg><p>If it's a fit, we set up an interview however suits you: a video call, voice notes or in writing.</p></li>
         <li><svg class="dots" data-text="4" data-o='{"drop":0,"stray":3,"seed":4,"color":"#8C52FF","keyline":true,"sub":3}' aria-hidden="true"></svg><p>You see your feature before it goes live.</p></li>
         <li><svg class="dots" data-text="5" data-o='{"drop":0,"stray":3,"seed":5,"color":"#8C52FF","keyline":true,"sub":3}' aria-hidden="true"></svg><p>It's published, and you're credited and tagged.</p></li>
       </ol>
@@ -42,7 +42,7 @@ const description = "Lighting, rigging, sound, visuals, sets, fashion or art for
   <section class="free">
     <svg class="dots scatter" data-scatter='{"seed":41,"w":520,"h":420,"clusters":3,"min":40,"max":110,"density":0.6,"strays":16,"x0":0.3,"keyline":0.6,"pal":[["#000000",4],["#C9B3FF",3],["#FFFFFF",1]]}' aria-hidden="true"></svg>
     <div class="wrap grid">
-      <p>Being featured is free. It always will be.<span>Nobody pays to be in STRUKT. The only thing we ask for is your work and your story.</span></p>
+      <p>Being featured is free, and it always will be.<span>Nobody pays to be in STRUKT. All we ask for is the work and the story behind it.</span></p>
     </div>
   </section>
 
@@ -50,14 +50,14 @@ const description = "Lighting, rigging, sound, visuals, sets, fashion or art for
     <div class="wrap grid">
       <div class="formside"><div class="sticky">
         <h2 id="h-form">The form</h2>
-        <p>Eight questions. Answer the way you'd talk to someone at the bar after load-out. We care about the work, not the polish.</p>
+        <p>Eight questions. Answer the way you'd talk to someone outside the venue after load-out. We care about the work, not the polish.</p>
         <p>We only use your details to contact you about STRUKT.</p>
         <div class="nom"><b>Know someone who should be here?</b><p>Nominate them. Pick "someone else" in the first question and tell us about their work.</p></div>
       </div></div>
 
       <div class="formcol">
         <div class="prog8" aria-live="polite"><div class="pdots" id="pdots" aria-hidden="true"></div><p class="mono" id="ptext">2 of 8 answered</p></div>
-        <form id="cf" action="https://formspree.io/f/maeebnbb" method="POST" novalidate>
+        <form id="cf" action="https://formspree.io/f/maeebnbb" method="POST" novalidate data-astro-reload>
           <div class="q"><span class="n">01</span><div class="body"><fieldset>
             <legend>Who are you submitting?</legend>
             <div class="chips">
@@ -105,7 +105,7 @@ const description = "Lighting, rigging, sound, visuals, sets, fashion or art for
             <p class="err" id="link-e"></p></div></div>
 
           <div class="q"><span class="n">06</span><div class="body">
-            <label class="l" for="story" id="story-l">Tell us about a night you built</label>
+            <label class="l" for="story" id="story-l">Tell us about something you made for a night</label>
             <p class="hint" id="story-h">What was it, what did you do, and what went wrong that nobody noticed?</p>
             <textarea id="story" name="story" maxlength="800" required aria-describedby="story-h story-c story-e"></textarea>
             <p class="count" id="story-c">0 / 800</p>
@@ -136,8 +136,8 @@ const description = "Lighting, rigging, sound, visuals, sets, fashion or art for
         <div class="done" id="done" hidden tabindex="-1">
           <svg class="dots scatter" data-scatter='{"seed":51,"w":320,"h":300,"clusters":2,"min":40,"max":90,"density":0.6,"strays":14,"keyline":0.6,"pal":[["#8C52FF",4],["#C9B3FF",2]]}' aria-hidden="true"></svg>
           <svg class="dots t" data-text="RECEIVED" data-o='{"drop":0.04,"stray":12,"seed":6,"color":"#8C52FF","keyline":true}' role="img" aria-label="Received"></svg>
-          <h2>Submission sent.</h2>
-          <p>We look at every one ourselves. If it's a fit, we'll message you to set up an interview. Until then, follow @struktmag and tag us in your work.</p>
+          <h2>Got it.</h2>
+          <p>We read every submission ourselves. If it's a fit, we'll message you about an interview. Until then, follow @struktmag and tag us in your work.</p>
         </div>
       </div>
     </div>

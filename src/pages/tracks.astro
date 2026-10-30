@@ -1,0 +1,97 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { platformName } from '../lib/tracks';
+
+const tracks = (await getCollection('tracks')).sort((a, b) => b.data.week.valueOf() - a.data.week.valueOf());
+const site = Astro.site ?? new URL('https://strukt.example');
+const weekLabel = (d: Date) => d.toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: "STRUKT track of the week",
+  url: new URL('/tracks/', site).href,
+  itemListElement: tracks.map((t, i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    item: {
+      "@type": "MusicRecording",
+      name: t.data.title,
+      byArtist: { "@type": "MusicGroup", name: t.data.artist },
+      url: t.data.link,
+      description: t.data.note,
+      ...(t.data.release ? { inAlbum: { "@type": "MusicAlbum", name: t.data.release } } : {}),
+      ...(t.data.label ? { recordLabel: { "@type": "Organization", name: t.data.label } } : {}),
+      ...(t.data.artwork ? { image: new URL(t.data.artwork, site).href } : {}),
+      creditText: t.data.credits.map((c) => `${c.role}: ${c.name}`).join('; '),
+    },
+  })),
+};
+---
+<Base
+  title="Track of the week | STRUKT"
+  description="One track a week, credited properly: producer, vocalist, mastering engineer and the samples underneath. Picked by STRUKT."
+  jsonLd={jsonLd}
+>
+  <main>
+    <section class="jhero" aria-labelledby="h-tracks">
+      <svg class="scatter dots" data-align="xMaxYMid" data-scatter='{"seed":73,"w":1600,"h":800,"clusters":5,"min":40,"max":130,"density":0.55,"strays":40,"x0":0.6,"s0":0.5,"y0":0.3,"keyline":0.5,"pal":[["#8C52FF",6],["#C9B3FF",2],["#1E1530",4]]}' aria-hidden="true"></svg>
+      <div class="wrap">
+        <div class="folio mono"><span>Track of the week</span><span>{tracks.length} {tracks.length === 1 ? 'week' : 'weeks'}</span></div>
+        <h1 id="h-tracks">Track of the week</h1>
+        <p class="jstand">One track a week, with the name of everyone who worked on it: the producer, the vocalist, whoever mastered it and the records it samples.</p>
+      </div>
+    </section>
+
+    <section class="tracks" aria-label="Every track of the week, newest first">
+      <div class="wrap">
+        {tracks.map((t) => {
+          const d = t.data;
+          return (
+            <article class="trk" aria-labelledby={`trk-${t.id}`}>
+              <p class="trk-week mono"><time datetime={d.week.toISOString().slice(0, 10)}>Week of {weekLabel(d.week)}</time></p>
+              <h2 id={`trk-${t.id}`}>{d.title} <span>{d.artist}</span></h2>
+              {(d.release || d.label) && <p class="trk-release mono">{[d.release, d.label].filter(Boolean).join(' · ')}</p>}
+              <p class="trk-note">{d.note}</p>
+              <div class="trk-player">
+                {d.platform === 'file' ? (
+                  <audio controls preload="none" src={d.audioFile} data-track-title={d.title} data-track-artist={d.artist} data-track-week={d.week.toISOString().slice(0, 10)}></audio>
+                ) : (
+                  <button type="button" class="trk-facade" data-embed={d.embedUrl} data-platform={d.platform} data-track-title={d.title} data-track-artist={d.artist} data-track-week={d.week.toISOString().slice(0, 10)}>
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
+                    <span>Play {d.title} <span class="mono">loads the {platformName[d.platform]} player</span></span>
+                  </button>
+                )}
+              </div>
+              <h3 class="trk-credits-head mono">Credits</h3>
+              <dl class="trk-credits">
+                {d.credits.map((c) => <><dt>{c.role}</dt><dd>{c.name}</dd></>)}
+              </dl>
+              <p class="trk-link"><a href={d.link} target="_blank" rel="noopener">{d.platform === 'file' ? "The track's page" : `Hear it on ${platformName[d.platform]}`}</a></p>
+            </article>
+          );
+        })}
+      </div>
+    </section>
+  </main>
+</Base>
+
+<script>
+  // Archive players: nothing from a platform loads until its play button is tapped. Delegated, so it survives page changes.
+  const track = (event: string, props: Record<string, unknown>) => { try { (window as any).posthog?.capture?.(event, props); } catch { /* analytics off */ } };
+  const props = (el: HTMLElement) => ({ title: el.dataset.trackTitle, artist: el.dataset.trackArtist, week: el.dataset.trackWeek, source: 'archive' });
+  document.addEventListener('click', (e) => {
+    const b = (e.target as Element | null)?.closest?.<HTMLButtonElement>('.trk-facade');
+    if (!b || !b.dataset.embed) return;
+    const f = document.createElement('iframe');
+    f.src = b.dataset.embed; f.title = `${b.dataset.trackTitle} by ${b.dataset.trackArtist}`;
+    f.allow = 'autoplay; encrypted-media'; f.className = `trk-embed trk-embed-${b.dataset.platform}`;
+    b.replaceWith(f);
+    track('track_play', { ...props(b), platform: b.dataset.platform });
+  });
+  document.addEventListener('play', (e) => {
+    const a = e.target as HTMLElement;
+    if (a instanceof HTMLAudioElement && a.closest('.trk-player')) track('track_play', { ...props(a), platform: 'file' });
+  }, true);
+</script>

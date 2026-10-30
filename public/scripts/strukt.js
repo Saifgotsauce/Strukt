@@ -1,4 +1,10 @@
 /* STRUKT site script: dot graphics, scroll lighting, small interactions */
+/* The site uses Astro's ClientRouter, so pages change without a full reload. This file runs once; init() sets up
+   whatever the current page has, on first load and again on every astro:page-load, and clears the last page's
+   window listeners and observers first. */
+(function(){
+if(window.__strukt)return;window.__strukt=true;
+
 
 /* seeded random so every visit draws the same scatter */
 function rng(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
@@ -67,9 +73,16 @@ function map(){
 }
 
 /* ---------- start-up: every block checks that its element exists, so one script serves every page ---------- */
+let page=null;
+function init(){
+if(!document.body||document.body.dataset.struktInit)return;document.body.dataset.struktInit='1';
+if(page){page.ac.abort();page.obs.forEach(o=>o.disconnect())}
+page={ac:new AbortController(),obs:[]};
+const signal=page.ac.signal,newIO=(cb,o)=>{const io=new IntersectionObserver(cb,o);page.obs.push(io);return io};
+
 let lastTall=null;
 if(document.getElementById('map')){map();lastTall=matchMedia('(max-width:700px)').matches;
-  addEventListener('resize',()=>{const t=matchMedia('(max-width:700px)').matches;if(t!==lastTall){lastTall=t;map()}});}
+  addEventListener('resize',()=>{const t=matchMedia('(max-width:700px)').matches;if(t!==lastTall){lastTall=t;map()}},{signal});}
 document.querySelectorAll('[data-scatter]').forEach(s=>scatter(s,JSON.parse(s.dataset.scatter)));
 document.querySelectorAll('[data-text]').forEach(s=>dotText(s,s.dataset.text,JSON.parse(s.dataset.o)));
 document.querySelectorAll('[data-glyph]').forEach(s=>glyph(s,+s.dataset.glyph));
@@ -78,7 +91,7 @@ document.querySelectorAll('[data-glyph]').forEach(s=>glyph(s,+s.dataset.glyph));
 (function(){
   const els=document.querySelectorAll('svg.dots,.reveal,.wall');
   if(!('IntersectionObserver' in window)){els.forEach(e=>e.classList.add('lit'));return}
-  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('lit');io.unobserve(e.target)}}),{threshold:.2});
+  const io=newIO(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('lit');io.unobserve(e.target)}}),{threshold:.2});
   els.forEach(e=>io.observe(e));
   document.querySelectorAll('.roles li').forEach((li,i)=>li.style.transitionDelay=(i*70)+'ms');
 })();
@@ -87,7 +100,7 @@ document.querySelectorAll('[data-glyph]').forEach(s=>glyph(s,+s.dataset.glyph));
 (function(){
   const bar=document.getElementById('bar'),art=document.querySelector('[data-progress]');if(!bar||!art)return;
   function upd(){const r=art.getBoundingClientRect(),t=Math.max(1,r.height-innerHeight);bar.style.width=Math.min(100,Math.max(0,-r.top/t*100))+'%'}
-  addEventListener('scroll',upd,{passive:true});upd();
+  addEventListener('scroll',upd,{passive:true,signal});upd();
 })();
 
 /* photo strip buttons */
@@ -140,7 +153,7 @@ document.querySelectorAll('.strip-btns button').forEach(b=>b.addEventListener('c
   function rise(){
     waiting='rise';
     cards.forEach(c=>{c.style.opacity='0';c.style.transform=RISE});
-    io=new IntersectionObserver(es=>{
+    io=newIO(es=>{
       const list=es.filter(e=>e.isIntersecting).map(e=>e.target).sort((a,b)=>cards.indexOf(a)-cards.indexOf(b)).map((c,k)=>{
         io.unobserve(c);c.style.opacity='';c.style.transform='';
         return{c,from:{transform:RISE,opacity:'0'},to:{transform:'none',opacity:'1'},order:k};
@@ -152,7 +165,7 @@ document.querySelectorAll('.strip-btns button').forEach(b=>b.addEventListener('c
   /* desktop: start in a pile, deal out as soon as any of the grid is on screen, so the pile is never left sitting there */
   function deal(){
     move(true,true);waiting='pile';
-    io=new IntersectionObserver(es=>{if(!es[0].isIntersecting)return;io.disconnect();
+    io=newIO(es=>{if(!es[0].isIntersecting)return;io.disconnect();
       setTimeout(()=>{if(waiting==='pile'){waiting=null;move(false)}},400)});
     io.observe(grid);
   }
@@ -170,7 +183,7 @@ document.querySelectorAll('.strip-btns button').forEach(b=>b.addEventListener('c
     anims.forEach(a=>a.finish());measure();
     if(waiting==='rise'&&!phone.matches){io.disconnect();waiting=null;cards.forEach(c=>{c.style.opacity='';c.style.transform=''})}
     else if(piled)cards.forEach((c,i)=>c.style.transform=pile[i]);
-  },150)});
+  },150)},{signal});
 })();
 
 /* call for creatives form */
@@ -189,7 +202,7 @@ document.querySelectorAll('.strip-btns button').forEach(b=>b.addEventListener('c
     document.getElementById('who-l').textContent=o?'Who should we credit? (them, and you)':'Who should we credit?';
     document.getElementById('name-l').textContent=o?'Their name or artist name':'Name or artist name';
     document.getElementById('what-l').textContent=o?'What do they do?':'What do you do?';
-    document.getElementById('story-l').textContent=o?'Tell us about a night they built':'Tell us about a night you built';
+    document.getElementById('story-l').textContent=o?'Tell us about something they made for a night':'Tell us about something you made for a night';
     document.getElementById('ok-t').textContent=o?"I'm sharing public work or have their permission, and STRUKT can contact me about them.":'I made this work or have permission to share it, and STRUKT can contact me about a feature.';
   }));
   function err(id,msg){document.getElementById(id+'-e').textContent=msg;const el=document.getElementById(id);msg?el.setAttribute('aria-invalid','true'):el.removeAttribute('aria-invalid');return !msg}
@@ -205,7 +218,7 @@ document.querySelectorAll('.strip-btns button').forEach(b=>b.addEventListener('c
       'City':f.city.value.trim(),
       'What they do':[...f.querySelectorAll('input[name=what]:checked')].map(c=>c.value).join(', '),
       'Link':f.link.value.trim(),
-      'Night they built':f.story.value.trim(),
+      'Something they made for a night':f.story.value.trim(),
       'Interview format':f.fmt.value,
       'Feature under an alias':f.alias.checked?'Yes':'No',
       'Permission':f.ok.checked?'Yes: '+document.getElementById('ok-t').textContent:'No',
@@ -239,4 +252,9 @@ document.querySelectorAll('.strip-btns button').forEach(b=>b.addEventListener('c
     if(ok.includes(false)){const bad=f.querySelector('[aria-invalid=true]')||document.getElementById('ok');(bad.matches('input,textarea')?bad:bad.querySelector('input')).focus();return}
     send();
   });
+})();
+}
+
+init();
+document.addEventListener('astro:page-load',init);
 })();
