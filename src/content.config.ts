@@ -36,6 +36,8 @@ const tracks = defineCollection({
       platform: z.enum(['soundcloud', 'bandcamp', 'spotify', 'youtube', 'file']),
       embedUrl: z.string().url().optional(),
       link: z.string().url(),
+      // where to buy it, shown in the player and the archive ("Buy on Bandcamp" for a bandcamp.com link)
+      buyLink: z.string().url().optional(),
       audioFile: z.string().startsWith('/audio/', 'audioFile must be a path under public/audio/, e.g. /audio/2026-11-09-track.mp3').optional(),
       rightsConfirmed: z.boolean().default(false),
       artwork: z.string().optional(),

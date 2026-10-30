@@ -43,6 +43,31 @@ draft: false
 Posts marked `draft: true` show up locally but are hidden on the live site.
 Both sample posts are drafts until a real quote replaces the placeholder.
 
+## Add a track of the week
+
+Add a Markdown file to `src/content/tracks/`, named with the Monday it starts, for example `2026-11-09-track-name.md`. The newest one plays in the player at the bottom of every page; all of them are listed at `/tracks`.
+
+```md
+---
+week: 2026-11-09
+title: "Track title"
+artist: "Artist"
+label: "Label"                 # optional
+platform: "soundcloud"         # soundcloud, bandcamp or file
+embedUrl: "https://w.soundcloud.com/player/?url=..."   # the platform's embed link
+link: "https://soundcloud.com/artist/track"            # the track's own page
+buyLink: "https://artist.bandcamp.com/track/track"     # optional
+credits:
+  - role: "Produced"
+    name: "Name"
+note: "A sentence or two on why it's the track of the week."
+---
+```
+
+- **SoundCloud** plays from STRUKT's own buttons.
+- **Bandcamp** doesn't allow that, so the player opens Bandcamp's own player in a sheet.
+- **file** plays an audio file from `public/audio/`. Set `audioFile: "/audio/<file>"` and `rightsConfirmed: true`, and only once you have permission to host it.
+
 ## Before launch
 
 1. The live domain is set once, as `site` in `astro.config.mjs`. Canonical links, the sitemap, `robots.txt`, `llms.txt` and social previews are all built from it.

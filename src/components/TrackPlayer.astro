@@ -1,143 +1,149 @@
 ---
-// Track of the week: a slim bar fixed to the bottom of every page, playing the newest track in src/content/tracks.
-// It persists across page changes (Astro ClientRouter + transition:persist) and never autoplays.
-// Platform tracks show a facade and only load the embed when play is tapped; self-hosted files use a native <audio>.
+// Track of the week: the newest track in src/content/tracks, playing from a floating bar (desktop) or a docked card
+// with a bottom sheet (phones). It persists across page changes (Astro ClientRouter + transition:persist) and never
+// autoplays. The playback engine and every interaction live in src/scripts/player/; the styles in src/styles/player.css.
 import { getCollection } from 'astro:content';
-import { platformName, embedHeight } from '../lib/tracks';
+import { platformName, buyLabel } from '../lib/tracks';
+import '../styles/player.css';
 
-const [track] = (await getCollection('tracks')).sort((a, b) => b.data.week.valueOf() - a.data.week.valueOf());
+const all = (await getCollection('tracks')).sort((a, b) => a.data.week.valueOf() - b.data.week.valueOf());
+const track = all.at(-1);
 const t = track?.data;
-const isFile = t?.platform === 'file';
-const listen = t ? (isFile ? "The track's page" : `Hear it on ${platformName[t.platform]}`) : '';
-const config = t && JSON.stringify({ title: t.title, artist: t.artist, platform: t.platform, embedUrl: t.embedUrl ?? null, embedHeight: embedHeight[t.platform], week: t.week.toISOString().slice(0, 10) });
-const eq = [0, 1, 2, 3, 4];
+const number = String(all.length).padStart(2, '0');
+const label = `Track of the week · ${number}`;
+const via = t ? `via ${platformName[t.platform]}` : '';
+const config = t && JSON.stringify({
+  title: t.title,
+  artist: t.artist,
+  platform: t.platform,
+  src: t.platform === 'file' ? t.audioFile : t.embedUrl,
+  link: t.link,
+  artwork: t.artwork ?? '',
+  week: t.week.toISOString().slice(0, 10),
+  label,
+});
+const eq = (cols: number) => Array.from({ length: cols }, (_, c) => c);
+const name = t ? `${t.title} by ${t.artist}` : '';
 ---
 {t && (
-  <div class="tow" id="tow" data-config={config} transition:persist="track-of-the-week">
-    <div class="tow-bar" role="region" aria-label="Track of the week">
-      <button type="button" class="tow-play" aria-pressed="false" aria-label={`Play ${t.title} by ${t.artist}`}>
-        <svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
-        <svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z" /></svg>
-      </button>
-      <span class="tow-eq" aria-hidden="true">
-        {eq.map((c) => <span class="col" style={`--c:${c}`}><i></i><i></i><i></i><i></i></span>)}
-      </span>
-      <div class="tow-main">
-        <div class="tow-meta">
-          <span class="tow-label mono">Track of the week</span>
-          <span class="tow-title"><b>{t.title}</b> <span>{t.artist}</span></span>
-        </div>
-        <div class="tow-embed" hidden></div>
-        {isFile && (
-          <div class="tow-progress">
-            <input type="range" class="tow-seek" min="0" max="1000" value="0" step="1" aria-label={`Seek in ${t.title}`} />
-            <span class="tow-time mono" aria-hidden="true">0:00</span>
-          </div>
-        )}
+  <section id="tow" class="tow" aria-label="Track of the week player" data-config={config} data-platform={t.platform} data-status="idle" data-view="open" transition:persist="track-of-the-week">
+    <div class="tow-dock" data-dock>
+      <div class="tow-line" data-slider role="slider" tabindex="0" aria-label={`Seek in ${t.title}`} aria-valuemin="0" aria-valuemax="0" aria-valuenow="0" aria-valuetext="0:00" aria-disabled="true">
+        <span class="tow-line-track"><span class="tow-buf" data-buf></span><span class="tow-played" data-played></span></span>
+        <span class="tow-knob" data-knob><i></i></span>
+        <span class="tow-tip" data-tip aria-hidden="true">0:00</span>
       </div>
-      <button type="button" class="tow-credits-btn mono" aria-expanded="false" aria-controls="tow-credits">Credits</button>
-      <button type="button" class="tow-hide" aria-label="Hide the track of the week player">
+
+      <button type="button" class="tow-play" data-play aria-pressed="false" aria-label={`Play ${name}`}>
+        <svg class="ic ic-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 5.5v13l10-6.5z" /></svg>
+        <svg class="ic ic-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h3.6v14H7zM13.4 5H17v14h-3.6z" /></svg>
+        <svg class="ic ic-replay" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5V2L7 6l5 4V7a5 5 0 1 1-5 5H5a7 7 0 1 0 7-7z" /></svg>
+        <svg class="ic ic-out" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4l-8.5 8.5M18 14v5H5V6h5" fill="none" stroke="currentColor" stroke-width="2" /></svg>
+        <span class="ic ic-load" aria-hidden="true"><i></i><i></i><i></i></span>
+      </button>
+
+      <button type="button" class="tow-open" data-open-sheet aria-haspopup="dialog" aria-label={`Open the player: ${name}`}></button>
+
+      <span class="tow-art" data-art aria-hidden="true"><img alt="" decoding="async" data-art-img /></span>
+
+      <span class="tow-text">
+        <span class="tow-label">{label}</span>
+        <span class="tow-title" data-marquee><span>{t.title}</span></span>
+        <span class="tow-artist" data-artist>{t.artist}</span>
+      </span>
+
+      <span class="tow-eq" data-eq aria-hidden="true">{eq(5).map(() => <span class="col"><i></i><i></i><i></i><i></i></span>)}</span>
+      <span class="tow-time" aria-hidden="true"><span data-elapsed>0:00</span><span class="sep"> / </span><span data-total>–:––</span></span>
+      <a class="tow-err-link" href={t.link} target="_blank" rel="noopener" data-via>Listen on {platformName[t.platform]}</a>
+      <button type="button" class="tow-credits-btn" data-panel-btn aria-expanded="false" aria-controls="tow-panel" aria-haspopup="dialog">Credits</button>
+      <button type="button" class="tow-collapse" data-collapse aria-label="Collapse the player">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" /></svg>
       </button>
+
+      <div class="tow-panel" id="tow-panel" data-panel role="dialog" aria-modal="true" aria-labelledby="tow-panel-h" inert>
+        <div class="tow-panel-in">
+          <div class="tow-panel-body" tabindex="-1">
+            <div class="tow-panel-head">
+              <span class="tow-art" data-art aria-hidden="true"><img alt="" decoding="async" data-art-img /></span>
+              <div>
+                <p class="tow-label">{label}</p>
+                <h2 id="tow-panel-h" class="tow-panel-title">{t.title} <span>{t.artist}</span></h2>
+              </div>
+            </div>
+            <p class="tow-note">{t.note}</p>
+            <dl class="tow-credits">{t.credits.map((c) => <div><dt class="">{c.role}</dt><dd>{c.name}</dd></div>)}</dl>
+            <p class="tow-actions">
+              {t.buyLink && <a class="tow-buy" href={t.buyLink} target="_blank" rel="noopener" data-buy>{buyLabel(t.buyLink)}</a>}
+              <a class="tow-via" href={t.link} target="_blank" rel="noopener" data-via>{via}</a>
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="tow-credits" id="tow-credits" hidden>
-      <p class="tow-credits-head mono">Credits: {t.title}, {t.artist}</p>
-      <dl>
-        {t.credits.map((c) => <><dt>{c.role}</dt><dd>{c.name}</dd></>)}
-      </dl>
-      <p class="tow-links"><a href={t.link} target="_blank" rel="noopener">{listen}</a> <a href="/tracks/">Every track of the week</a></p>
+
+    <div class="tow-sheet-wrap" data-sheet-wrap inert>
+      <div class="tow-backdrop" data-backdrop></div>
+      <div class="tow-sheet" data-sheet role="dialog" aria-modal="true" aria-labelledby="tow-sheet-h">
+        <button type="button" class="tow-handle" data-handle aria-label="Close"><i></i></button>
+        <div class="tow-slot" data-slot>
+          <p class="tow-slot-note" data-note></p>
+          <div class="tow-slot-frame" data-slot-frame></div>
+        </div>
+        <div class="tow-sheet-body" data-sheet-body>
+          <span class="tow-art tow-art-lg" data-art aria-hidden="true"><img alt="" decoding="async" data-art-img /></span>
+          <p class="tow-label">{label}</p>
+          <h2 id="tow-sheet-h" class="tow-sheet-title">{t.title}</h2>
+          <p class="tow-sheet-artist" data-artist>{t.artist}</p>
+
+          <div class="tow-scrub" data-ctl>
+            <div class="tow-line tow-line-lg" data-slider role="slider" tabindex="0" aria-label={`Seek in ${t.title}`} aria-valuemin="0" aria-valuemax="0" aria-valuenow="0" aria-valuetext="0:00" aria-disabled="true">
+              <span class="tow-line-track"><span class="tow-buf" data-buf></span><span class="tow-played" data-played></span></span>
+              <span class="tow-knob" data-knob><i></i></span>
+            </div>
+            <p class="tow-times" aria-hidden="true"><span data-elapsed>0:00</span><span data-total>–:––</span></p>
+          </div>
+
+          <div class="tow-sheet-ctl">
+            <button type="button" class="tow-play tow-play-lg" data-play aria-pressed="false" aria-label={`Play ${name}`}>
+              <svg class="ic ic-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 5.5v13l10-6.5z" /></svg>
+              <svg class="ic ic-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h3.6v14H7zM13.4 5H17v14h-3.6z" /></svg>
+              <svg class="ic ic-replay" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5V2L7 6l5 4V7a5 5 0 1 1-5 5H5a7 7 0 1 0 7-7z" /></svg>
+              <svg class="ic ic-out" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4l-8.5 8.5M18 14v5H5V6h5" fill="none" stroke="currentColor" stroke-width="2" /></svg>
+              <span class="ic ic-load" aria-hidden="true"><i></i><i></i><i></i></span>
+            </button>
+          </div>
+
+          <h3 class="tow-sheet-h">Credits</h3>
+          <dl class="tow-credits">{t.credits.map((c) => <div><dt class="">{c.role}</dt><dd>{c.name}</dd></div>)}</dl>
+          <p class="tow-note">{t.note}</p>
+          <p class="tow-actions">
+            {t.buyLink && <a class="tow-buy" href={t.buyLink} target="_blank" rel="noopener" data-buy>{buyLabel(t.buyLink)}</a>}
+            <a class="tow-via" href={t.link} target="_blank" rel="noopener" data-via>{via}</a>
+          </p>
+          <p class="tow-sheet-foot"><button type="button" class="tow-minimise" data-collapse>Minimise the player</button> <a class="" href="/tracks/">Every track of the week</a></p>
+        </div>
+      </div>
     </div>
-    <button type="button" class="tow-dot" aria-label={`Show the track of the week player: ${t.title} by ${t.artist}`} hidden>
-      <span class="tow-eq" aria-hidden="true">{eq.slice(0, 3).map((c) => <span class="col" style={`--c:${c}`}><i></i><i></i><i></i></span>)}</span>
+
+    <button type="button" class="tow-fab" data-fab aria-label={`Show the track of the week player: ${name}`}>
+      <span class="tow-eq" data-eq aria-hidden="true">{eq(5).map(() => <span class="col"><i></i><i></i><i></i><i></i></span>)}</span>
     </button>
-    {isFile && <audio class="tow-audio" src={t.audioFile} preload="none"></audio>}
-  </div>
+
+    <p class="sr" data-live aria-live="polite"></p>
+
+    <!-- before first paint: restore collapsed/expanded from this session and hold the entrance on a first visit, so nothing flashes -->
+    <script is:inline>
+      (function () {
+        var t = document.getElementById('tow'); if (!t || t.dataset.boot) return; t.dataset.boot = '1';
+        try { var s = JSON.parse(sessionStorage.getItem('strukt-tow') || 'null'); if (s && s.view === 'collapsed') t.dataset.view = 'collapsed'; } catch (e) {}
+        try { if (!localStorage.getItem('strukt-tow-seen')) t.dataset.enter = 'wait'; } catch (e) {}
+      })();
+    </script>
+  </section>
 )}
 
 <script>
-  const KEY = 'strukt-player-collapsed';
-  const store = {
-    get() { try { return localStorage.getItem(KEY) === '1'; } catch { return false; } },
-    set(v: boolean) { try { v ? localStorage.setItem(KEY, '1') : localStorage.removeItem(KEY); } catch { /* storage blocked: the choice just isn't remembered */ } },
-  };
-  const track = (event: string, props: Record<string, unknown>) => {
-    try { (window as any).posthog?.capture?.(event, props); } catch { /* analytics off */ }
-  };
-
-  // Runs once: the bar is persisted across page changes, so its listeners stay attached.
-  function setup() {
-    const root = document.getElementById('tow');
-    if (!root || root.dataset.ready) return;
-    root.dataset.ready = '1';
-    const cfg = JSON.parse(root.dataset.config || '{}');
-    const play = root.querySelector<HTMLButtonElement>('.tow-play')!;
-    const embed = root.querySelector<HTMLElement>('.tow-embed')!;
-    const audio = root.querySelector<HTMLAudioElement>('.tow-audio');
-    const seek = root.querySelector<HTMLInputElement>('.tow-seek');
-    const time = root.querySelector<HTMLElement>('.tow-time');
-    const creditsBtn = root.querySelector<HTMLButtonElement>('.tow-credits-btn')!;
-    const credits = root.querySelector<HTMLElement>('.tow-credits')!;
-    const hide = root.querySelector<HTMLButtonElement>('.tow-hide')!;
-    const dot = root.querySelector<HTMLButtonElement>('.tow-dot')!;
-    const name = `${cfg.title} by ${cfg.artist}`;
-
-    const setPlaying = (on: boolean) => {
-      root.classList.toggle('playing', on);
-      play.setAttribute('aria-pressed', String(on));
-      play.setAttribute('aria-label', (on ? (audio ? 'Pause ' : 'Close ') : 'Play ') + name);
-    };
-
-    // Platforms: nothing from the platform loads until play is tapped. Tapping again removes the embed, which stops it.
-    const openEmbed = () => {
-      const f = document.createElement('iframe');
-      f.src = cfg.embedUrl; f.title = `${name} on ${cfg.platform}`; f.loading = 'eager';
-      f.allow = 'autoplay; encrypted-media'; f.style.height = cfg.embedHeight + 'px';
-      if (cfg.platform === 'youtube') f.style.removeProperty('height');
-      embed.replaceChildren(f); embed.hidden = false; root.classList.add('embedded');
-      root.classList.toggle('tall', cfg.platform === 'youtube' || cfg.embedHeight > 48);
-    };
-    const closeEmbed = () => { embed.replaceChildren(); embed.hidden = true; root.classList.remove('embedded', 'tall'); };
-
-    play.addEventListener('click', () => {
-      const on = play.getAttribute('aria-pressed') !== 'true';
-      if (audio) { on ? audio.play().catch(() => setPlaying(false)) : audio.pause(); }
-      else { on ? openEmbed() : closeEmbed(); setPlaying(on); }
-      if (on) track('track_play', { title: cfg.title, artist: cfg.artist, platform: cfg.platform, week: cfg.week, source: 'player' });
-    });
-
-    if (audio && seek && time) {
-      const fmt = (s: number) => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
-      audio.addEventListener('play', () => setPlaying(true));
-      audio.addEventListener('pause', () => setPlaying(false));
-      audio.addEventListener('ended', () => setPlaying(false));
-      audio.addEventListener('timeupdate', () => {
-        if (!audio.duration) return;
-        seek.value = String(Math.round((audio.currentTime / audio.duration) * 1000));
-        seek.style.setProperty('--p', seek.value);
-        time.textContent = fmt(audio.currentTime);
-      });
-      seek.addEventListener('input', () => { if (audio.duration) audio.currentTime = (+seek.value / 1000) * audio.duration; });
-    }
-
-    creditsBtn.addEventListener('click', () => {
-      const open = credits.hidden;
-      credits.hidden = !open; creditsBtn.setAttribute('aria-expanded', String(open));
-      if (open) track('track_credits_open', { title: cfg.title, artist: cfg.artist, source: 'player' });
-    });
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !credits.hidden) { credits.hidden = true; creditsBtn.setAttribute('aria-expanded', 'false'); creditsBtn.focus(); } });
-
-    const collapse = (on: boolean, focus = false) => {
-      root.classList.toggle('collapsed', on);
-      root.querySelector<HTMLElement>('.tow-bar')!.hidden = on; dot.hidden = !on;
-      if (on) { credits.hidden = true; creditsBtn.setAttribute('aria-expanded', 'false'); }
-      store.set(on);
-      if (focus) (on ? dot : play).focus();
-    };
-    hide.addEventListener('click', () => collapse(true, true));
-    dot.addEventListener('click', () => collapse(false, true));
-    collapse(store.get());
-  }
-
-  setup();
-  document.addEventListener('astro:page-load', setup);
+  import { start } from '../scripts/player/player';
+  start();
+  document.addEventListener('astro:page-load', start);
 </script>
