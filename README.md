@@ -95,3 +95,9 @@ Then add your domain in Google Search Console and submit `https://yourdomain.com
 
 - `robots.txt`, `llms.txt`, `llms-full.txt` and a Markdown copy of each post (`/journal/<post-name>.md`) are generated on every build, so new posts show up in them automatically.
 - **IndexNow (Bing):** each production deploy on Vercel compares the new sitemap with the live one and reports new or changed pages to IndexNow, which shares them with Bing. The key is the public file `public/ed491aa9a8ccb24676f587de09d3646b.txt`. To see what would be sent without sending it, build with `INDEXNOW_DRY_RUN=1 npm run build`.
+
+## Security headers
+
+Every page is served with a Content Security Policy and the standard hardening headers (HSTS, `nosniff`, no framing by other sites, a strict referrer policy). They're added at build time by `integrations/security-headers.mjs`, which writes them into Vercel's routing config.
+
+The policy only lets the browser load scripts, frames and connections from this site and the services it uses: SoundCloud, Bandcamp, YouTube (nocookie), Google Fonts, Unsplash, PostHog and Formspree. **If you add a new outside service** (another embed, font or tool) and it doesn't show up on the live site, add its address to `SOURCES` at the top of that file. Inline scripts are hashed automatically on every build, so editing one never needs a manual change.
