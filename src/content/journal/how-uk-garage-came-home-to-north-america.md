@@ -4,6 +4,9 @@ description: "Named after a New York club and sped up in London, UK garage is ba
 pubDate: 2026-10-30
 category: "The scene"
 tags: ["UK garage", "NUKG", "MPH", "Chris Lake", "Sammy Virji", "Black Book Records", "speed garage", "Vancouver"]
+heroImage: "/images/journal/how-uk-garage-came-home-to-north-america/dancer-in-front-of-dj.webp"
+heroAlt: "A DJ in silhouette behind the decks under a single red light"
+heroCredit: "Photo: Dima Kosh, Unsplash"
 draft: false
 ---
 
@@ -19,6 +22,11 @@ Somewhere between Miami and Vancouver, the funny sped-up garage got big enough t
 
 "Garage" was never a British word for music. It comes from the [Paradise Garage](https://en.wikipedia.org/wiki/Garage_house), the New York club where Larry Levan held his residency, and from Club Zanzibar in Newark, New Jersey. The soulful, gospel-touched house that DJs played in those rooms became known as garage house, or simply the New York and New Jersey sound. (We wrote about the people who built the Garage's room, including sound designer Richard Long, in [our piece on the designers behind legendary clubs](/journal/the-designers-behind-legendary-clubs/).)
 
+<figure class="post-figure">
+  <img src="/images/journal/how-uk-garage-came-home-to-north-america/dj-mixer-close-up.webp" alt="Close-up of faders and knobs on a mixing desk" width="1400" height="933" loading="lazy">
+  <figcaption>Faders on a mixing desk. <span class="credit">Photo: Alexey Ruban, Unsplash</span></figcaption>
+</figure>
+
 By the early 1990s, that American sound had a devoted following in London, but it lived in odd places. According to [Wikipedia's history of UK garage](https://en.wikipedia.org/wiki/UK_garage), US and US-influenced house and garage was very often played in the second room at jungle events, the overflow space for people who wanted something warmer than the main room's breakbeats.
 
 ## London sped it up
@@ -29,6 +37,11 @@ Edwards matters for another reason. His habit of [chopping vocals into tiny frag
 
 By the late 1990s, London producers had taken it further. The most radical change came when they dropped the second and fourth kick drums from each bar, leaving the [skipping, syncopated rhythm](https://en.wikipedia.org/wiki/2-step_garage) known as 2-step. Pirate radio carried it, and by 1999 2-step records were on Top of the Pops. That was the sound Andy Lewis was championing, and the one North American dance floors mostly ignored.
 
+<figure class="post-figure">
+  <img src="/images/journal/how-uk-garage-came-home-to-north-america/microphone-on-dj-gear.webp" alt="A microphone resting on a lit mixer" width="1400" height="933" loading="lazy">
+  <figcaption>A microphone resting on a lit mixer. <span class="credit">Photo: Michael Maasen, Unsplash</span></figcaption>
+</figure>
+
 ## Why it didn't cross the first time
 
 The Toronto profile gave an honest reason: many veterans of the North American house scene [saw UK garage as Britain repackaging Black American music](https://nowtoronto.com/music/andy-lewis-locked-on-to-uk-garage/). It's a fair criticism, and worth sitting with. The sound was built on the work of Black and Latino DJs and dancers in New York and New Jersey, and the British version arrived with more chart hits than credit.
@@ -38,6 +51,11 @@ So for most of the 2000s, UK garage stayed largely British. Its influence spread
 ## The second wave
 
 The revival started in the underground. In 2023, [Bandcamp Daily reported](https://daily.bandcamp.com/scene-report/nukg-scene-report) that a new generation of garage, nicknamed NUKG, had been bubbling under for about four years, led by producers such as Interplanetary Criminal, whose explanation for the appeal was simple: "Everyone kind of likes garage, right?"
+
+<figure class="post-figure">
+  <img src="/images/journal/how-uk-garage-came-home-to-north-america/packed-room.webp" alt="A packed room with the DJ at floor level in the corner" width="1400" height="928" loading="lazy">
+  <figcaption>A packed room, the DJ at floor level in the corner. <span class="credit">Photo: Maksim Zhashkevych, Unsplash</span></figcaption>
+</figure>
 
 This time the internet did the job pirate radio once did, and the sound didn't stay in London. The UK garage column NUKG Monthly at KEYMAG has since covered growing scenes in [Japan](https://www.keymag.co.uk/nukg-monthly/inside-japans-garage-scene-prozak-ec2a-pangaea) and Brazil, and in 2026 it profiled [a California scene](https://www.keymag.co.uk/nukg-monthly/ramonpang-interview-uk-garage-from-california) that has released a compilation called *UK Garage from California*. The same column admits British heads are still a little suspicious of the American version, noting that the garage hype cycle has swept through festivals including Coachella and EDC, and joking about the way Americans pronounce the word.
 
