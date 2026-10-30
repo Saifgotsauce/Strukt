@@ -58,7 +58,7 @@ function map(){
   const W=tall?900:1600,H=tall?880:520,p=tall?22:14,R=rng(77),dots=[],fs=tall?40:26,nr=tall?[12.5,8]:[8.3,5.2];
   const pr=tall?(lat,lon)=>[60+((lon+125)/140)*(W-200),110+((56-lat)/52)*(H-200)]:(lat,lon)=>[((lon+140)/180)*W,((64-lat)/66)*H];
   for(let i=0;i<(tall?420:520);i++) dots.push({x:Math.floor(R()*W/p)*p+p/2,y:Math.floor(R()*H/p)*p+p/2,c:'#2E2148'});
-  const V=pr(49.28,-123.12),A=pr(49.05,-122.31),B=pr(52.52,13.40),L=pr(6.52,3.38);
+  const V=pr(49.28,-123.12),B=pr(52.52,13.40),L=pr(6.52,3.38);
   const line=(a,b,bend)=>{const n=Math.round(Math.hypot(b[0]-a[0],b[1]-a[1])/(tall?22:16));const mx=(a[0]+b[0])/2+(tall?bend:0),my=Math.min(a[1],b[1])-(tall?40:90);
     for(let i=1;i<n;i++){const t=i/n,x=(1-t)*(1-t)*a[0]+2*(1-t)*t*mx+t*t*b[0],y=(1-t)*(1-t)*a[1]+2*(1-t)*t*my+t*t*b[1];dots.push({x,y,c:'#C9B3FF',r:tall?3.4:2.2})}};
   line(V,B,0);line(V,L,-160);
@@ -67,8 +67,8 @@ function map(){
   const node=(pt,label,dx,dy,anchor)=>{let g='';for(let a=-1;a<=1;a++)for(let b=-1;b<=1;b++){g+=`<circle cx="${pt[0]+a*p}" cy="${pt[1]+b*p}" r="${nr[0]}" fill="#fff"/>`}
     for(let a=-1;a<=1;a++)for(let b=-1;b<=1;b++){g+=`<circle cx="${pt[0]+a*p}" cy="${pt[1]+b*p}" r="${nr[1]}" fill="#8C52FF"/>`}
     return g+`<text x="${pt[0]+dx}" y="${pt[1]+dy}" text-anchor="${anchor||'start'}" fill="#fff" font-family="Geist Mono, monospace" font-size="${fs}">${label}</text>`};
-  if(tall) s+=node(V,'Vancouver',0,-52,'start')+node([A[0]+60,A[1]+90],'Abbotsford',48,12)+node(B,'Berlin',0,-52,'end')+node(L,'Lagos',-48,12,'end');
-  else s+=node(V,'Vancouver',-28,-34)+node([A[0]+42,A[1]+56],'Abbotsford',34,8)+node(B,'Berlin',34,8)+node(L,'Lagos',34,8);
+  if(tall) s+=node(V,'Vancouver',0,-52,'start')+node(B,'Berlin',0,-52,'end')+node(L,'Lagos',-48,12,'end');
+  else s+=node(V,'Vancouver',-28,-34)+node(B,'Berlin',34,8)+node(L,'Lagos',34,8);
   svg.setAttribute('viewBox',`0 0 ${W} ${H}`);svg.innerHTML=s;
 }
 
