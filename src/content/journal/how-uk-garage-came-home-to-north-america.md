@@ -1,6 +1,6 @@
 ---
 title: "How UK garage came home to North America"
-description: "Named after a New York club and sped up in London, UK garage is back. MPH, Chris Lake and Sammy Virji hit Vancouver within a week. How the sound crossed twice."
+description: "UK garage took its name from a New York club. Now MPH, Chris Lake and Sammy Virji hit Vancouver in one week. The sound's history, and the names behind the shows."
 pubDate: 2026-10-30
 category: "The scene"
 tags: ["UK garage", "NUKG", "MPH", "Chris Lake", "Sammy Virji", "Black Book Records", "speed garage", "Vancouver"]
@@ -61,7 +61,7 @@ This time the internet did the job pirate radio once did, and the sound didn't s
 
 The numbers moved too. Stereofox, citing an [IMS Business Report](https://www.stereofox.com/articles/fastest-rising-electronic-music-genres), reports that plays of the UK garage scene on SoundCloud rose 31% in a year, with the US the second-biggest audience after the UK.
 
-The best-known name in North America is Sammy Virji, the Southampton-born producer whom Beatport has called [the face of the current wave of UK garage in the US](https://www.beatportal.com/articles/1052209-artist-of-the-month-sammy-virji). His [DJ Mag HQ set went viral](https://djmag.com/features/sammy-virji-global-garage-phenomenon-interview), and a run of North American headline tours followed. He's modest about it. Talking to Beatport about leading garage's global revival, he played down his own part: ["I'm just at the right place at the right time."](https://www.beatportal.com/articles/249663-sammy-virji-on-leading-uk-garages-global-revolution-i-was-just-in-the-right-place-at-the-right-time)
+The best-known name in North America is Sammy Virji, the producer [born in London and raised in Witney, Oxfordshire](https://en.wikipedia.org/wiki/Sammy_Virji), whom Beatport has called [the face of the current wave of UK garage in the US](https://www.beatportal.com/articles/1052209-artist-of-the-month-sammy-virji). His [DJ Mag HQ set went viral](https://djmag.com/features/sammy-virji-global-garage-phenomenon-interview), and a run of North American headline tours followed. He's modest about it. Talking to Beatport about leading garage's global revival, he played down his own part: ["I'm just at the right place at the right time."](https://www.beatportal.com/articles/249663-sammy-virji-on-leading-uk-garages-global-revolution-i-was-just-in-the-right-place-at-the-right-time)
 
 ## MPH, Chris Lake and the house connection
 
@@ -76,6 +76,38 @@ Chris Lake is an English [house and tech house producer](https://en.wikipedia.or
 Lake's links run through Virji too. The two have released two collaborations, ["Summertime Blues" and "925"](https://www.beatportal.com/articles/1047369-sammy-virji-and-chris-lake-meet-again-for-propulsive-single-925), and this September Virji teamed up with Barry Can't Swim on ["I Could Be Madonna"](https://routenote.com/radar/?p=4289), a direct homage to classic UK garage.
 
 That's the real story behind this week's Vancouver lineup. A garage producer from Canterbury is signed to an English house producer's label, collaborating with a vocalist from Los Angeles, and being played by a French house legend. Garage and house, which started as the same music in New York and New Jersey, are running back into each other. Not everyone loves it. KEYMAG has asked whether the new [tech house and garage crossover](https://www.keymag.co.uk/nukg-monthly/tag/rinse+fm) is a faithful callback or a move towards commercialism, and it's a fair question. But it's hard to argue the sound hasn't come full circle.
+
+## The names under the headliners
+
+Every story about this week names the same four or five people. These are some of the others: the people who build what the headliners stand in front of. Where we couldn't find a name, we've said so, because that gap is the problem.
+
+**Behind Sammy Virji**
+
+- When Virji played two nights at O2 Academy Brixton in 2025, the show direction, lighting, production and set design came from [Experience Studios](https://www.experience-studios.com/projects/sammy-virji-at-o2-brixton-academy/), the London studio co-founded by [Mark Murphy](https://www.experience-studios.com/about/), with **Tom Kendrew** as its creative lead. The studio built custom kinetic light boxes based on the cover of "If U Need It" together with Light Initiative. *We couldn't find which members of either team worked on the show.*
+- At [Civic Center Park in Denver](https://brownnote.com/dj-sammy-virji-brings-high-energy-show-to-denvers-civic-center-park/) on September 13, 2025, lighting designer **Erik Mahowald** of Bending Light Productions built the show around 92 Claypaky Ultimo Sharpy fixtures in a design that left the City and County Building behind the stage completely unblocked. **Alex Van Roon** ran the lights on the night. The video operator is credited only as **ED36North**; *we couldn't find a full name.* The production came from Brown Note Productions, which **Sara and Ryan Knutson** [built up from a two-car garage](https://www.westword.com/?p=40657009), working alongside Chris Schroeder Productions.
+- Before any of this, it was **Conducta** who [asked to release one of Virji's tracks](https://en.wikipedia.org/wiki/Sammy_Virji) on his label, Kiwi Rekords.
+- *We couldn't find Virji's own touring lighting designer, production manager or front of house engineer credited anywhere public. We're asking.*
+
+**Behind MPH**
+
+- The voices on his records: **Cecilia** on ["Rush"](https://www.qobuz.com/gb-en/interpreter/mph/1695251), **Katie Bosworth** on ["Waiting"](https://www.beatportal.com/articles/201881-mph-flava-d-has-been-the-biggest-influence-on-my-sound), **Kelly Lee Owens** on "Reach For You", **Æ** on "Flex It", and the British MC **EV**, whom MPH announced as a vocal guest on his album [*Substance*](https://edmmaniac.com/?p=3231).
+- The pictures: his 2023 press photos were taken by [**Leo Lightfoot**](https://edmmaniac.com/?p=3224). The photo used to announce his 2025 tour is credited only to the handle [**@hi.gunpowder**](https://edmmaniac.com/?p=3231); *we couldn't find the photographer's name.*
+- The early believer: **AC Slater**, who runs Night Bass, put out MPH's first two albums.
+- *We couldn't find his manager, agent or touring crew credited publicly.*
+
+**Behind Chris Lake**
+
+- Black Book Records isn't only Lake. According to [DJ Mag](https://djmag.com/features/chris-lake-slow-burn), he launched it with his creative partner **Ian Massoth**, who [Billboard reported in 2023](https://www.billboard.com/pro/chris-lake-black-book-label-sign-astralwerks/) was its head of A&R, with Lake's manager **Brett Fischer** of AYITA helping run it. The same report noted that **Toby Andrews**, general manager of Astralwerks at the time, had known Lake since 2008, when he worked as his publicist.
+- *We couldn't find who designs or runs the red-lit production on Lake's* Chemistry *shows. We're asking his team.*
+
+**Behind Foundation**
+
+- Foundation is run by Blueprint, the company [founded by **Bill Kerasiotis, Chris Kerasiotis and Alvaro Prol**](https://thisisblueprint.com/). [Business in Vancouver](https://www.biv.com/news/entertainment-media-sports/profile-alvaro-prol-co-owner-blueprint-8248494) traces it to a weekly night called Blueprint Tuesdays at the old Plaza Club, which grew out of Prol's years in Vancouver's underground clubs after he arrived from Argentina. Prol has also long been Blueprint's [head talent buyer](https://dailyhive.com/vancouver/seasons-festival-2016-vancouver-talent), the person who decides who plays.
+- In that same 2016 interview, **Matt Owchar**, who also DJs as Expendable Youth, described starting at Blueprint as a DJ and promoter and working his way up to marketing and talent buying. It's a fair picture of how most people get into this industry.
+- Below the headliners on the Halloween bill is [**Madam Lola**](https://edmidentity.com/?p=274477), a Vancouver DJ and multidisciplinary artist born in Tehran and raised between Istanbul and Vancouver. She's the founder, or in her words the Mother, of House of Lola, a queer-forward event series focused on making nightlife visible, safe and open to LGBTQ+ artists and dancers, and she released her debut EP, *Domination Frequency*, last December. Several ticket listings for Saturday leave her name off entirely. She's the only artist on the lineup who lives here.
+- *We couldn't find who designs Foundation's stages or who is running production at the Convention Centre on Saturday, and the same goes for the crew at the PNE Forum on November 6.*
+
+If you worked on any of these shows, in any role, [tell us](/call-for-creatives). Every gap above is a name we want to add.
 
 ## The arena problem
 
@@ -105,4 +137,17 @@ That's the part we want to document. When Andy Lewis was being teased in Miami, 
 - MPH biography, [Qobuz](https://www.qobuz.com/gb-en/interpreter/mph/1695251)
 - "MPH and Æ Join Forces on 'Flex It'", [Beatportal](https://www.beatportal.com/articles/1295810-mph-and-ae-join-forces-on-flex-it-out-now-on-black-book-records)
 - MPH "Unconditional", [Breaking and Entering](https://breakingandentering.net/2026/05/02/mph-unconditional-new-single-breakaway-arizona/)
+- Sammy Virji at O2 Academy Brixton, [Experience Studios](https://www.experience-studios.com/projects/sammy-virji-at-o2-brixton-academy/)
+- "DJ Sammy Virji brings high-energy show to Denver's Civic Center Park", [Brown Note Productions](https://brownnote.com/dj-sammy-virji-brings-high-energy-show-to-denvers-civic-center-park/)
+- "MPH Talks UK Garage & His Debut LP", [EDM Maniac](https://edmmaniac.com/?p=3224)
+- Blueprint, [This Is Blueprint](https://thisisblueprint.com/) and [Business in Vancouver](https://www.biv.com/news/entertainment-media-sports/profile-alvaro-prol-co-owner-blueprint-8248494)
+- Foundation at New Brighton Park, [Daily Hive](https://dailyhive.com/vancouver/foundation-new-brighton-park-vancouver-approved)
+- Madam Lola, *Domination Frequency*, [EDM Identity](https://edmidentity.com/?p=274477)
+- Experience Studios team, [Experience Studios](https://www.experience-studios.com/about/)
+- Brown Note Productions, [Westword](https://www.westword.com/?p=40657009)
+- Sammy Virji, [Wikipedia](https://en.wikipedia.org/wiki/Sammy_Virji)
+- MPH *Substance* tour announcement, [EDM Maniac](https://edmmaniac.com/?p=3231)
+- "Chris Lake: slow burn", [DJ Mag](https://djmag.com/features/chris-lake-slow-burn)
+- "Chris Lake & His Black Book Label Sign to Astralwerks", [Billboard](https://www.billboard.com/pro/chris-lake-black-book-label-sign-astralwerks/)
+- "Seasons Festival showcases a hotbed of talent in Vancouver", [Daily Hive](https://dailyhive.com/vancouver/seasons-festival-2016-vancouver-talent)
 - Chris Lake, [Wikipedia](https://en.wikipedia.org/wiki/Chris_Lake), [AXS](https://www.axs.com/se/artists/775729) and [Audiojacked](https://audiojacked.com/music-news/chris-lake-atrip-make-you-fight-black-book-records)

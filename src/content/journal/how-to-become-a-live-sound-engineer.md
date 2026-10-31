@@ -12,11 +12,15 @@ draft: false
 
 <!-- Desk: Rig. Words: STRUKT Rig desk. -->
 
-Most of the engineers mixing clubs and festivals today learned on the job. They taught themselves a mixing desk at home on free software, picked up audio networking from free online courses, and spent their first year carrying speakers for whoever would have them. The ones still working twenty years in also treated their ears as the most expensive piece of kit they own. That's the route, and the rest of this guide fills it in.
+Most of the engineers mixing clubs and festivals today learned on the job. They taught themselves a mixing desk at home on free software, picked up audio networking from free online courses, and spent their first year carrying speakers for whoever would have them. The ones still working twenty years in also treated their ears as the most expensive piece of kit they own. That's the route.
+
+If that sounds like a modest start, consider **John Newsham**. He [began his career in live sound in 1976](https://www.mixonline.com/?p=129335) on the road with the Steve Hillage Band, met the sound designer **Tony Andrews** while touring in Los Angeles the following year, and went on to co-found two of the most important loudspeaker companies in dance music with him: [Turbosound and then Funktion-One](https://en.wikipedia.org/wiki/Funktion-One). If you've ever stood in front of a stack of purple speakers in a club, you've heard what started on that tour. Here's how the route works today.
 
 ## What the job actually is
 
 On a festival stage, live sound usually splits into three roles. The front of house engineer mixes what the crowd hears from a desk out in the audience. The monitor engineer mixes what the performers hear on stage, often from a desk at the side. The system tech designs and tunes the speakers so the mix sounds the same at the barrier as it does at the back.
+
+You can see the split on any big tour. When the Calgary-born pop star Tate McRae played Osheaga in Montreal and Lollapalooza in Chicago this summer, **Curtis McKenna** [mixed front of house and **Melvin Godfrey** mixed her monitors](https://fohonline.com/featured/tate-mcraes-engineers-make-quantum-jump-to-digico-desks/), two engineers doing two very different jobs for the same show.
 
 In a club, one person often does all three. They patch the DJ mixer into the system, check the booth monitors, set the subs, keep an MC's microphone clear of feedback, and watch the levels all night. It's less glamorous than a festival main stage and a far better place to learn, because every problem in the room is yours to solve.
 
@@ -30,7 +34,7 @@ In a club, one person often does all three. They patch the DJ mixer into the sys
 Nearly every major console manufacturer gives away offline editing software that looks like the real desk, so you can learn it on a laptop. As [ProSoundWeb's guide](https://www.prosoundweb.com/lockdown-lessons-a-guide-for-sound-engineers-techs/2/) puts it, all of the leading companies offer their software for free. The ones worth starting with:
 
 - **Allen & Heath dLive Director and Avantis Director.** Free for Windows and Mac. dLive Director lets you [build an entire show offline](https://fohonline.com/?p=125972), including the channel list, patching and surface layouts, and it's the same software engineers use to control the desk from a laptop on the night.
-- **DiGiCo offline software.** DiGiCo's SD and S-Series desks are common on touring and festival stages. The [S-Series Offline Editor](https://lsionline.com/news/digico-releases-s-series-offline-editor) runs on both Windows and Mac.
+- **DiGiCo offline software.** DiGiCo's SD and S-Series desks are common on touring and festival stages. The [S-Series Offline Editor](https://lsionline.com/news/digico-releases-s-series-offline-editor) runs on both Windows and Mac. Curtis McKenna gave a very practical reason for switching his own shows to DiGiCo: ["you can find DiGiCo everywhere,"](https://fohonline.com/featured/tate-mcraes-engineers-make-quantum-jump-to-digico-desks/) and his show file adapts to whichever model a venue has.
 - **Yamaha.** According to [FOH magazine](https://fohonline.com/?p=172957), Yamaha has the most complete coverage, with offline editors for all of its digital mixers on both platforms. The catch, noted by [Live Sound International](https://digital.livesoundint.com/articles/digital-evolution), is that Yamaha's editors share a generic layout and don't look like the individual desks.
 
 None of these pass audio, so you won't be mixing real sound at home. What you will learn is where everything lives, which is most of the battle the first time you walk up to an unfamiliar desk with ten minutes before doors.
@@ -46,7 +50,9 @@ None of these pass audio, so you won't be mixing real sound at home. What you wi
 
 ## Get the free networking certificate first
 
-Modern festival and touring systems move audio over computer networks, and the most common format is Dante. Its maker, Audinate, runs a three-level certification program, and [all three courses are free](https://www.prosoundweb.com/audinate-announces-revamped-dante-training-program/), with certifications valid for three years. Level 1 covers the fundamentals, Level 2 covers designing and troubleshooting systems that span multiple network switches, and Level 3 covers large-scale networks.
+Modern festival and touring systems move audio over computer networks, and the most common format is Dante. It started with one frustrated musician. **Aidan Williams**, an engineer who played music on the side, was [tired of the mess of cables](https://avnetwork.com/features/dante-audio-a-brief-history) needed to connect his synths, mixers and recorders. When Motorola closed its Australian research lab in 2003, he took a team of researchers to the NICTA research centre in Sydney, and in 2006 he [founded Audinate](https://en.wikipedia.org/wiki/Audinate) with co-founder **David Myers** to bring Dante to market.
+
+Audinate now runs a three-level certification program, and [all three courses are free](https://www.prosoundweb.com/audinate-announces-revamped-dante-training-program/), with certifications valid for three years. Level 1 covers the fundamentals, Level 2 covers designing and troubleshooting systems that span multiple network switches, and Level 3 covers large-scale networks.
 
 Level 1 is a short online course with an exam at the end. It costs nothing, it's a line on your résumé a production manager will actually recognise, and it means you won't be the person who panics when a stage box drops off the network.
 
@@ -70,6 +76,8 @@ Level 1 is a short online course with an exam at the end. It costs nothing, it's
 
 **Assisting a monitor engineer.** On bigger shows, monitor engineers often need a hand on stage: running cables, swapping microphones and fixing in-ear packs. Watching a good monitor engineer handle a nervous performer teaches as much about people as it does about sound.
 
+The people at the very top started in these jobs. Tony Andrews, John Newsham's Funktion-One co-founder, was a touring roadie when the two of them [founded Turbosound](https://groove.de/2017/05/29/funktion-one-tony-andrews-interview-english/2/), and according to [Selector](https://selector.news/?p=8297) he had already provided the sound for the very first Glastonbury Festival in 1971.
+
 Whatever the job, the habits that get you rehired don't change: show up before call time, label everything, coil cable the way the crew boss does it, and never touch a desk that isn't yours without asking.
 
 <!-- REDDIT DATA: add first-job stories from working engineers, credited to each thread. -->
@@ -83,7 +91,7 @@ Hearing damage is permanent, and live sound engineers spend their working lives 
   <figcaption>A speaker cone up close. <span class="credit">Photo: Christian Lambert, Unsplash</span></figcaption>
 </figure>
 
-That limit is less restrictive than it sounds. Writing in [ProSoundWeb](https://www.prosoundweb.com/?p=171351), audio researcher Adam Hill reported on monitoring data from more than 300 events: shows with a limit in place ran only about 2 dBA quieter than shows without one, and only a handful of engineers mixed above 103 dBA for more than a few minutes, usually during the encore.
+That limit is less restrictive than it sounds. Writing in [ProSoundWeb](https://www.prosoundweb.com/?p=171351), audio researcher **Adam Hill** reported on monitoring data from more than 300 events: shows with a limit in place ran only about 2 dBA quieter than shows without one, and only a handful of engineers mixed above 103 dBA for more than a few minutes, usually during the encore.
 
 In practice, that means three habits from your first day:
 
@@ -95,11 +103,15 @@ In practice, that means three habits from your first day:
 
 The US Bureau of Labor Statistics puts the median wage for sound engineering technicians at [$73,130 a year](https://wagedex.com/card/sound-engineering-technicians), with the lowest-paid tenth earning under $37,570 and the highest-paid tenth over $137,370. Two caveats: that category includes studio and broadcast engineers as well as live sound, and the survey [excludes the self-employed](https://voxbooster.com/blog/audio-engineering-jobs-statistics-2026), who make up much of live work. Most club and festival engineers start freelance, paid by the day or the call, and the first years usually mean more hours than money.
 
+Ask working engineers how rates are set and you'll get a blunter answer than any wage survey. In a [Gearspace thread on touring pay](https://gearspace.com/threads/whats-your-weekly-pay-as-a-foh-engineer.1111154/), a front of house engineer posting as **alex_kyuss**, who says he has toured the world for more than 30 years, put it down to two things: what clients are willing to pay and what he's willing to accept, paid either per gig or per week. *We only know him by his username.*
+
 <!-- REDDIT DATA: add day rates engineers report for club and festival work in specific cities (Vancouver, Toronto, London, Berlin), with the date and source for each. -->
 
 ## Get credited in STRUKT
 
-Sound engineers are some of the least credited people in the building. When a set sounds incredible, the DJ gets the applause and the person who tuned the room gets to pack the subs at 4 a.m. STRUKT is for that person too, and every night we cover gets a credits card with every name on it. If you're mixing anywhere, from a basement party to a festival stage, [send us your work](/call-for-creatives). Being featured is free.
+Sound engineers are some of the least credited people in the building. When a set sounds incredible, the DJ gets the applause and the person who tuned the room gets to pack the subs at 4 a.m. STRUKT is for that person too, and every night we cover gets a credits card with every name on it.
+
+*We couldn't find the engineers who mix and tune the systems at Vancouver's biggest club nights credited anywhere public, and the same is true in most cities.* That's exactly the list we want to build. If you're mixing anywhere, from a basement party to a festival stage, [send us your work](/call-for-creatives). Being featured is free.
 
 ## Quick answers
 
@@ -114,3 +126,13 @@ Yes. Audinate's Dante courses are free, Level 1 is short, and audio networking i
 
 **How loud is too loud at a club or festival?**
 The WHO's safe listening standard recommends an average of no more than 100 dB over any 15 minutes, measured with calibrated equipment. Engineers should also wear hearing protection whenever they aren't actively mixing.
+
+## Sources
+
+- John Newsham's retirement, [Mix](https://www.mixonline.com/?p=129335); Funktion-One, [Wikipedia](https://en.wikipedia.org/wiki/Funktion-One)
+- Tony Andrews interview, [Groove](https://groove.de/2017/05/29/funktion-one-tony-andrews-interview-english/2/); Funktion-One history, [Selector](https://selector.news/?p=8297)
+- "Tate McRae's Engineers Make Quantum Jump to DiGiCo Desks", [FOH](https://fohonline.com/featured/tate-mcraes-engineers-make-quantum-jump-to-digico-desks/)
+- Offline editors, [ProSoundWeb](https://www.prosoundweb.com/lockdown-lessons-a-guide-for-sound-engineers-techs/2/), [FOH](https://fohonline.com/?p=172957), [LSi](https://lsionline.com/news/digico-releases-s-series-offline-editor) and [Live Sound International](https://digital.livesoundint.com/articles/digital-evolution)
+- Dante's history, [AV Network](https://avnetwork.com/features/dante-audio-a-brief-history) and [Wikipedia](https://en.wikipedia.org/wiki/Audinate); free Dante training, [ProSoundWeb](https://www.prosoundweb.com/audinate-announces-revamped-dante-training-program/)
+- WHO safe listening standard, [World Hearing Day](https://worldhearingday.org/wp-content/uploads/2022/03/MLS_WHD_Infographic_WHO-LOGO_aw.pdf); Adam Hill on sound level limits, [ProSoundWeb](https://www.prosoundweb.com/?p=171351)
+- Wage data, [Wagedex](https://wagedex.com/card/sound-engineering-technicians) and [Voxbooster](https://voxbooster.com/blog/audio-engineering-jobs-statistics-2026); touring pay thread, [Gearspace](https://gearspace.com/threads/whats-your-weekly-pay-as-a-foh-engineer.1111154/)

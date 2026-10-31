@@ -573,6 +573,10 @@ footer img{height:1.9rem;width:auto;mix-blend-mode:lighten}
 .prose .post-figure.embed iframe{display:block;width:100%;height:auto;aspect-ratio:16/9;border:0;background:var(--deep)}
 .prose .post-figure figcaption{margin-top:.7rem;font:400 .8rem/1.55 var(--mono);color:var(--paper-ash)}
 .prose .post-figure .credit{color:inherit}
+.prose em.gap{font:italic 400 .86em/1.6 var(--mono);color:var(--paper-ash);letter-spacing:0}
+.prose em.gap::before{content:"";display:inline-block;width:.42em;height:.42em;border-radius:50%;background:var(--violet);margin:0 .5em .12em 0;vertical-align:middle}
+.prose em.gap .t{font-style:normal}
+.prose li.gap-line>em.gap::before{display:none}
 .prose hr{border:0;height:14px;background:radial-gradient(circle,var(--violet) 3px,transparent 3.6px) center/16px 14px repeat-x;margin:3.2rem auto;max-width:12rem}
 .prose code{font-family:var(--mono);font-size:.88em;background:var(--paper-rule);padding:.1em .35em}
 .prose table{width:100%;border-collapse:collapse;font-size:1rem}
