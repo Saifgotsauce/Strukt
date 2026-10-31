@@ -4,6 +4,8 @@ import vercel from '@astrojs/vercel';
 import fs from 'node:fs';
 import indexnow from './integrations/indexnow.mjs';
 import securityHeaders from './integrations/security-headers.mjs';
+import { satteri } from '@astrojs/markdown-satteri';
+import gapNotes from './src/lib/gap-notes.mjs';
 
 // The live domain. Canonical links, the sitemap, robots.txt, llms.txt and social previews are all built from it.
 const site = 'https://www.struktmagazine.com';
@@ -30,6 +32,10 @@ export default defineConfig({
     // last, after the Vercel adapter has written its routes: a Content Security Policy and hardening headers on every response
     securityHeaders(),
   ],
+  markdown: {
+    // marks the italic "We couldn't find..." notes in posts so they can be styled
+    processor: satteri({ hastPlugins: [gapNotes] }),
+  },
   adapter: vercel({
     webAnalytics: { enabled: true }
   }),
