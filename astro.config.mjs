@@ -6,6 +6,7 @@ import indexnow from './integrations/indexnow.mjs';
 import securityHeaders from './integrations/security-headers.mjs';
 import { satteri } from '@astrojs/markdown-satteri';
 import gapNotes from './src/lib/gap-notes.mjs';
+import creditLists from './src/lib/credit-lists.mjs';
 
 // The live domain. Canonical links, the sitemap, robots.txt, llms.txt and social previews are all built from it.
 const site = 'https://www.struktmagazine.com';
@@ -34,7 +35,7 @@ export default defineConfig({
   ],
   markdown: {
     // marks the italic "We couldn't find..." notes in posts so they can be styled
-    processor: satteri({ hastPlugins: [gapNotes] }),
+    processor: satteri({ hastPlugins: [gapNotes, creditLists] }),
   },
   adapter: vercel({
     webAnalytics: { enabled: true }
