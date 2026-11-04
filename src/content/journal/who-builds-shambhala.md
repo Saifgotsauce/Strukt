@@ -4,6 +4,9 @@ description: "Shambhala runs on a family farm near Salmo, BC. We went through it
 pubDate: 2026-11-01
 category: "The scene"
 tags: ["Shambhala", "Shambhala Music Festival", "British Columbia", "Salmo", "harm reduction", "ANKORS", "festival crew", "credits"]
+heroImage: "/images/journal/who-builds-shambhala/nelson-and-kootenay-lake.webp"
+heroAlt: "Nelson, BC, under low cloud, with the orange bridge crossing Kootenay Lake below the mountains"
+heroCredit: "Photo: Marina Martum, Unsplash"
 draft: false
 ---
 

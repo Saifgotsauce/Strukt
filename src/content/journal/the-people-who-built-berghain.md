@@ -4,7 +4,7 @@ description: "Everyone talks about Berghain's door. Far fewer know who designed 
 pubDate: 2026-11-01
 category: "The scene"
 tags: ["Berghain", "Berlin", "club history", "Studio Karhard", "Sven Marquardt", "Wolfgang Tillmans", "Piotr Nathan", "Funktion-One"]
-draft: false
+draft: true
 ---
 
 <!-- Desk: Archive. Words: STRUKT Archive desk. -->

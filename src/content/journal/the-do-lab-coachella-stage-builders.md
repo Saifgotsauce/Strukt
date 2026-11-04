@@ -4,6 +4,9 @@ description: "Three brothers, a childhood friend and a lot of self-taught engine
 pubDate: 2026-11-01
 category: "The scene"
 tags: ["Do LaB", "Coachella", "Lightning in a Bottle", "stage design", "festival production", "Flemming brothers"]
+heroImage: "/images/journal/the-do-lab-coachella-stage-builders/shade-sails.webp"
+heroAlt: "White fabric shade sails strung between black poles over dry, open ground"
+heroCredit: "Photo: Sophia Shi, Unsplash"
 draft: false
 ---
 

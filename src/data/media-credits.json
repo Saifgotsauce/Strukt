@@ -308,5 +308,25 @@
     "licence": "Unsplash License",
     "credit": "Photo: Fabio Sasso, Unsplash",
     "note": "Checked through the Unsplash API on 4 November 2026: free photo (not Unsplash+), downloaded via the API with the download registered. 1400px wide WebP."
+  },
+  {
+    "path": "/images/journal/the-do-lab-coachella-stage-builders/shade-sails.webp",
+    "post": "the-do-lab-coachella-stage-builders",
+    "description": "White fabric shade sails strung between black poles over dry, open ground (hero; stand-in until the Do LaB sends approved photos)",
+    "creator": "Sophia Shi",
+    "source": "https://unsplash.com/photos/white-fabric-shades-cover-an-outdoor-seating-area-gYajBo57YtM",
+    "licence": "Unsplash License",
+    "credit": "Photo: Sophia Shi, Unsplash",
+    "note": "Checked through the Unsplash API on 4 November 2026: free photo (not Unsplash+), downloaded via the API with the download registered. 2000px wide WebP, with a 0.6px blur to keep the gravel texture from bloating the file."
+  },
+  {
+    "path": "/images/journal/who-builds-shambhala/nelson-and-kootenay-lake.webp",
+    "post": "who-builds-shambhala",
+    "description": "Nelson, BC, with the orange bridge over Kootenay Lake (hero; stand-in until Shambhala sends approved photos)",
+    "creator": "Marina Martum",
+    "source": "https://unsplash.com/photos/bridge-over-lake-with-mountain-clouds-0M-PnS3gD04",
+    "licence": "Unsplash License",
+    "credit": "Photo: Marina Martum, Unsplash",
+    "note": "Checked through the Unsplash API on 4 November 2026: free photo (not Unsplash+), location given as Nelson, BC, Canada, downloaded via the API with the download registered. 2000px wide WebP."
   }
 ]
